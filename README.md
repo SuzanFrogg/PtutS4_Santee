@@ -64,8 +64,12 @@ npm install
 ```
 (Cela va creer un dossier node_modules avec les dépendances à l'intérieur)
 
-
 Une fois le téléchargement finis vous êtes pret à coder la partie client.
+Il suffit de faire dans votre console (n'oubliez pas qu'il faut être dans le dossier *client*) la commande suivante pour lancer le côté client du projet :
+```
+npm start
+```
+
 
 ### Côté serveur
 
@@ -84,6 +88,11 @@ npm install
 (Cela va creer un dossier node_modules avec les dépendances à l'intérieur)
 
 Félicitation, votre projet est pret à l'emploi !
+
+Il suffit de faire dans votre console (n'oubliez pas qu'il faut être dans le dossier *server*) la commande suivante pour lancer le côté serveur du projet :
+```
+npm start
+```
 
 ## Autre
 
