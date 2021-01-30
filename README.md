@@ -65,7 +65,10 @@ npm install
 (Cela va créer un dossier node_modules avec les dépendances à l'intérieur)
 
 Une fois le téléchargement fini vous êtes prêt à coder la partie client.
+
 Il suffit de faire dans votre console (n'oubliez pas qu'il faut être dans le dossier *client*) la commande suivante pour lancer le côté client du projet : ```npm start```
+
+Pour arreter le script vous pouvez soit fermer la console ou alors faire ```Ctrl+C```
 
 
 ### Côté serveur
@@ -84,11 +87,13 @@ npm install
 ```
 (Cela va créer un dossier node_modules avec les dépendances à l'intérieur)
 
+*Remarque : le paquet dotenv utilise un fichier .env que vous devez créer dans le dossier config (plus d'infos dans la partie Autre>Remarques>Fichier .env)*
+
 Félicitation, votre projet est prêt à l'emploi !
 
 Il suffit de faire dans votre console (n'oubliez pas qu'il faut être dans le dossier *server*) la commande suivante pour lancer le côté serveur du projet : ```npm start```
 
-*Remarque : le paquet dotenv utilise un fichier .env que vous devez créer dans le dossier config (plus d'infos dans la partie Autre>Remarques>Fichier .env)*
+Pour arreter le script vous pouvez soit fermer la console ou alors faire ```Ctrl+C```
 
 ## Autre
 
@@ -118,7 +123,7 @@ export default ModuleVarExp; //On ne peut utiliser le export default qu'une fois
 ```
 
 #### Fichier .env
-**Important :** Du côté serveur, le paquet dotenv a été installé ce qui permet d'avoir des variables d'environnement, ainsi il faut créer un fichier *.env* dans le dossier *config*, pour l'instant le fichier est sous la forme :
+**Important :** Du côté serveur, le paquet dotenv a été installé ce qui permet d'avoir des variables d'environnement, ainsi il faut créer un fichier *.env* dans le dossier *config*. Pour l'instant le fichier est sous la forme :
 ```
 PORT=5000
 ```
