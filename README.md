@@ -37,7 +37,7 @@ Pour voir si NodeJS est bien installé vous pouvez aller sur une console (cmd su
 
 Pour la suite on va utiliser le gestionnaire de paquets de node qui est npm (npm est intégré à node). Comme pour NodeJS vous pouvez taper ```npm -v``` pour voir sa version.
 
-On va installer des paquets dans notre projet (des dépendances) qui ne sont pas présentes dans github car trop volumineux.
+On va installer des paquets dans notre projet (des dépendances) grâce à npm. Ces paquets ne sont pas présents dans github car trop volumineux.
 
 Avant cela, télécharger les fichiers du github et mettez-les dans un dossier où vous souhaitez travailler (n'importe où sur votre pc).
 
@@ -47,11 +47,11 @@ Pour la suite vous aurez besoin d'aller sur une console et d'aller à l'adresse 
 cd C:/Chemin/PtutS4_Santee-main/Application/
 ```
 
-Vous êtes maintenant pret pour installer les dépendances.
+Vous êtes maintenant prêt pour installer les dépendances.
 
 ### Côté client
 
-Le côté client (frontend) utilise la bibliothèque React qui utilise son lot de dépendances.
+Le côté client (frontend) utilise la bibliothèque React qui utilise son lot de dépendances (+ React Router).
 
 Accèdez au dossier client :
 ```
@@ -73,7 +73,7 @@ Pour arreter le script vous pouvez soit fermer la console ou alors faire ```Ctrl
 
 ### Côté serveur
 
-Le côté serveur (backend) utilise comme dépendances, express, mongoose, nodemon et dotenv que j'ai moi-même choisit d'installer (on peut très bien installer d'autres).
+Le côté serveur (backend) utilise comme dépendances, express, mongoose, nodemon et dotenv que j'ai moi-même choisit d'installer (on peut très bien en installer d'autres).
 
 Accèdez au dossier server :
 ```
@@ -81,7 +81,7 @@ cd ..
 cd server
 ```
 
-Ensuite comme pour la partie client vous devez simplement faire la commande suivante :
+Ensuite comme pour la partie client vous devez simplement faire la commande suivante pour installer les dépendances citées plus haut :
 ```
 npm install
 ```
@@ -129,5 +129,5 @@ PORT=5000
 ```
 Vous pouvez utiliser une variable dans un autre fichier de cette manière : (C'est un exemple)
 ```javascript
-let port = process.env.PORT
+let port = process.env.PORT;
 ```

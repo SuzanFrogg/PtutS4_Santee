@@ -1,0 +1,181 @@
+:root {
+	--back-color: #ffffff;
+	--fore-color: #1d1d1d;
+	--main-color: #d631c8;
+}
+
+/*---------------------------|Fonts|---------------------------*/
+@font-face {
+	font-family: "manrope";
+	src: url("./media/font/manrope/web/Manrope-ExtraLight.woff");
+	font-weight: 100;
+}
+@font-face {
+	font-family: "manrope";
+	src: url("./media/font/manrope/web/Manrope-Light.woff");
+	font-weight: 200;
+}
+@font-face {
+	font-family: "manrope";
+	src: url("./media/font/manrope/web/Manrope-Regular.woff");
+}
+@font-face {
+	font-family: "manrope";
+	src: url("./media/font/manrope/web/Manrope-Medium.woff");
+	font-weight: 500;
+}
+@font-face {
+	font-family: "manrope";
+	src: url("./media/font/manrope/web/Manrope-SemiBold.woff");
+	font-weight: 600;
+}
+@font-face {
+	font-family: "manrope";
+	src: url("./media/font/manrope/web/Manrope-Bold.woff");
+	font-weight: bold;
+}
+@font-face {
+	font-family: "manrope";
+	src: url("./media/font/manrope/web/Manrope-ExtraBold.woff");
+	font-weight: 800;
+}
+
+/*---------------------------|Reset-css|---------------------------*/
+html, body {
+	min-height: 100%;
+}
+html {
+	font-size: 62.5%;
+}
+body {
+	background-color: var(--back-color);
+	color: var(--fore-color);
+	font-family: "manrope", helvetica, arial, sans-serif;
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+/* font-sizing for content */
+p,
+ul,
+ol,
+dl,
+blockquote,
+pre,
+td,
+th,
+label,
+textarea,
+caption,
+details, 
+figure, 
+hgroup {
+	font-size: 1em;
+	line-height: 1.5;
+	margin: 1.5em 0 0;
+}
+h1, h2, h3, h4, h5, h6 {
+	color: var(--fore-color);
+}
+h1 {
+	margin: 20px 0;
+	line-height: 90px;
+	font-size: 80px;
+	font-weight: 800;
+}
+h2 {
+	margin: 15px 0;
+	line-height: 60px;
+	font-size: 50px;
+	font-weight: 800;
+}
+h3 {
+	margin: 15px 0 ;
+	line-height: 28px;
+	font-size: 28px;
+	font-weight: 800;
+}
+h4 {
+	margin:  10px 0 0 0;
+	line-height: 30px;
+	font-size: 24px;
+	font-weight: 600;
+}
+h5 {
+	margin:  10px 0 0 0;
+	line-height: 24px;
+	font-size: 20px;
+	font-weight: 500;
+}
+h6 {
+	margin:  8px 0 0 0;
+	line-height: 24px;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+/* soft reset */
+html,
+body,
+textarea,
+figure,
+label {
+	margin: 0;
+	padding: 0;
+}
+ul,
+ol {
+	padding-left: 2em;
+}
+code, 
+pre,
+samp {
+	white-space: pre-wrap;
+	font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+}
+code { line-height: 1em; }
+table { margin-bottom: 1.5em; }
+
+/* avoid margins on nested elements */
+li p,
+li ul,
+li ol {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* HTML5 tags */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+	display: block;
+}
+
+/* max values */
+img, table, td, blockquote, code, pre, textarea, input, video {
+	max-width: 100%;
+}
+
+/* you shall not pass */
+div, textarea, table, td, th, code, pre, samp {
+	word-wrap: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	-o-hyphens: auto;
+	hyphens: auto;
+}
+
+/* pictures */
+img {
+	width: auto;
+	height: auto;
+	vertical-align: middle;
+}
+a img { border: 0; }
+
+/* scripts */
+body > script {display: none !important;}
+
+#root {
+	width: 100%;
+	height: 100%;
+}
