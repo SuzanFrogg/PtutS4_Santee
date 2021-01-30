@@ -84,17 +84,21 @@ npm install
 ```
 (Cela va créer un dossier node_modules avec les dépendances à l'intérieur)
 
-Félicitation, votre projet est pret à l'emploi !
+Félicitation, votre projet est prêt à l'emploi !
 
 Il suffit de faire dans votre console (n'oubliez pas qu'il faut être dans le dossier *server*) la commande suivante pour lancer le côté serveur du projet : ```npm start```
+
+*Remarque : le paquet dotenv utilise un fichier .env que vous devez créer dans le dossier config (plus d'infos dans la partie Autre>Remarques>Fichier .env)*
 
 ## Autre
 
 ### Remarques
 
- - Pour le code javascript merci de mettre des **;** à la fin de vos lignes. En effet, le code peut marcher sans (enfin ça peut dépendre) mais on s'y retrouve mieux avec. (Certaines personnes ne les utilisent pas dans les tutos, c'est pour ça que je précise)
+#### Point virgule
+Pour le code Javascript merci de mettre des **;** à la fin de vos lignes. En effet, le code peut marcher sans (enfin ça peut dépendre) mais on s'y retrouve mieux avec. (Certaines personnes ne les utilisent pas dans les tutos, c'est pour ça que je précise)
 
- - **Attention :** L'utilisation de module de la version d'ES6 de js est utilisé au lieu de l'utilisation de CommonJS (Bibliothèque intégré à Node pour la gestion de modules), ainsi :
+#### Modules ES6
+**Attention :** L'utilisation de module de la version d'ES6 de js est utilisé au lieu de l'utilisation de CommonJS (Bibliothèque intégré à Node pour la gestion de modules), ainsi :
 ```javascript
 /*Pour Import*/
 //On n'utilise pas :
@@ -111,4 +115,14 @@ module.exports = ModuleVarExp;
 export {ModuleVarExp};
 //Ou :
 export default ModuleVarExp; //On ne peut utiliser le export default qu'une fois dans un document
+```
+
+#### Fichier .env
+**Important :** Du côté serveur, le paquet dotenv a été installé ce qui permet d'avoir des variables d'environnement, ainsi il faut créer un fichier *.env* dans le dossier *config*, pour l'instant le fichier est sous la forme :
+```
+PORT=5000
+```
+Vous pouvez utiliser une variable dans un autre fichier de cette manière : (C'est un exemple)
+```javascript
+let port = process.env.PORT
 ```
