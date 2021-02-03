@@ -1,7 +1,10 @@
+//Variables d'environnements
+import "dotenv/config.js";
+//Express.js
 import express from "express";
-import dotenv from "dotenv";
+//Charge la base de données
+import "./config/db.js";
 
-dotenv.config({path: "./config/.env"});
 const app = express();
 
 app.listen(process.env.PORT, () => {

@@ -87,13 +87,17 @@ npm install
 ```
 (Cela va créer un dossier node_modules avec les dépendances à l'intérieur)
 
-*Remarque : le paquet dotenv utilise un fichier .env (sans rien devant le point) que vous devez créer dans le dossier config (plus d'infos dans la partie Autre>Remarques>Fichier .env)*
+*Remarque : le paquet dotenv utilise un fichier .env (sans rien devant le point) que vous devez créer dans la racine du serveur (plus d'infos dans la partie Autre>Remarques>Fichier .env)*
 
 Félicitation, votre projet est prêt à l'emploi !
 
 Il suffit de faire dans votre console (n'oubliez pas qu'il faut être dans le dossier *server*) la commande suivante pour lancer le côté serveur du projet : ```npm start```
 
 Pour arreter le script vous pouvez soit fermer la console ou alors faire ```Ctrl+C```
+
+#### Base de données
+
+Pour pouvoir faciliter la manipulation de la base de données, vous pouvez installer [MongoDB Compass](https://www.mongodb.com/products/compass) (Téléchargez le en .msi) qui est un GUI pour visualiser les données, ceci dit, ce n'est pas du tout obligatoire.
 
 ## Autre
 
@@ -123,9 +127,10 @@ export default ModuleVarExp; //On ne peut utiliser le export default qu'une fois
 ```
 
 #### Fichier .env
-**Important :** Du côté serveur, le paquet dotenv a été installé ce qui permet d'avoir des variables d'environnement, ainsi il faut créer un fichier *.env* (sans rien devant le point) dans le dossier *config*. Pour l'instant le fichier est sous la forme :
+**Important :** Du côté serveur, le paquet dotenv a été installé ce qui permet d'avoir des variables d'environnement, ainsi il faut créer un fichier *.env* (sans rien devant le point) dans le dossier *server* (à la racine de ce dossier). Pour l'instant le fichier est sous la forme :
 ```
 PORT=5000
+DB_USER_PASS=ptuts4user:bdd-santex
 ```
 Vous pouvez utiliser une variable dans un autre fichier de cette manière : (C'est un exemple)
 ```javascript
