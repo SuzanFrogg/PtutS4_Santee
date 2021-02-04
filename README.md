@@ -100,6 +100,7 @@ Pour arreter le script vous pouvez soit fermer la console ou alors faire ```Ctrl
 #### Base de données
 
 Pour pouvoir faciliter la manipulation de la base de données, vous pouvez installer [MongoDB Compass](https://www.mongodb.com/products/compass) (Téléchargez le en .msi) qui est un GUI pour visualiser les données, ceci dit, ce n'est pas du tout obligatoire.
+Lien pour se connecter à la bdd : *mongodb+srv://ptuts4user:bdd-santex@cluster0.xyttr.mongodb.net/ptuts4-project*
 
 On peut aussi installer [Postman](https://www.postman.com/downloads/) pour pouvoir simuler des requêtes du client vers la partie server sans forcément avoir besoin de codé le client, mais encore une fois, c'est facultatif.
 
