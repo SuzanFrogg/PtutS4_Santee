@@ -12,7 +12,7 @@ let signUp = async (req, res) => {
 		res.status(201).json({ user: user._id });
 	}
 	catch(err) {
-		res.status(400).send({ err });
+		res.status(400).json({ error: "ID inconnu" });
 	}
 }
 

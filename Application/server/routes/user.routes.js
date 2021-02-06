@@ -5,11 +5,13 @@ import userController from "../controllers/user.controller.js";
 
 //CRUD
 
-//Authentification (CREATE)
-router.post("/register", authController.signUp);
+//Authentification
+router.post("/register", authController.signUp); //CREATE
 
-//User db (READ)
-router.get("/", userController.getAllUsers);
-router.get("/:id", userController.userInfo);
+//User db
+router.get("/", userController.getAllUsers); //READ
+router.get("/:id", userController.userInfo); //READ
+router.put("/:id", userController.updateUser); //UPDATE
+router.delete("/:id", userController.deleteUser); //DELETE
 
 export default router;

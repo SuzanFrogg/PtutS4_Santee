@@ -1,21 +1,23 @@
-//Variables d'environnements
+/*---App configuration---*/
 import "dotenv/config.js";
-//Express.js
 import express from "express";
 const app = express();
-//Charge les routes de l'utilisateur
 import userRoutes from "./routes/user.routes.js";
-//Charge la base de données
+
+/*---DB configuration---*/
 import "./config/db.js";
 
 
+/*---App configuration---*/
+//Converti les requêtes entrantes en JSON (bodyParser)
 app.use(express.json());
+//Converti les requêtes entrantes en chaines de caractère ou liste (bodyParser)
 app.use(express.urlencoded({ extended: true }));
 
-//Routes
+/*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
 
-//Server
+/*---Server listener---*/
 app.listen(process.env.PORT, () => {
 	console.log(`Listening on port ${process.env.PORT}`);
 });
