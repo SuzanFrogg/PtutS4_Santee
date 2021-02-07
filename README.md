@@ -23,8 +23,6 @@ Le carnet propose un suivis des vaccins, dons de sang, maladies, rappels de méd
   * **(petit paquet)** [Dotenv](https://www.npmjs.com/package/dotenv) : Module qui permet de charger des variables d'environnements de fichier **.env** en **process.env.** dans le code
   * **(petit paquet)** [validator](https://www.npmjs.com/package/validator) : Bibliothèque pour valider des string (par exemple des mails)
   * **(petit paquet)** [bcrypt](https://www.npmjs.com/package/bcrypt) : Bibliothèque qui pour hash des mots de passe
-  * [JWT](https://jwt.io) : JSON Web Token utilise des tokens pour échanger des informations entre plusieurs tiers. Par exemple pour s'authentifier.
-  * **(petit paquet)** [cookie-parser](https://www.npmjs.com/package/cookie-parser) : Permet de lire les cookies de notre application
 
 * [MongoDB](https://www.mongodb.com/fr) : Base de données NoSQL orientée documents (pas de table comme MySQL)
 
@@ -102,7 +100,6 @@ Pour arreter le script vous pouvez soit fermer la console ou alors faire ```Ctrl
 #### Base de données
 
 Pour pouvoir faciliter la manipulation de la base de données, vous pouvez installer [MongoDB Compass](https://www.mongodb.com/products/compass) (Téléchargez le en .msi) qui est un GUI pour visualiser les données, ceci dit, ce n'est pas du tout obligatoire.
-Lien pour se connecter à la bdd : *mongodb+srv://ptuts4user:bdd-santex@cluster0.xyttr.mongodb.net/ptuts4-project*
 
 On peut aussi installer [Postman](https://www.postman.com/downloads/) pour pouvoir simuler des requêtes du client vers la partie server sans forcément avoir besoin de codé le client, mais encore une fois, c'est facultatif.
 

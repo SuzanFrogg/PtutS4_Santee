@@ -31,9 +31,6 @@ const userSchema = mongoose.Schema({
 		prenom: {
 			type: String
 		},
-		image: {
-			type: String
-		}
 	},
 	{
 		timestamps: true
@@ -48,21 +45,5 @@ userSchema.pre("save", async function(next) {
 	this.password = await bcrypt.hash(this.password, salt);
 	next();
 });
-
-/**
- * Trouve l'adresse mail et vérifie si c'est le bon mot de passe
- * @param {String} email L'adresse mail de l'utilisateur auquel on veut se connecter
- * @param {String} password Le mot de passe correspondant au mail de l'utilisateur
- */
-userSchema.statics.login = async function(email, password) {
-	const user = await this.findOne({ email });
-	if (user) {
-		const auth = await bcrypt.compare(password, user.password);
-		if (auth) {
-			return user;
-		}
-	}
-	throw Error("Email ou mot de passe incorrect")
-}
 
 export default mongoose.model("user", userSchema);
