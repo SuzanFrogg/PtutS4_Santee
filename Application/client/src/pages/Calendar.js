@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header() {
+function Calendar() {
 	return (
 		<div>
 			<h1>Votre agenda</h1>
@@ -8,4 +8,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default Calendar;

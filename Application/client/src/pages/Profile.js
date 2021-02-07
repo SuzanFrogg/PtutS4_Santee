@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header() {
+function Profile() {
 	return (
 		<div>
 			<h1>Votre profil</h1>
@@ -8,4 +8,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default Profile;

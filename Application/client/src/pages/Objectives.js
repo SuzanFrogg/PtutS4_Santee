@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header() {
+function Objectives() {
 	return (
 		<div>
 			<h1>Vos objectifs</h1>
@@ -8,4 +8,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default Objectives;

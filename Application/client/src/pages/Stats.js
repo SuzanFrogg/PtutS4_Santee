@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header() {
+function Stats() {
 	return (
 		<div>
 			<h1>Vos statistiques</h1>
@@ -8,4 +8,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default Stats;
