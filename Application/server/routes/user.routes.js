@@ -3,10 +3,10 @@ const router = express.Router();
 import authController from "../controllers/auth.controller.js";
 import userController from "../controllers/user.controller.js";
 
-//CRUD
-
 //Authentification
 router.post("/register", authController.signUp); //CREATE
+router.post("/login", authController.login);
+router.get("/logout", authController.logout);
 
 //User db
 router.get("/", userController.getAllUsers); //READ

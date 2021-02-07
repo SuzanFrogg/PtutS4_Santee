@@ -25,6 +25,9 @@ let userInfo = async (req, res) => {
 	}).select("-password");
 }
 
+/**
+ * Permet de mettre à jour un utilisateur
+ */
 let updateUser = async (req, res) => {
 	//Si l'id n'est pas présent dans la bdd
 	if (!ObjectId.isValid(req.params.id))
@@ -51,6 +54,9 @@ let updateUser = async (req, res) => {
 	}
 }
 
+/**
+ * Permet de supprimer un utilisateur
+ */
 let deleteUser = async (req, res) => {
 	//Si l'id n'est pas présent dans la bdd
 	if (!ObjectId.isValid(req.params.id))
