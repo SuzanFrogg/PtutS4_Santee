@@ -8,31 +8,34 @@ const userSchema = mongoose.Schema({
 			type: String,
 			required: true,
 			unique: true,
-			validate: isEmail,
+			validate: [isEmail],
 			lowercase: true,
 			trim: true
 		},
 		password: {
 			type: String,
 			required: true,
-			minLength: 6,
+			minlength: 6,
 			trim: true
 		},
 		pseudo: {
 			type: String,
 			required: true,
-			maxLength: 64,
+			maxlength: 64,
 			unique: true,
 			trim: true
 		},
 		nom: {
-			type: String
+			type: String,
+			maxlength: 64
 		},
 		prenom: {
-			type: String
+			type: String,
+			maxlength: 64
 		},
-		image: {
-			type: String
+		picture: {
+			type: String,
+			default: "uploads/profil/default_user.png"
 		}
 	},
 	{
@@ -62,7 +65,7 @@ userSchema.statics.login = async function(email, password) {
 			return user;
 		}
 	}
-	throw Error("Email ou mot de passe incorrect")
+	throw ("Email ou mot de passe incorrect");
 }
 
 export default mongoose.model("user", userSchema);

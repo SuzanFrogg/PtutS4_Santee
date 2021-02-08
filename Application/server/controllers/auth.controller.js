@@ -1,4 +1,5 @@
 import userModel from "../models/user.model.js";
+import errorsUtils from "../utils/errors.utils.js";
 import jwt from "jsonwebtoken";
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;//3 jours
@@ -22,7 +23,8 @@ let signUp = async (req, res) => {
 		res.status(201).json({ user: user._id });
 	}
 	catch (err) {
-		res.status(400).json({ error: "ID inconnu" });
+		const errors = errorsUtils.signUpErrors(err);
+		res.status(400).json({ errors });
 	}
 }
 
@@ -39,7 +41,7 @@ let login = async (req, res) => {
 		res.status(200).json({ user: user._id });
 	}
 	catch (err) {
-		res.status(400).json({ error: err });
+		res.status(400).json({ err });
 	}
 }
 

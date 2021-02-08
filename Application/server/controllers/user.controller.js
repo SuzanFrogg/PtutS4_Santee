@@ -1,6 +1,5 @@
 import userModel from "../models/user.model.js";
 import mongoose from "mongoose";
-const ObjectId = mongoose.Types.ObjectId;
 
 /**
  * Permet d'obtenir tous les utilisateurs
@@ -15,7 +14,7 @@ let getAllUsers = async (req, res) => {
  */
 let userInfo = async (req, res) => {
 	//Si l'id n'est pas présent dans la bdd
-	if (!ObjectId.isValid(req.params.id))
+	if (!mongoose.isValidObjectId(req.params.id))
 		return res.status(400).json({ error: "ID inconnu" });
 
 	userModel.findById(req.params.id, (err, docs) => {
@@ -30,7 +29,7 @@ let userInfo = async (req, res) => {
  */
 let updateUser = async (req, res) => {
 	//Si l'id n'est pas présent dans la bdd
-	if (!ObjectId.isValid(req.params.id))
+	if (!mongoose.isValidObjectId(req.params.id))
 		return res.status(400).json({ error: "ID inconnu" });
 	
 	try {
@@ -59,11 +58,11 @@ let updateUser = async (req, res) => {
  */
 let deleteUser = async (req, res) => {
 	//Si l'id n'est pas présent dans la bdd
-	if (!ObjectId.isValid(req.params.id))
+	if (!mongoose.isValidObjectId(req.params.id))
 		return res.status(400).json({ error: "ID inconnu" });
 	
 	try {
-		await userModel.remove({ _id: req.params.id }).exec();
+		await userModel.deleteOne({ _id: req.params.id }).exec();
 		res.status(200).json({ message: "Suppression réussie"});
 	}
 	catch (err) {
