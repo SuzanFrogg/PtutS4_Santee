@@ -26,6 +26,7 @@ Le carnet propose un suivis des vaccins, dons de sang, maladies, rappels de méd
   * [JWT](https://jwt.io) : JSON Web Token utilise des tokens pour échanger des informations entre plusieurs tiers. Par exemple pour s'authentifier.
   * **(petit paquet)** [cookie-parser](https://www.npmjs.com/package/cookie-parser) : Permet de lire les cookies de notre application
   * **(petit paquet)** [multer](https://www.npmjs.com/package/multer) : Un middleware pour upload des images
+  * [CORS](https://www.npmjs.com/package/cors) : Permet de pouvoir partager des ressources entre deux serveurs (par exemple entre le client et le serveur)
 
 * [MongoDB](https://www.mongodb.com/fr) : Base de données NoSQL orientée documents (pas de table comme MySQL)
 
