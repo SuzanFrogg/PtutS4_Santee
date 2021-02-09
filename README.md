@@ -139,7 +139,9 @@ export default ModuleVarExp; //On ne peut utiliser le export default qu'une fois
 **Important :** Du côté serveur, le paquet dotenv a été installé ce qui permet d'avoir des variables d'environnement, ainsi il faut créer un fichier *.env* (sans rien devant le point) dans le dossier *server* (à la racine de ce dossier). Pour l'instant le fichier est sous la forme :
 ```
 PORT=5000
+CLIENT_URL=http://localhost:3000
 DB_USER_PASS=ptuts4user:bdd-santex
+TOKEN_SECRET=4hh13sklojf563vguh5dhwdsiojpfubjyfghj54b412jnd4fqdlmkwcv5357hjkqdffsaplps4gter1465jggrs6265hdgijodfgs
 ```
 Vous pouvez utiliser une variable dans un autre fichier de cette manière : (C'est un exemple)
 ```javascript
