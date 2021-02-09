@@ -44,7 +44,7 @@ let updateUser = async (req, res) => {
 			{ new: true, upsert: true, setDefaultsOnInsert: true },
 			(err, docs) => {
 				if (!err) return res.status(200).json(docs);
-				else return res.status(500).send({ error: err });
+				else return res.status(500).json({ error: err });
 			}
 		)
 	}
@@ -66,7 +66,7 @@ let deleteUser = async (req, res) => {
 		res.status(200).json({ message: "Suppression réussie"});
 	}
 	catch (err) {
-		return res.status(500).send({ error: err });
+		return res.status(500).json({ error: err });
 	}
 }
 
