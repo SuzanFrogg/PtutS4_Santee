@@ -147,3 +147,6 @@ Vous pouvez utiliser une variable dans un autre fichier de cette manière : (C'e
 ```javascript
 let port = process.env.PORT;
 ```
+
+#### Lancer le serveur ET le client
+Si vous voulez faire des requêtes aux serveur depuis le client il vous faudra lancer les deux. Vous aurez simplement à ouvrir deux consoles et lancer le script ```npm start``` (en etant dans leurs fichiers respectifs (dans la console)).
