@@ -1,23 +1,23 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import HeaderItem from "./HeaderItem";
 
 function Header() {
 	return (
 		<header>
-			<nav>
+			<div>
 				<div>
-					<img src={''} alt="logo"/> 
+					<img src="" alt="logo"/> 
 				</div>
-				<div>
+				<nav>
 					<ul>
-						<Link to="/"><li>Accueil</li></Link>
-						<Link to="/Stats"><li>Statistiques</li></Link>
-						<Link to="/Calendar"><li>Calendrier</li></Link>
-						<Link to="/Objectives"><li>Objectifs</li></Link>
-						<Link to="/Profile"><li>Profil</li></Link>
+						<HeaderItem link="/" text="Accueil" />
+						<HeaderItem link="/Stats" text="Statistiques" />
+						<HeaderItem link="/Calendar" text="Calendrier" />
+						<HeaderItem link="/Objectives" text="Objectifs" />
+						<HeaderItem link="/Profile" text="Profil" />
 					</ul>
-				</div>
-			</nav>
+				</nav>
+			</div>
 		</header>
 	);
 }
