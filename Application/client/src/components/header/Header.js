@@ -10,7 +10,9 @@ function Header() {
 	return (
 		<header>
 			<div className="header-logo">
-				<img src="" alt="logo"/> 
+				<Link to="/">
+					<img src="" alt="logo"/> 
+				</Link>
 			</div>
 			<ul className="header-menu">
 				<HeaderItem link="/" text="Accueil" icon={<Home />} />
@@ -18,7 +20,7 @@ function Header() {
 				<HeaderItem link="/Calendar" text="Calendrier" icon={<Calendar />} />
 				<HeaderItem link="/Objectives" text="Objectifs" icon={<Objectives />} />
 			</ul>
-			<div className="profil-menu">
+			<div className="header-profile">
 				<Link to="/Profile">
 					<img src="./uploads/profil/default-user.jpg" alt="Profil"/>
 				</Link>
