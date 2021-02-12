@@ -5,9 +5,5 @@ function Menstruation()
 
 }
 
-function addDay()
-{
-
-}
 
 export default Menstruation;

@@ -5,9 +5,5 @@ function Sleep()
 
 }
 
-function addEntry()
-{
 
-}
-
-export default Menstruation;
+export default Sleep;
