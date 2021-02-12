@@ -2,9 +2,12 @@ import userModel from "../models/user.model.js";
 import errorsUtils from "../utils/errors.utils.js";
 import jwt from "jsonwebtoken";
 
-const maxAge = 3 * 24 * 60 * 60 * 1000;//3 jours
-
-const createToken = (id) => {
+/**
+ * On crée un token d'authentification pour sauvegarder l'utilisateur
+ * @param {String} id l'id de l'utilisateur
+ * @param {int} maxAge la durée de vie du token
+ */
+const createToken = (id, maxAge) => {
 	return jwt.sign({id}, process.env.TOKEN_SECRET, {
 		expiresIn: maxAge
 	});
@@ -36,7 +39,8 @@ let login = async (req, res) => {
 
 	try {
 		const user = await userModel.login(email, password);
-		const token = createToken(user._id);
+		const maxAge = 3 * 24 * 60 * 60 * 1000; //3 jours
+		const token = createToken(user._id, maxAge);
 		res.cookie("jwt", token, { httpOnly: true, maxAge });
 		res.status(200).json({ user: user._id });
 	}
