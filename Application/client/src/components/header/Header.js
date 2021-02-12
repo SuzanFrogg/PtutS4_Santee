@@ -16,12 +16,12 @@ function Header() {
 			</div>
 			<ul className="header-menu">
 				<HeaderItem link="/" text="Accueil" icon={<Home />} />
-				<HeaderItem link="/Stats" text="Statistiques" icon={<Stats />} />
-				<HeaderItem link="/Calendar" text="Calendrier" icon={<Calendar />} />
-				<HeaderItem link="/Objectives" text="Objectifs" icon={<Objectives />} />
+				<HeaderItem link="/stats" text="Statistiques" icon={<Stats />} />
+				<HeaderItem link="/calendar" text="Calendrier" icon={<Calendar />} />
+				<HeaderItem link="/objectives" text="Objectifs" icon={<Objectives />} />
 			</ul>
 			<div className="header-profile">
-				<Link to="/Profile">
+				<Link to="/profile">
 					<img src="./uploads/profil/default-user.jpg" alt="Profil"/>
 				</Link>
 			</div>

@@ -16,10 +16,10 @@ function App() {
 			<main id="main-container">
 				<Switch>
 					<Route path="/" exact component={Home} />
-					<Route path="/Stats" exact component={Stats} />
-					<Route path="/Objectives" exact component={Objectives} />
-					<Route path="/Profile" exact component={Profile} />
-					<Route path="/Calendar" exact component={Calendar} />
+					<Route path="/stats" component={Stats} />
+					<Route path="/objectives" exact component={Objectives} />
+					<Route path="/profile" exact component={Profile} />
+					<Route path="/calendar" exact component={Calendar} />
 					<Route path="/" component={ErrorHTTP} />
 				</Switch>
 			</main>
