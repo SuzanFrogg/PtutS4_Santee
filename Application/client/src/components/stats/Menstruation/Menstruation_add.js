@@ -4,7 +4,7 @@ function Menstruation_add()
 {
     return (
 		<div>
-			<h1>Règles</h1>
+			<h2>Règles</h2>
 
             <form action="">
                 <label for="dateR">Date</label>
