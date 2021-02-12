@@ -2,9 +2,9 @@ import React from "react";
 
 function Calendar() {
 	return (
-		<div>
+		<section>
 			<h1>Votre agenda</h1>
-		</div>
+		</section>
 	);
 }
 

@@ -1,3 +1,4 @@
 @import "./settings.css";
 @import "./general.css";
-@import "./components/header/header.css"
+@import "./components/header/header.css";
+@import "./components/stats/stats.css";

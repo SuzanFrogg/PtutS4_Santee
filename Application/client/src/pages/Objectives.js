@@ -2,9 +2,9 @@ import React from "react";
 
 function Objectives() {
 	return (
-		<div>
+		<section>
 			<h1>Vos objectifs</h1>
-		</div>
+		</section>
 	);
 }
 

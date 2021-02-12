@@ -2,9 +2,9 @@ import React from "react";
 
 function Header() {
 	return (
-		<div>
+		<section>
 			<h1>Votre santé à portée de main</h1>
-		</div>
+		</section>
 	);
 }
 

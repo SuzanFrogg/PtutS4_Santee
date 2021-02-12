@@ -22,7 +22,7 @@ function Header() {
 			</ul>
 			<div className="header-profile">
 				<Link to="/profile">
-					<img src="./uploads/profil/default-user.jpg" alt="Profil"/>
+					<img src="/uploads/profil/default-user.jpg" alt="Profil"/>
 				</Link>
 			</div>
 		</header>

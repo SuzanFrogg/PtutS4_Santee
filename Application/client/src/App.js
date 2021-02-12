@@ -13,7 +13,7 @@ function App() {
 		<BrowserRouter forceRefresh={true}>
 			<Header />
 
-			<main id="main-container">
+			<main className="main-container">
 				<Switch>
 					<Route path="/" exact component={Home} />
 					<Route path="/stats" component={Stats} />

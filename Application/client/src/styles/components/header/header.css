@@ -49,6 +49,7 @@ header {
 .header-menu li svg {
 	height: 30px;
 	width: 30px;
+	fill: white;
 }
 
 .header-profile {
