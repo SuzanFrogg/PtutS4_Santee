@@ -38,14 +38,22 @@ let login = async (req, res) => {
 	const {email, password} = req.body;
 
 	try {
-		const user = await userModel.login(email, password);
+		const user = await userModel.findOne({ email });
+		if (!user)
+			throw Error("invalid email");
+
+		const isMatch = await user.matchPassword(password);
+		if (!isMatch)
+			throw Error("invalid password");
+
 		const maxAge = 3 * 24 * 60 * 60 * 1000; //3 jours
 		const token = createToken(user._id, maxAge);
 		res.cookie("jwt", token, { httpOnly: true, maxAge });
 		res.status(200).json({ user: user._id });
 	}
 	catch (err) {
-		res.status(400).json({ err });
+		const error = err.message;
+		res.status(400).json({ error });
 	}
 }
 

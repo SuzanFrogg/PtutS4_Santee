@@ -57,15 +57,8 @@ userSchema.pre("save", async function(next) {
  * @param {String} email L'adresse mail de l'utilisateur auquel on veut se connecter
  * @param {String} password Le mot de passe correspondant au mail de l'utilisateur
  */
-userSchema.statics.login = async function(email, password) {
-	const user = await this.findOne({ email });
-	if (user) {
-		const auth = await bcrypt.compare(password, user.password);
-		if (auth) {
-			return user;
-		}
-	}
-	throw ("Email ou mot de passe incorrect");
+userSchema.methods.matchPassword = async function(password) {
+	return await bcrypt.compare(password, this.password);
 }
 
 export default mongoose.model("user", userSchema);
