@@ -15,7 +15,7 @@ import { ReactComponent as PeriodIcon } from '../media/icons/stats/menu-menstrua
 
 import TabItem from "../components/stats/Tab";
 
-function Stats(props) {
+function Stats() {
 	//On récupère le chemin du fichier
 	const {url, path} = useRouteMatch();
 

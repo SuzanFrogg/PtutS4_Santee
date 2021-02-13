@@ -44,6 +44,9 @@
 .stats-tabs li a:hover {
 	background-color: var(--main-color-var1);
 }
+.tab-active {
+	background-color: var(--main-color-var2);
+}
 
 .stats-content {
 	padding: 20px;

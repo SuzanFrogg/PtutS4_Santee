@@ -1,12 +1,12 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 function Tab(props) {
 	return (
 		<li>
-			<Link to={props.destination}>
+			<NavLink to={props.destination} activeClassName="tab-active">
 				{props.icon}
-			</Link>
+			</NavLink>
 		</li>
 	)
 }

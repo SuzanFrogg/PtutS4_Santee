@@ -10,7 +10,7 @@ import Calendar from "./pages/Calendar";
 
 function App() {
 	return (
-		<BrowserRouter forceRefresh={true}>
+		<BrowserRouter /*forceRefresh={true}*/>
 			<Header />
 
 			<main className="main-container">
