@@ -1,18 +1,5 @@
 import userModel from "../models/user.model.js";
 import errorsUtils from "../utils/errors.utils.js";
-import jwt from "jsonwebtoken";
-
-/**
- * On crée un token d'authentification pour sauvegarder l'utilisateur
- * @param {String} id l'id de l'utilisateur
- * @param {int} maxAge la durée de vie du token
- */
-const createToken = (id, maxAge) => {
-	return jwt.sign({id}, process.env.TOKEN_SECRET, {
-		expiresIn: maxAge
-	});
-}
-
 
 /**
  * Inscris un utilisateur (dans la bdd)
@@ -47,7 +34,7 @@ let login = async (req, res) => {
 			throw Error("invalid password");
 
 		const maxAge = 3 * 24 * 60 * 60 * 1000; //3 jours
-		const token = createToken(user._id, maxAge);
+		const token = await user.getSignedToken(maxAge);
 		res.cookie("jwt", token, { httpOnly: true, maxAge });
 		res.status(200).json({ user: user._id });
 	}

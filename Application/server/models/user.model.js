@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 const {isEmail} = validator;
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = mongoose.Schema({
 		email: {
@@ -53,12 +54,21 @@ userSchema.pre("save", async function(next) {
 });
 
 /**
- * Trouve l'adresse mail et vérifie si c'est le bon mot de passe
- * @param {String} email L'adresse mail de l'utilisateur auquel on veut se connecter
- * @param {String} password Le mot de passe correspondant au mail de l'utilisateur
+ * Vérifie si c'est le bon mot de passe
+ * @param {String} password Le mot de passe correspondant à l'utilisateur
  */
 userSchema.methods.matchPassword = async function(password) {
 	return await bcrypt.compare(password, this.password);
+}
+
+/**
+ * On crée un token d'authentification pour sauvegarder l'id de l'utilisateur
+ * @param {int} maxAge la durée de vie du token
+ */
+userSchema.methods.getSignedToken = async function(maxAge) {
+	return jwt.sign({ id: this._id }, process.env.TOKEN_SECRET, {
+		expiresIn: maxAge
+	});
 }
 
 export default mongoose.model("user", userSchema);
