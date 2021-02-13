@@ -16,6 +16,18 @@ let signUpErrors = (err) => {
 	return errors;
 }
 
+let loginErrors = (err) => {
+	let errors = {email: "", password: ""};
+	console.log(err);
+
+	if (err.message.includes("email"))
+		errors.email = "Email incorrect";
+	if (err.message.includes("password"))
+		errors.password = "Mot de passe incorrect";
+
+	return errors;
+}
+
 let uploadErrors = (err) => {
 	let errors = {format: "", maxSize: ""};
 
@@ -27,4 +39,4 @@ let uploadErrors = (err) => {
 	return errors;
 }
 
-export default {signUpErrors, uploadErrors};
+export default {signUpErrors, loginErrors, uploadErrors};

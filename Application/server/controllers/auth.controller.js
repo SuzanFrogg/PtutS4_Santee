@@ -39,8 +39,8 @@ let login = async (req, res) => {
 		res.status(200).json({ user: user._id });
 	}
 	catch (err) {
-		const error = err.message;
-		res.status(400).json({ error });
+		const errors = errorsUtils.loginErrors(err);
+		res.status(200).json({ errors });
 	}
 }
 
