@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Route, Link, useRouteMatch} from "react-router-dom";
+import {Switch, Route, useRouteMatch} from "react-router-dom";
 
 import Diary from '../components/stats/Diary/Diary';
 import Menstruation from '../components/stats/Menstruation/Menstruation';
