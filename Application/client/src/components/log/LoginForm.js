@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {getAccessToken, setAccessToken} from "./accessToken.js";
 
 function LoginForm() {
 	const [email, setEmail] = useState("");
@@ -20,12 +21,26 @@ function LoginForm() {
 				password
 			}
 		}).then((res) => {
-			console.log(res.data); //A récuperer
 			if (res.data.errors) {
 				emailError.innerHTML = res.data.errors.email;
 				passwordError.innerHTML = res.data.errors.password;
 			}
 			else {
+				//On récupère le token reçu et on le stocke
+				setAccessToken(res.data.accessToken);
+
+				
+				/* Exemple de requête avec le token */
+				axios.get("/api/user", { headers: { Authorization: "Bearer " + getAccessToken() } })
+				.then((res) => {
+					console.log(res.data);
+				})
+				.catch((err) => {
+					console.log(err);
+				})
+				/* Fin exemple */
+
+
 				//window.location = "/";
 			}
 		}).catch((err) => {

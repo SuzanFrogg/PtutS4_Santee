@@ -1,4 +1,5 @@
 import userModel from "../models/user.model.js";
+import jwt from "jsonwebtoken";
 
 let checkUser = (req, res, next) => {
 	//On récupère le token d'authentification dans le header (il est sous la forme "Bearer TOKEN_HERE")
