@@ -6,12 +6,14 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
 import authMiddleware from "./middleware/auth.middleware.js";
 import cors from "cors";
+import jwt from "jsonwebtoken";
+import userModel from "./models/user.model.js";
 
 /*---DB configuration---*/
 import "./config/db.js";
 
 /*---App configuration---*/
-//Autoriser seulement le client à faire des requêtes au backend
+//On autorise seulement le client à faire des requêtes au backend
 const corsOptions = {
 	origin: process.env.CLIENT_URL,
 	credentials: true,
@@ -31,6 +33,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 /*---jwt---*/
+app.post("/refresh_token", async (req, res) => {
+	const token = req.cookies.jwt;
+	if (!token) return res.status(400).json({ accessToken: "" });
+
+	//On vérifie que le token est valide
+	let payload = null;
+	try {
+		payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+	} catch (err) {
+		return res.status(400).json({ accessToken: "" });
+	}
+
+	const user = await userModel.findById({ _id: payload.id });
+	if (!user) return res.status(400).json({ accessToken: "" });
+
+	const accessToken = await user.getAccessToken();
+	return res.status(200).json({ accessToken });
+});
 app.get("*", authMiddleware.checkUser);
 app.get("/jwtid", authMiddleware.requireAuth, (req, res) => {
 	res.status(200).send(res.locals.user._id);

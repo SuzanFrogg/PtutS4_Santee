@@ -18,7 +18,6 @@ let signUpErrors = (err) => {
 
 let loginErrors = (err) => {
 	let errors = {email: "", password: ""};
-	console.log(err);
 
 	if (err.message.includes("email"))
 		errors.email = "Email incorrect";

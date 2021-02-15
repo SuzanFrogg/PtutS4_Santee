@@ -1,31 +1,32 @@
 import userModel from "../models/user.model.js";
-import jwt from "jsonwebtoken";
 
 let checkUser = (req, res, next) => {
-	const token = req.cookies.jwt;
+	//On récupère le token d'authentification dans le header (il est sous la forme "Bearer TOKEN_HERE")
+	const authHeader = req.headers["authorization"];
+	const token = authHeader && authHeader.split(" ")[1];
+
 	if (token) {
-		jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-			if (err) {
-				res.locals.user = null;
-				res.cookie("jwt", "", { maxAge: 1 });
-			}
-			else {
+		try {
+			jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decodedToken) => {
+				if (err) throw err;
 				let user = await userModel.findById(decodedToken.id);
-				res.locals.user = user;
-			}
-			next();
-		});
+				req.user = user;
+				next();
+			});
+		}
+		catch (err) {
+			res.status(403).json({ err: "invalid Token" });
+		}
 	}
 	else {
-		res.locals.user = null;
-		next();
+		res.status(401).json({ err: "access denied" });
 	}
 }
 
 let requireAuth = (req, res, next) => {
 	const token = req.cookies.jwt;
 	if (token) {
-		jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+		jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decodedToken) => {
 			if (err) {
 				console.log(err);
 			}

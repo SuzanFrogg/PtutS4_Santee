@@ -63,11 +63,19 @@ userSchema.methods.matchPassword = async function(password) {
 
 /**
  * On crée un token d'authentification pour sauvegarder l'id de l'utilisateur
- * @param {int} maxAge la durée de vie du token
  */
-userSchema.methods.getSignedToken = async function(maxAge) {
-	return jwt.sign({ id: this._id }, process.env.TOKEN_SECRET, {
-		expiresIn: maxAge
+userSchema.methods.getAccessToken = async function() {
+	return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN_SECRET, {
+		expiresIn: "20s"
+	});
+}
+
+/**
+ * On crée un token d'authentification pour sauvegarder l'id de l'utilisateur
+ */
+userSchema.methods.getRefreshToken = async function() {
+	return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN_SECRET, {
+		expiresIn: "1d"
 	});
 }
 
