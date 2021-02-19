@@ -7,7 +7,7 @@ function Weight_add()
 			<h2>Poids</h2>
 
 			<form action="">
-                <label for="dateR">Date</label>
+                <label for="dateP">Date</label>
                 <input type="date" name="dateP"></input>
 
                 <label>Poids</label> 
