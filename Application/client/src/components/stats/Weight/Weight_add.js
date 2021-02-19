@@ -5,6 +5,21 @@ function Weight_add()
     return (
 		<div>
 			<h2>Poids</h2>
+
+			<form action="">
+                <label for="dateR">Date</label>
+                <input type="date" name="dateP"></input>
+
+                <label>Poids</label> 
+                <input type="text" name="poids"></input>
+
+                <label>Taille</label>
+                <input type="text" name="taille"></input>
+
+                <input type="submit" name="submitP">Valider</input>
+
+
+            </form>
 		</div>
 	);
 }
