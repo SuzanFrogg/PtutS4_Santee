@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {getAccessToken, setAccessToken} from "./accessToken.js";
 
 function LoginForm() {
 	const [email, setEmail] = useState("");
@@ -12,40 +11,16 @@ function LoginForm() {
 		const emailError = document.querySelector(".form-error.form-error-email");
 		const passwordError = document.querySelector(".form-error.form-error-password");
 
-		axios({
-			method: "POST",
-			url: "/api/user/login",
-			withCredentials: true,
-			data: {
-				email,
-				password
-			}
-		}).then((res) => {
-			if (res.data.errors) {
-				emailError.innerHTML = res.data.errors.email;
-				passwordError.innerHTML = res.data.errors.password;
-			}
-			else {
-				//On récupère le token reçu et on le stocke
-				setAccessToken(res.data.accessToken);
-
-				
-				/* Exemple de requête avec le token */
-				axios.get("/api/user", { headers: { Authorization: "Bearer " + getAccessToken() } })
-				.then((res) => {
-					console.log(res.data);
-				})
-				.catch((err) => {
-					console.log(err);
-				})
-				/* Fin exemple */
-
-
-				//window.location = "/";
-			}
-		}).catch((err) => {
-			console.log(err);
-		});
+		//On lance la requête pour se connecter
+		const response = await axios.post("/api/user/login", {email, password}, { withCredentials: true });
+		if (response.data.errors) {
+			emailError.innerHTML = response.data.errors.email;
+			passwordError.innerHTML = response.data.errors.password;
+		}
+		else {
+			axios.defaults.headers.common["authorization"] = `Bearer ${response.data.accessToken}`;
+			window.location = "/";
+		}
 	};
 
 	return (
