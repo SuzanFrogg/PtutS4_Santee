@@ -35,26 +35,25 @@ app.use(cookieParser());
 /*---jwt---*/
 app.post("/refresh_token", async (req, res) => {
 	const token = req.cookies.jwt;
-	if (!token) return res.status(400).json({ accessToken: "" });
+	if (!token) return res.status(400).json({ accessToken: "", userId: "" });
 
 	//On vérifie que le token est valide
 	let payload = null;
 	try {
 		payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
 	} catch (err) {
-		return res.status(400).json({ accessToken: "" });
+		return res.status(400).json({ accessToken: "", userId: "" });
 	}
 
 	const user = await userModel.findById({ _id: payload.id });
-	if (!user) return res.status(400).json({ accessToken: "" });
+	if (!user) return res.status(400).json({ accessToken: "", userId: "" });
 
 	const accessToken = await user.getAccessToken();
-	return res.status(200).json({ accessToken });
+	const userId = user._id;
+	const expiresIn = 30*1000; //30s
+	return res.status(200).json({ accessToken, userId, expiresIn });
 });
 app.get("*", authMiddleware.checkUser);
-app.get("/jwtid", authMiddleware.requireAuth, (req, res) => {
-	res.status(200).send(res.locals.user._id);
-})
 
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
