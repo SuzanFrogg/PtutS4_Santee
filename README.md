@@ -14,19 +14,21 @@ Le carnet propose un suivis des vaccins, dons de sang, maladies, rappels de méd
 
 * [React](https://fr.reactjs.org) : Bibliothèque js pour la partie Front End/Client
   * [React Router](https://reactrouter.com) : Bibliothèque de routage des urls (Permet de charger des composants en fonction de l'URL)
+  * [axios](https://www.npmjs.com/package/axios) : Permet de faire des requêtes au serveur plus simplement (GET, POST...)
+  * [chart.js](https://www.chartjs.org) : Bibliothèque pour créer des graphiques
 
 * [Node.js](https://nodejs.org/fr/) : Environnement d'éxécution qui permet d'utiliser du js côté serveur
   * [npm](https://www.npmjs.com) : Gestionnaire de paquets de Node.js (installé automatiquement avec Node.js)
   * [Express.js](https://expressjs.com/fr/) : Framework qui fournit des outils pour faciliter le développement d'applications Node.js
   * [Mongoose](https://mongoosejs.com) : Bibliothèque pour des applications Node.js qui utilisent MongoDB
+  * [JWT](https://jwt.io) : JSON Web Token utilise des tokens pour échanger des informations entre plusieurs tiers. Par exemple pour s'authentifier.
+  * [CORS](https://www.npmjs.com/package/cors) : Permet de pouvoir partager des ressources entre deux serveurs (par exemple entre le client et le serveur)
+  * **(petit paquet)** [cookie-parser](https://www.npmjs.com/package/cookie-parser) : Permet de lire les cookies de notre application
+  * **(petit paquet)** [multer](https://www.npmjs.com/package/multer) : Un middleware pour upload des images
   * **(petit paquet)** [Nodemon](https://nodemon.io) : Utilitaire qui permet de redémarrer l'application Node lors d'un changement dans le code
   * **(petit paquet)** [Dotenv](https://www.npmjs.com/package/dotenv) : Module qui permet de charger des variables d'environnements de fichier **.env** en **process.env.** dans le code
   * **(petit paquet)** [validator](https://www.npmjs.com/package/validator) : Bibliothèque pour valider des string (par exemple des mails)
   * **(petit paquet)** [bcrypt](https://www.npmjs.com/package/bcrypt) : Bibliothèque qui pour hash des mots de passe
-  * [JWT](https://jwt.io) : JSON Web Token utilise des tokens pour échanger des informations entre plusieurs tiers. Par exemple pour s'authentifier.
-  * **(petit paquet)** [cookie-parser](https://www.npmjs.com/package/cookie-parser) : Permet de lire les cookies de notre application
-  * **(petit paquet)** [multer](https://www.npmjs.com/package/multer) : Un middleware pour upload des images
-  * [CORS](https://www.npmjs.com/package/cors) : Permet de pouvoir partager des ressources entre deux serveurs (par exemple entre le client et le serveur)
 
 * [MongoDB](https://www.mongodb.com/fr) : Base de données NoSQL orientée documents (pas de table comme MySQL)
 
