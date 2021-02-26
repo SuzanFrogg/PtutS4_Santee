@@ -54,3 +54,22 @@
 	border-radius: 15px;
 	box-shadow: 0 0 20px rgb(221, 221, 221);
 }
+
+.data-recap {
+	z-index: 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	text-align: center;
+}
+
+.data-case {
+	margin: 30px auto;
+  	width: 300px;
+  	height: 300px;
+  	border-radius: 40px;
+	box-shadow: 0 0 20px rgb(179, 177, 177);
+  	transition: 0.4s;
+	background-color: var(--main-color);	
+}
