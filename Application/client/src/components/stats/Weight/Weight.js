@@ -132,6 +132,21 @@ function Weight()
 		<div>
 			<h2>Poids</h2>
 
+			<div className="data-recap">
+				<div className="data-case">
+					<h3>Poids</h3>
+					<p>données</p>
+				</div>
+				<div className="data-case">
+					<h3>Taille</h3>
+					<p>données</p>
+				</div>
+				<div className="data-case">
+					<h3>IMC</h3>
+					<p>données</p>
+				</div>						
+			</div>
+
 			<canvas id="weightChart" height="300" width="500"></canvas>
 			<canvas id="imcChart" height="300" width="500"></canvas>
 
