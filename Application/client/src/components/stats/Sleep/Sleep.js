@@ -3,48 +3,70 @@ import Chart from "chart.js";
 
 function Sleep(){
 
+	
 	let BarChart = new Chart('myChart', {
 		type: 'bar',
 		data:{
 			//axe des abscisses
-			labels: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
 			datasets: [{
 				label: 'Heure de sommeil',
 				//données
-				data:[
-					7,
-					6,
-					9,
-					8,
-					7,
-					9,
-				],
-				backgroundColor:[
-					'rgba(50,144,255,0.6)',
-					'rgba(50,144,255,0.6)',
-					'rgba(50,144,255,0.6)',
-					'rgba(50,144,255,0.6)',
-					'rgba(50,144,255,0.6)',
-					'rgba(50,144,255,0.6)',
-					'rgba(50,144,255,0.6)',
-				],
+				data: [{
+					t: 'Feb 21 2021',
+					y: 5
+				}, {
+					t: 'Feb 22 2021',
+					y: 8
+				}, {
+					t: 'Feb 23 2021',
+					y: 7
+				}, {
+					t: 'Feb 24 2021',
+					y: 9
+				}, {
+					t: 'Feb 25 2021',
+					y: 8
+				}],
+				backgroundColor:'rgb(50,144,255)',
 				borderWidth:1,
 				borderColor: '#777',
 				hoverBorderColor:'#000',
-				hoverBorderWidth:3
+				hoverBorderWidth:3,
 			}]
+		},
+		options: {
+			responsive: true,
+			title: {
+				display: true,
+				text: "Nombre d'heures de sommeil"
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+				xAxes: [{
+					type: 'time',
+					time: {
+						unit: 'week'
+					}
+				}],
+				yAxes: [{
+					ticks: {
+						suggestedMin: 0,
+						suggestedMax: 12
+					}
+				}]
+			}
 		}
-	});
 
-	//Echelle du graphique
-	Chart.scaleService.updateScaleDefaults('linear', {
-		ticks: {
-			min: 0,
-			max: 12
-		}
-	});
+	});	
+
 	
-
     return (
 		<div>
 			<h2>Sommeil</h2>
@@ -72,7 +94,9 @@ function Sleep(){
 				</div>						
 			</div>
 			
-			<canvas id="myChart" height="300" width="500"></canvas>			
+			<div className="Chart">
+				<canvas id="myChart" height="300" width="500"></canvas>		
+			</div>	
 		</div>
 
 	);

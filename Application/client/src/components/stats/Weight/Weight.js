@@ -7,18 +7,26 @@ function Weight()
 		type: 'line',
 		data:{
 			//axe des abscisses
-			labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
+			//labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
 			datasets: [{
 				label: 'poids',
 				//données
-				data:[
-					67,
-					68,
-					70,
-					69,
-					69,
-					70,
-					71
+				data:[{
+					t: 'Jan 21 2021',
+					y: 57
+				}, {
+					t: 'Feb 2 2021',
+					y: 59
+				}, {
+					t: 'Feb 23 2021',
+					y: 58
+				}, {
+					t: 'Mar 25 2021',
+					y: 60
+				}, {
+					t: 'May 26 2021',
+					y: 61
+				}
 				],
 				borderWidth:3,
 				borderColor: 'rgb(255,155,255)',
@@ -42,8 +50,19 @@ function Weight()
 				intersect: true
 			},
 			scales: {
-				min: 60,
-				max: 80
+				xAxes: [{
+					type: 'time',
+					time: {
+						unit: 'month'
+					}
+				}],
+				yAxes: [{
+					ticks: {
+						suggestedMin: 50,
+						suggestedMax: 65,
+						stepSize: 1
+					}
+				}]
 			}
 		}
 	});
@@ -52,18 +71,26 @@ function Weight()
 		type: 'line',
 		data:{
 			//axe des abscisses
-			labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
+			//labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
 			datasets: [{
 				label: 'poids',
 				//données
-				data:[
-					22,
-					22.5,
-					22.3,
-					22.3,
-					22.2,
-					22.3,
-					22.4
+				data:[{
+					t: 'Jan 21 2021',
+					y: 18.2
+				}, {
+					t: 'Feb 2 2021',
+					y: 18.3
+				}, {
+					t: 'Feb 23 2021',
+					y: 18.4
+				}, {
+					t: 'Mar 25 2021',
+					y: 18.3
+				}, {
+					t: 'May 26 2021',
+					y: 18.3
+				}
 				],
 				borderWidth:3,
 				borderColor: 'rgb(255,0,255)',
@@ -73,15 +100,13 @@ function Weight()
 			{
 				label: 'IMC minimum',
 				//données
-				data:[
-					18,
-					18,
-					18,
-					18,
-					18,
-					18,
-					18
-				],
+				data:[{
+					t: 'Jan 1 2021',
+					y: 18
+				}, {
+					t: 'Dec 31 2021',
+					y: 18
+				}],
 				borderWidth:3,
 				borderColor: 'rgb(0,255,255)',
 				fill: false
@@ -89,14 +114,13 @@ function Weight()
 			},{
 				label: 'IMC maximum',
 				//données
-				data:[
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
+				data:[{
+					t: 'Jan 1 2021',
+					y: 25
+				}, {
+					t: 'Dec 31 2021',
+					y: 25
+				}
 				],
 				borderWidth:3,
 				borderColor: 'rgb(255,255,0)',
@@ -119,8 +143,19 @@ function Weight()
 				intersect: true
 			},
 			scales: {
-				min: 15,
-				max: 30
+				xAxes: [{
+					type: 'time',
+					time: {
+						unit: 'month'
+					}
+				}],
+				yAxes: [{
+					ticks: {
+						suggestedMin: 15,
+						suggestedMax: 30,
+						stepSize: 1
+					}
+				}]
 			}
 		}
 	
