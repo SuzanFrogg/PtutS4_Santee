@@ -1,0 +1,41 @@
+.vaccinsP ul{
+    list-style-type: none;
+}
+
+.vaccinsP li{
+    background-color: lightskyblue;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    padding: 0.3em;
+    display: inline;
+    border-radius: 5em;
+
+}
+
+.detailsP ul{
+    list-style-type: none;
+}
+
+.allergiesP ul{
+    list-style-type: symbols("-");
+}
+
+body {
+
+    color : darkblue;
+}
+
+button {
+
+    color: darkblue;
+    background-color: lightskyblue;
+    border-radius: 5em;
+    padding: 0.5em;
+    margin: 0.2em;
+}
+
+button:hover {
+    background-color: darkblue;
+    color: white;
+    font-weight: bold;
+}
