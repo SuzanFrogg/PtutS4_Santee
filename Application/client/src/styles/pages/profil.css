@@ -1,9 +1,15 @@
+body {
+
+    color : var(--main-color);
+}
+
 .vaccinsP ul{
     list-style-type: none;
 }
 
 .vaccinsP li{
-    background-color: lightskyblue;
+    background-color: var(--main-color);
+    color:var(--back-color);
     margin-left: 0.2em;
     margin-right: 0.2em;
     padding: 0.3em;
@@ -20,22 +26,31 @@
     list-style-type: symbols("-");
 }
 
-body {
+#level {
+    height: 0.8em;
+    border: 2px solid var(--main-color);
+}
 
-    color : darkblue;
+#progress {
+    height: 0.8em;
+    background-color: var(--main-color) ;
 }
 
 button {
 
-    color: darkblue;
-    background-color: lightskyblue;
+    color:var(--back-color);
+    background-color: var(--main-color);
     border-radius: 5em;
     padding: 0.5em;
     margin: 0.2em;
 }
 
 button:hover {
-    background-color: darkblue;
-    color: white;
+    background-color: var(--main-color-var2);
     font-weight: bold;
+}
+
+img {
+    
+     border-radius: 6em;
 }
