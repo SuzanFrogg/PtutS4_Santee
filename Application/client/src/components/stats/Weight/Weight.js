@@ -1,11 +1,10 @@
 import React from "react";
-import Chart from 'chart.js';
+import { Line } from "react-chartjs-2";
 
 function Weight()
 {
-	let Chart1 = new Chart('weightChart', {
-		type: 'line',
-		data:{
+	//Data du graphique de poids
+	let dataChart1 = {
 			//axe des abscisses
 			//labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
 			datasets: [{
@@ -33,45 +32,45 @@ function Weight()
 				fill: false
 
 			}]
+		
+	};
 
+	//Option du Graphique de poids
+	let optionsChart1 = {
+		responsive: true,
+		title: {
+			display: true,
+			text: 'Courbe de poids'
 		},
-		options: {
-			responsive: true,
-			title: {
-				display: true,
-				text: 'Courbe de poids'
-			},
-			tooltips: {
-				mode: 'index',
-				intersect: false,
-			},
-			hover: {
-				mode: 'nearest',
-				intersect: true
-			},
-			scales: {
-				xAxes: [{
-					type: 'time',
-					time: {
-						unit: 'month'
-					}
-				}],
-				yAxes: [{
-					ticks: {
-						suggestedMin: 50,
-						suggestedMax: 65,
-						stepSize: 1
-					}
-				}]
-			}
+		tooltips: {
+			mode: 'index',
+			intersect: false,
+		},
+		hover: {
+			mode: 'nearest',
+			intersect: true
+		},
+		scales: {
+			xAxes: [{
+				type: 'time',
+				time: {
+					unit: 'month'
+				}
+			}],
+			yAxes: [{
+				ticks: {
+					Min: 50,
+					Max: 65,
+					stepSize: 1
+				}
+			}]
 		}
-	});
+	};			
+	
+	//Data du graphique IMC
+	let dataChart2 = {
 
-	let Chart2 = new Chart('imcChart', {
-		type: 'line',
-		data:{
 			//axe des abscisses
-			//labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
 			datasets: [{
 				label: 'poids',
 				//données
@@ -127,9 +126,12 @@ function Weight()
 				fill: false
 
 			}
-		]},
-		options: {
-			responsive: true,
+		]
+	};
+
+	//Option du graphique IMC
+	let optionsChart2 = {
+		responsive: true,
 			title: {
 				display: true,
 				text: 'Courbe IMC'
@@ -151,17 +153,14 @@ function Weight()
 				}],
 				yAxes: [{
 					ticks: {
-						suggestedMin: 15,
-						suggestedMax: 30,
+						SuggestedMin: 15,
+						SuggestedMax: 30,
 						stepSize: 1
 					}
 				}]
 			}
-		}
-	
-	});
-
-	
+		
+	};		
 
     return (
 		<div>
@@ -182,9 +181,8 @@ function Weight()
 				</div>						
 			</div>
 
-			<canvas id="weightChart" height="300" width="500"></canvas>
-			<canvas id="imcChart" height="300" width="500"></canvas>
-
+			<Line data={dataChart1} options={optionsChart1} />
+			<Line data={dataChart2} options={optionsChart2}/>
 		</div>
 	);
 }

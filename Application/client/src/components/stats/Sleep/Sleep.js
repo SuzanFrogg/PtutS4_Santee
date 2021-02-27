@@ -1,12 +1,10 @@
 import React from "react";
-import Chart from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 function Sleep(){
 
-	
-	let BarChart = new Chart('myChart', {
-		type: 'bar',
-		data:{
+	//data graphique sommeil
+	let dataChartBar = {
 			//axe des abscisses
 			datasets: [{
 				label: 'Heure de sommeil',
@@ -33,8 +31,10 @@ function Sleep(){
 				hoverBorderColor:'#000',
 				hoverBorderWidth:3,
 			}]
-		},
-		options: {
+		};
+
+	//Option graphique sommeil
+	let optionChartBar = {
 			responsive: true,
 			title: {
 				display: true,
@@ -62,9 +62,7 @@ function Sleep(){
 					}
 				}]
 			}
-		}
-
-	});	
+	};	
 
 	
     return (
@@ -95,7 +93,7 @@ function Sleep(){
 			</div>
 			
 			<div className="Chart">
-				<canvas id="myChart" height="300" width="500"></canvas>		
+				<Bar data={dataChartBar} options={optionChartBar}/>		
 			</div>	
 		</div>
 
