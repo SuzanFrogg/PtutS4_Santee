@@ -57,8 +57,8 @@ function Sleep(){
 				}],
 				yAxes: [{
 					ticks: {
-						suggestedMin: 0,
-						suggestedMax: 12
+						min: 0,
+						max: 12
 					}
 				}]
 			}

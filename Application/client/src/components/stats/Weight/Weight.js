@@ -59,8 +59,8 @@ function Weight()
 			}],
 			yAxes: [{
 				ticks: {
-					Min: 50,
-					Max: 65,
+					min: 50,
+					max: 65,
 					stepSize: 1
 				}
 			}]
@@ -153,8 +153,8 @@ function Weight()
 				}],
 				yAxes: [{
 					ticks: {
-						SuggestedMin: 15,
-						SuggestedMax: 30,
+						min: 15,
+						max: 30,
 						stepSize: 1
 					}
 				}]
