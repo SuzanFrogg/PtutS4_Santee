@@ -9,14 +9,18 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+/**
+ * Téléverse l'image de profil
+ */
 let uploadProfil = async (req, res) => {
 	try {
+		//Si l'image n'est pas un png/jpg/jpeg
 		if (req.file.detectedMimeType !== "image/jpg" &&
 		req.file.detectedMimeType !== "image/png" &&
 		req.file.detectedMimeType !== "image/jpeg")
 			throw Error("invalid file");
 		
-		//Supérieur à 500ko
+		//Si l'image est supérieur à 500ko
 		if (req.file.size > 500000)
 			throw Error("max size");
 	}
