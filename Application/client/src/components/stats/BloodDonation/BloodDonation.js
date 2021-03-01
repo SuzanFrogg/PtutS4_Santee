@@ -1,7 +1,8 @@
 import React from "react";
+import {ReactComponent as PocheSang} from '../../../media/icons/stats/Grand_blood_bag.svg';
 
 function BloodDonation()
-{
+{	
     return (
 		<div>
 			<h2>Don du Sang</h2>
@@ -24,7 +25,8 @@ function BloodDonation()
 					<p>données</p>
 				</div>
 			</div>
-
+			
+			<PocheSang/>
 		</div>
 	);
 }
