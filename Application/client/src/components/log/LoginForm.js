@@ -8,11 +8,12 @@ function LoginForm() {
 	const handleLogin = async (event) => {
 		event.preventDefault();
 
-		const emailError = document.querySelector(".form-error.form-error-email");
-		const passwordError = document.querySelector(".form-error.form-error-password");
+		const emailError = document.querySelector(".form-login .form-error.form-error-email");
+		const passwordError = document.querySelector(".form-login .form-error.form-error-password");
 
 		//On lance la requête pour se connecter
 		const response = await axios.post("/api/user/login", {email, password}, { withCredentials: true });
+		
 		if (response.data.errors) {
 			emailError.innerHTML = response.data.errors.email;
 			passwordError.innerHTML = response.data.errors.password;

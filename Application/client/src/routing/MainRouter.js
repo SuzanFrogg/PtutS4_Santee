@@ -9,7 +9,7 @@ import Stats from "../pages/Stats";
 import Objectives from "../pages/Objectives";
 import Profile from "../pages/Profile";
 import Calendar from "../pages/Calendar";
-import PrivatePage from "../pages/PrivatePage";
+import PrivatePage from "../pages/PublicPage";
 
 function MainRouter() {
 	const { uid } = useUser();
