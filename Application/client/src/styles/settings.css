@@ -1,9 +1,15 @@
 :root {
 	--back-color: #ffffff;
-	--fore-color: #1d1d1d;
-	--main-color: #0099ec;
+	--back-color-var1: #E8E8E8;
+	--fore-color: #2f2f2f;
+	--fore-color-var1: #676767;
+	--main-color: #d42634;
 	--main-color-var1: #007dc0;
 	--main-color-var2: #006aa3;
+	--gradient-color1: #FF646F;
+	--gradient-color2: #993e9c;
+	--error-color: #e25a7c;
+	--size-input: 70px;
 }
 
 /*---------------------------|Fonts|---------------------------*/

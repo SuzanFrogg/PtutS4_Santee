@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ReactComponent as LockIcon } from "../../media/icons/padlock-full.svg";
+import { ReactComponent as UserIcon } from "../../media/icons/user-full.svg";
+import { ReactComponent as MailIcon } from "../../media/icons/email-full.svg";
 
 function SignUpForm() {
 	const [pseudo, setPseudo] = useState("");
@@ -27,36 +30,51 @@ function SignUpForm() {
 	}
 
 	return (
+		<>
+		<h3>Inscription</h3>
 		<form action="" onSubmit={handleSignUp} className="form-signup">
-			<label htmlFor="form-pseudo">Pseudo</label>
-			<input
-				type="text"
-				id="form-pseudo"
-				value={pseudo}
-				onChange={(event) => setPseudo(event.target.value)}
-			/>
+			<div className="form-input-container">
+				<span className="form-input-icon"><UserIcon /></span>
+				<input
+					type="text"
+					id="form-pseudo"
+					value={pseudo}
+					onChange={(event) => setPseudo(event.target.value)}
+					placeholder=" "
+				/>
+				<label htmlFor="form-pseudo">Pseudo</label>
+			</div>
 			<div className="form-error form-error-pseudo"></div>
 
-			<label htmlFor="form-email">Email</label>
-			<input
-				type="text"
-				id="form-email"
-				value={email}
-				onChange={(event) => setEmail(event.target.value)}
-			/>
+			<div className="form-input-container">
+				<span className="form-input-icon"><MailIcon /></span>
+				<input
+					type="text"
+					id="form-email"
+					value={email}
+					onChange={(event) => setEmail(event.target.value)}
+					placeholder=" "
+				/>
+				<label htmlFor="form-email">Email</label>
+			</div>
 			<div className="form-error form-error-email"></div>
 
-			<label htmlFor="form-password">Mot de passe</label>
-			<input
-				type="password"
-				id="form-password"
-				value={password}
-				onChange={(event) => setPassword(event.target.value)}
-			/>
+			<div className="form-input-container">
+				<span className="form-input-icon"><LockIcon /></span>
+				<input
+					type="password"
+					id="form-password"
+					value={password}
+					onChange={(event) => setPassword(event.target.value)}
+					placeholder=" "
+				/>
+				<label htmlFor="form-password">Mot de passe</label>
+			</div>
 			<div className="form-error form-error-password"></div>
 
 			<input type="submit" value="S'inscrire" />
 		</form>
+		</>
 	);
 }
 

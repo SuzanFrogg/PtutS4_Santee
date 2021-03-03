@@ -14,7 +14,7 @@ let signUp = async (req, res) => {
 	}
 	catch (err) {
 		const errors = errorsUtils.signUpErrors(err);
-		res.status(400).json({ errors });
+		res.status(200).json({ errors });
 	}
 }
 

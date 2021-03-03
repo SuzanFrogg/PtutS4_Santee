@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ReactComponent as LockIcon } from "../../media/icons/padlock-full.svg";
+import { ReactComponent as UserIcon } from "../../media/icons/user-full.svg";
 
 function LoginForm() {
 	const [email, setEmail] = useState("");
@@ -25,27 +27,39 @@ function LoginForm() {
 	};
 
 	return (
+		<>
+		<h3>Connexion</h3>
 		<form action="" onSubmit={handleLogin} className="form-login">
-			<label htmlFor="form-email">Email</label>
-			<input
-				type="text"
-				id="form-email"
-				value={email}
-				onChange={(event) => setEmail(event.target.value)}
-			/>
+			<div className="form-input-container">
+				<span className="form-input-icon"><UserIcon /></span>
+				<input
+					type="text"
+					id="form-email"
+					value={email}
+					onChange={(event) => setEmail(event.target.value)}
+					placeholder=" "
+				/>
+				<label htmlFor="form-email">Email</label>
+			</div>
 			<div className="form-error form-error-email"></div>
 
-			<label htmlFor="form-password">Mot de passe</label>
-			<input
-				type="password"
-				id="form-password"
-				value={password}
-				onChange={(event) => setPassword(event.target.value)}
-			/>
+
+			<div className="form-input-container">
+				<span className="form-input-icon"><LockIcon /></span>
+				<input
+					type="password"
+					id="form-password"
+					value={password}
+					onChange={(event) => setPassword(event.target.value)}
+					placeholder=" "
+				/>
+				<label htmlFor="form-password">Mot de passe</label>
+			</div>
 			<div className="form-error form-error-password"></div>
 
 			<input type="submit" value="Se connecter" />
 		</form>
+		</>
 	);
 }
 
