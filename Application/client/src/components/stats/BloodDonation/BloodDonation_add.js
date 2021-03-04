@@ -2,25 +2,55 @@ import React from "react";
 
 function BloodDonation_add()
 {
-    return (
-		<div>
-			<h2>Dons du Sang</h2>
+  const [date, setDate] = useState("");
+  const [sang, setSang] = useState("");
+  const [plaquette, setPlaquette] = useState("");
+  const [plasma, setPlasma] = useState("");
 
-			<form action="">
-                <label for="dateD">Date</label>
-                <input type="date" name="dateD"></input>
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+  }
+      
 
-                <label>Dons</label> 
-                <input type="img" src="../../temp1.png" name="sang"></input>
-                <input type="img" src="../../temp1.png" name="plaquette"></input>
-                <input type="img" src="../../temp1.png" name="plasma"></input>
+  return (
+    <form action="" onSubmit={handleSubmit} className="form-dons">
+        <label htmlFor="dateD">Date</label>
+        <input 
+          type="date" 
+          id="dateD"
+          value={date}
+          onChange={(event) => setDate(event.target.value)}
+        />
 
-                <input type="submit" name="submitDons">Valider</input>
+        <label htmlFor="dons">Dons</label> 
+        <input 
+          type="img" 
+          id="sang"
+          src="../../temp1.png"
+          value={sang}
+          onChange={(event) => setSang(event.target.value)}
+        />
+              
+        <input 
+          type="img" 
+          id="plaquette"
+          src="../../temp1.png"
+          value={plaquette}
+          onChange={(event) => setPlaquette(event.target.value)}
+        />
 
+        <input 
+          type="img" 
+          id="plasma"
+          src="../../temp1.png"
+          value={plasma}
+          onChange={(event) => setPlasma(event.target.value)}
+        />
 
-            </form>
-		</div>
-	);
+        <input type="submit" value="Valider"/>
+
+    </form>
+);
 }
 
 

@@ -2,22 +2,43 @@ import React from "react";
 
 function Sleep_add()
 {
+    const [date, setDate] = useState("");
+    const [timeS, setTimeS] = useState("");
+    const [timeR, setTimeR] = useState("");
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    }
+        
+
     return (
-		<div>
-			<h2>Sommeil</h2>
+			<form action="" onSubmit={handleSubmit} className="form-sleep">
+                <label htmlFor="dateS">Date</label>
+                <input 
+                    type="date" 
+                    id="dateS"
+                    value={date}
+                    onChange={(event) => setDate(event.target.value)}
+                />
 
-			<form action="">
-                <label for="dateS">Date</label>
-                <input type="date" name="dateS"></input>
+                <label htmlFor="time">Temps</label> 
+                <input 
+                    type="time" 
+                    id="timeS"
+                    value={timeS}
+                    onChange={(event) => setTimeS(event.target.value)}
+                />
+                
+				<input 
+                    type="time" 
+                    id="timeR"
+                    value={timeR}
+                    onChange={(event) => setTimeR(event.target.value)}
+                />
 
-                <label>Temps</label> 
-                <input type="time" name="timeS"></input>
-				<input type="time" name="timeR"></input>
-
-                <input type="submit" name="submitSommeil">Valider</input>
+                <input type="submit" value="Valider"/>
 
             </form>
-		</div>
 	);
 }
 

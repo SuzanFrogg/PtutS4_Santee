@@ -2,26 +2,44 @@ import React from "react";
 
 function Weight_add()
 {
-    return (
-		<div>
-			<h2>Poids</h2>
+  const [date, setDate] = useState("");
+  const [poids, setpoids] = useState("");
+  const [taille, setTaille] = useState("");
 
-			<form action="">
-                <label for="dateP">Date</label>
-                <input type="date" name="dateP"></input>
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+  }
+      
 
-                <label>Poids</label> 
-                <input type="text" name="poids"></input>
+  return (
+    <form action="" onSubmit={handleSubmit} className="form-sleep">
+              <label htmlFor="dateS">Date</label>
+              <input 
+                  type="date" 
+                  id="dateP"
+                  value={date}
+                  onChange={(event) => setDate(event.target.value)}
+              />
 
-                <label>Taille</label>
-                <input type="text" name="taille"></input>
+              <label htmlFor="time">Temps</label> 
+              <input 
+                  type="text" 
+                  id="poids"
+                  value={poids}
+                  onChange={(event) => setPoids(event.target.value)}
+              />
+              
+      <input 
+                  type="text" 
+                  id="taille"
+                  value={taille}
+                  onChange={(event) => setTaille(event.target.value)}
+              />
 
-                <input type="submit" name="submitP">Valider</input>
+              <input type="submit" value="Valider"/>
 
-
-            </form>
-		</div>
-	);
+          </form>
+  );
 }
 
 
