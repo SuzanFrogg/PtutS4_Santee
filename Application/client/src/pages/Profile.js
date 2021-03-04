@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useUser } from "../utils/store.js";
-import Success from '../components/profil/Success';
+import Success from '../components/profile/Success';
 
 function Profile() {
 	const { setUid } = useUser();

@@ -70,6 +70,11 @@
   	height: 300px;
   	border-radius: 40px;
 	box-shadow: 0 0 20px rgb(179, 177, 177);
-  	transition: 0.4s;
 	background-color: var(--main-color);	
+}
+
+.data-case p{
+	color: black;
+	font-size: 35px;
+	margin-bottom: 50px;
 }

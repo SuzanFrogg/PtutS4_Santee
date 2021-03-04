@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	margin: 20px 0;
 	line-height: 90px;
-	font-size: 80px;
+	font-size: 70px;
 	font-weight: 800;
 }
 h2 {
@@ -150,4 +150,30 @@ body > script {display: none !important;}
 	margin: 20px auto;
 	padding: 0 20px;
 	box-sizing: border-box;
+}
+
+a {
+	color: var(--main-color);
+}
+
+input {
+	margin: 20px 0;
+	padding: 0 40px;
+	min-height: var(--size-input);
+	border: none;
+	border-radius: 100px;
+	background-color: var(--back-color-var1);
+	font-family: "manrope", helvetica, arial, sans-serif;
+	font-size: 22px;
+	color: var(--fore-color-var1);
+}
+
+input[type="submit"] {
+	cursor: pointer;
+	padding: 10px;
+	border-radius: 100px;
+	background: linear-gradient(90deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+	color: white;
+	font-weight: bold;
+	font-size: 28px;
 }

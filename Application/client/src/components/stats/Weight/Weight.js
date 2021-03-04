@@ -40,7 +40,9 @@ function Weight()
 		responsive: true,
 		title: {
 			display: true,
-			text: 'Courbe de poids'
+			text: 'Courbe de poids',
+			fontSize: 30,
+			fontColor: 'rgb(0,0,0)'
 		},
 		tooltips: {
 			mode: 'index',
@@ -55,6 +57,9 @@ function Weight()
 				type: 'time',
 				time: {
 					unit: 'month'
+				},
+				ticks:{
+					beginAtZero: true
 				}
 			}],
 			yAxes: [{
@@ -64,6 +69,13 @@ function Weight()
 					stepSize: 1
 				}
 			}]
+		},
+		legend: {
+			position: 'bottom',
+			labels: {
+				fontColor: 'rgb(0,0,0)',
+				fontSize: 15
+			}
 		}
 	};			
 	
@@ -134,7 +146,9 @@ function Weight()
 		responsive: true,
 			title: {
 				display: true,
-				text: 'Courbe IMC'
+				text: 'Courbe IMC',
+				fontSize: 30,
+				fontColor: 'rgb(0,0,0)'
 			},
 			tooltips: {
 				mode: 'index',
@@ -158,6 +172,13 @@ function Weight()
 						stepSize: 1
 					}
 				}]
+			},
+			legend: {
+				position: 'bottom',
+				labels: {
+					fontColor: 'rgb(0,0,0)',
+					fontSize: 15
+				}
 			}
 		
 	};		

@@ -71,11 +71,11 @@ userSchema.methods.getAccessToken = async function() {
 }
 
 /**
- * On crée un token d'authentification pour sauvegarder l'id de l'utilisateur
+ * On crée un token de rafraichissement pour demander un nouveau token d'authentification
  */
 userSchema.methods.getRefreshToken = async function() {
 	return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN_SECRET, {
-		expiresIn: "1d"
+		expiresIn: "3d"
 	});
 }
 

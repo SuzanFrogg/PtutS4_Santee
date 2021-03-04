@@ -2,4 +2,5 @@
 @import "./general.css";
 @import "./components/header/header.css";
 @import "./components/stats/stats.css";
-@import "./pages/profil.css";
+@import "./components/log/log.css";
+@import "./pages/profile.css";
