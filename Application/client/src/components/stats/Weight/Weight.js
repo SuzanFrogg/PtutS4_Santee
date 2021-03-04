@@ -1,17 +1,9 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import dataWeight from "./dataWeight.json";
 
 function Weight()
 {
-	let dataW;
-	for (var i = 0; i < dataWeight.jsonarray.length; i++){
-		dataW += 
-		{
-			t: dataWeight.jsonarray[i].date,
-			y: dataWeight.jsonarray[i].poids
-		}+',';
-	}
+
 
 	//Data du graphique de poids
 	let dataChart1 = {
@@ -19,7 +11,24 @@ function Weight()
 			datasets: [{
 				label: 'poids',
 				//données
-				data:[dataW],
+				data:[
+					{
+						t: 'Feb 5 2021',
+						y: 57
+					},
+					{
+						t: 'Mar 15 2021',
+						y: 59.2
+					},
+					{
+						t: 'May 25 2021',
+						y: 58.9
+					},
+					{
+						t: 'Aug 3 2021',
+						y: 60.2
+					}
+				],
 				borderWidth:3,
 				borderColor: 'rgb(255,155,255)',
 				fill: false
