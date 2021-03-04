@@ -15,6 +15,7 @@ function Sleep(){
 
 	let moyHeureSem = (lunHeure + marHeure + merHeure + jeuHeure + venHeure)/5;
 	let moyHeureWE = (samHeure + dimHeure)/2;
+	let moyTotalSem = (lunHeure + marHeure + merHeure + jeuHeure + venHeure + samHeure + dimHeure)/7;
 
 	//Dates
 
@@ -45,7 +46,6 @@ function Sleep(){
 	let venLever = '5:00';
 	let samLever = '8:00';
 	let dimLever = '7:30';
-
 
 
 	//data graphique sommeil
@@ -135,6 +135,10 @@ function Sleep(){
 				<div className="data-case">
 					<h3>Durée moyenne en week-end</h3>
 					<p>{Math.round(moyHeureWE)}h</p>
+				</div>
+				<div className="data-case">
+					<h3>Durée moyenne total de la semaine</h3>
+					<p>{Math.round(moyTotalSem)}h</p>
 				</div>
 				<div className="data-case">
 					<h3>Fluctuation moyenne du sommeil</h3>
