@@ -4,6 +4,7 @@ import express from "express";
 const app = express();
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
+import sleepRoutes from "./routes/sleep.routes.js";
 import authMiddleware from "./middleware/auth.middleware.js";
 import cors from "cors";
 import jwt from "jsonwebtoken";
@@ -53,10 +54,11 @@ app.post("/refresh_token", async (req, res) => {
 	const expiresIn = 30*1000; //30s
 	return res.status(200).json({ accessToken, userId, expiresIn });
 });
-app.get("*", authMiddleware.checkUser);
+//app.get("*", authMiddleware.checkUser);
 
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
+app.use("/api/sleep", sleepRoutes); //Route de sleep
 
 /*---Server listener---*/
 app.listen(process.env.PORT, () => {
