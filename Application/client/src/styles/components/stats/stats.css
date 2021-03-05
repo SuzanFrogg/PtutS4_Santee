@@ -11,9 +11,8 @@
 	list-style: none;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--main-color);
+	background-color: var(--middle-color);
 	border-radius: 15px;
-	box-shadow: 0 0 20px rgb(221, 221, 221);
 }
 .stats-tabs li {
 	justify-content: center;
@@ -33,7 +32,7 @@
 	align-items: center;
 	text-align: center;
 	color: white;
-	fill: white;
+	fill: var(--fore-color-var1);
 	font-size: 16px;
 	font-weight: 900;
 	text-decoration: none;
@@ -43,38 +42,61 @@
 	height: 40px;
 }
 .stats-tabs li a:hover {
-	background-color: var(--main-color-var1);
+	background-color: var(--main-color);
+	fill: white;
 }
-.tab-active {
-	background-color: var(--main-color-var2);
+.stats-tabs .tab-active {
+	background-color: var(--main-color-var1);
+	fill: white;
 }
 
 .stats-content {
-	padding: 20px;
-	border-radius: 15px;
-	box-shadow: 0 0 20px rgb(221, 221, 221);
+	overflow: hidden;
 }
 
 .data-recap {
-	z-index: 0;
-	width: 100%;
 	display: flex;
-	justify-content: space-around;
+	margin-bottom: 40px;
 	flex-wrap: wrap;
-	text-align: center;
+	column-gap: 55px;
+	row-gap: 35px;
+	width: 100%;
+	justify-content: center;
+}
+.data-card {
+	display: flex;
+	flex-direction: column;
+	padding: 40px 50px;
+  	width: 430px;
+  	border-radius: 30px;
+	background-color: var(--middle-color);
+	justify-content: center;
+}
+.data-card p {
+	font-size: 20px;
+	margin: 0 0 5px 0;
+	color: var(--fore-color-var1);
+	white-space: nowrap;
+}
+.data-card span {
+	color: var(--fore-color);
+	line-height: 80px;
+	font-size: 70px;
+	font-weight: 900;
+}
+.data-card span small {
+	font-size: 45px;
 }
 
-.data-case {
-	margin: 30px auto;
-  	width: 300px;
-  	height: 300px;
-  	border-radius: 40px;
-	box-shadow: 0 0 20px rgb(179, 177, 177);
-	background-color: var(--main-color);	
+.data-box {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 40px;
+	padding: 50px;
+	border-radius: 30px;
+	background-color: var(--middle-color);
 }
-
-.data-case p{
-	color: black;
-	font-size: 35px;
-	margin-bottom: 50px;
+.stats-container canvas {
+	margin-top: 40px;
+	max-height: 700px;
 }

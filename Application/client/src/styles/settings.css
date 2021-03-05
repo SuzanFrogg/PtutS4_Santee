@@ -1,6 +1,7 @@
 :root {
-	--back-color: #ffffff;
-	--back-color-var1: #E8E8E8;
+	--back-color: #F2F1F1;
+	--back-color-var1: #e0e0e0;
+	--middle-color: white;
 	--fore-color: #2f2f2f;
 	--fore-color-var1: #676767;
 	--main-color: #FF646F;
@@ -13,6 +14,7 @@
 }
 
 /*---------------------------|Fonts|---------------------------*/
+/*Manrope*/
 @font-face {
 	font-family: "manrope";
 	src: url("../media/font/manrope/web/Manrope-ExtraLight.woff");
@@ -45,5 +47,41 @@
 @font-face {
 	font-family: "manrope";
 	src: url("../media/font/manrope/web/Manrope-ExtraBold.woff");
+	font-weight: 800;
+}
+
+/*Karla*/
+@font-face {
+	font-family: "karla";
+	src: url("../media/font/karla/ttf/Karla-ExtraLight.ttf");
+	font-weight: 100;
+}
+@font-face {
+	font-family: "karla";
+	src: url("../media/font/karla/ttf/Karla-Light.ttf");
+	font-weight: 200;
+}
+@font-face {
+	font-family: "karla";
+	src: url("../media/font/karla/ttf/Karla-Regular.ttf");
+}
+@font-face {
+	font-family: "karla";
+	src: url("../media/font/karla/ttf/Karla-Medium.ttf");
+	font-weight: 500;
+}
+@font-face {
+	font-family: "karla";
+	src: url("../media/font/karla/ttf/Karla-SemiBold.ttf");
+	font-weight: 600;
+}
+@font-face {
+	font-family: "karla";
+	src: url("../media/font/karla/ttf/Karla-Bold.ttf");
+	font-weight: bold;
+}
+@font-face {
+	font-family: "karla";
+	src: url("../media/font/karla/ttf/Karla-ExtraBold.ttf");
 	font-weight: 800;
 }

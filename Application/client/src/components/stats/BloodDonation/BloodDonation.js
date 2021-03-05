@@ -4,30 +4,29 @@ import {ReactComponent as PocheSang} from '../../../media/icons/stats/Grand_bloo
 function BloodDonation()
 {	
     return (
-		<div>
+		<>
 			<h2>Don du Sang</h2>
-
 			<div className="data-recap">
-				<div className="data-case">
-					<h3>Nombre de don de sang</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Nombre de don de sang</p>
+					<span>3</span>
 				</div>
-				<div className="data-case">
-					<h3>Nombre de don de plaquettes</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Nombre de don de plaquettes</p>
+					<span>3</span>
 				</div>
-				<div className="data-case">
-					<h3>Nombre de don de plasma</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Nombre de don de plasma</p>
+					<span>3</span>
 				</div>
-				<div className="data-case">
-					<h3>Nombre de personnes sauvées</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Nombre de personnes sauvées</p>
+					<span>3</span>
 				</div>
 			</div>
 			
 			<PocheSang/>
-		</div>
+		</>
 	);
 }
 

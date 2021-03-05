@@ -3,8 +3,6 @@ import { Line } from "react-chartjs-2";
 
 function Weight()
 {
-
-
 	//Data du graphique de poids
 	let dataChart1 = {
 			//axe des abscisses
@@ -39,12 +37,6 @@ function Weight()
 	//Option du Graphique de poids
 	let optionsChart1 = {
 		responsive: true,
-		title: {
-			display: true,
-			text: 'Courbe de poids',
-			fontSize: 30,
-			fontColor: 'rgb(0,0,0)'
-		},
 		tooltips: {
 			mode: 'index',
 			intersect: false,
@@ -145,12 +137,6 @@ function Weight()
 	//Option du graphique IMC
 	let optionsChart2 = {
 		responsive: true,
-			title: {
-				display: true,
-				text: 'Courbe IMC',
-				fontSize: 30,
-				fontColor: 'rgb(0,0,0)'
-			},
 			tooltips: {
 				mode: 'index',
 				intersect: false,
@@ -185,28 +171,33 @@ function Weight()
 	};		
 
     return (
-		<div>
+		<>
 			<h2>Poids</h2>
-
 			<div className="data-recap">
-				<div className="data-case">
-					<h3>Poids</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Poids</p>
+					<span>10<small>kg</small></span>
 				</div>
-				<div className="data-case">
-					<h3>Taille</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Taille</p>
+					<span>1<small>m</small>60</span>
 				</div>
-				<div className="data-case">
-					<h3>IMC</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>IMC</p>
+					<span>30</span>
 				</div>	
-									
 			</div>
-
-			<Line data={dataChart1} options={optionsChart1} />
-			<Line data={dataChart2} options={optionsChart2}/>
-		</div>
+			
+			<h2>Graphiques</h2>
+			<div className="data-box">
+				<h3>Courbe de poids</h3>
+				<Line data={dataChart1} options={optionsChart1} />
+			</div>
+			<div className="data-box">
+				<h3>Courbe IMC</h3>
+				<Line data={dataChart2} options={optionsChart2} />
+			</div>
+		</>
 	);
 }
 

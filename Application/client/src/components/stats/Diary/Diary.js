@@ -4,9 +4,9 @@ import React from "react";
 function Diary()
 {
     return (
-		<div>
+		<>
 			<h2>Journal</h2>
-		</div>
+		</>
 	);
 }
 

@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 html, body {
 	width: 100%;
@@ -12,7 +13,7 @@ html {
 body {
 	background-color: var(--back-color);
 	color: var(--fore-color);
-	font-family: "manrope", helvetica, arial, sans-serif;
+	font-family: "karla", "manrope", helvetica, arial, sans-serif;
 	font-size: 20px;
 	line-height: 1.5;
 }
@@ -43,18 +44,18 @@ h1 {
 	margin: 20px 0;
 	line-height: 90px;
 	font-size: 70px;
-	font-weight: 800;
+	font-weight: 900;
 }
 h2 {
 	margin: 15px 0;
-	line-height: 60px;
-	font-size: 50px;
+	line-height: 50px;
+	font-size: 40px;
 	font-weight: 800;
 }
 h3 {
 	margin: 15px 0 ;
-	line-height: 28px;
-	font-size: 28px;
+	line-height: 36px;
+	font-size: 30px;
 	font-weight: 800;
 }
 h4 {
@@ -144,7 +145,7 @@ body > script {display: none !important;}
 	height: 100%;
 }
 .main-container {
-	max-width: 1400px;
+	max-width: 1440px;
 	width: 100%;
 	height: 100%;
 	margin: 20px auto;
@@ -163,7 +164,7 @@ input {
 	border: none;
 	border-radius: 100px;
 	background-color: var(--back-color-var1);
-	font-family: "manrope", helvetica, arial, sans-serif;
+	font-family: "karla", "manrope", helvetica, arial, sans-serif;
 	font-size: 22px;
 	color: var(--fore-color-var1);
 }

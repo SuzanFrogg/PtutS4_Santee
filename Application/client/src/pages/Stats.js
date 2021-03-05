@@ -21,7 +21,6 @@ function Stats() {
 
 	return (
 		<section className="stats-section">
-			<h1>Vos statistiques</h1>
 			<div className="stats-container">
 				<ul className="stats-tabs">
 					<TabItem destination={`${url}/diary`} text="Journal" icon={<DiaryIcon />} />

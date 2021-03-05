@@ -5,47 +5,28 @@ function Sleep(){
 	//DONNEES
 	//Heures de sommeil
 
-	let lunHeure = 8;
-	let marHeure = 9;
-	let merHeure = 5;
-	let jeuHeure = 7;
-	let venHeure = 6;
-	let samHeure = 8;
-	let dimHeure = 8;
+	let lengthSleepWeek = [8, 9, 5, 7, 6, 8, 6];
 
-	let moyHeureSem = (lunHeure + marHeure + merHeure + jeuHeure + venHeure)/5;
-	let moyHeureWE = (samHeure + dimHeure)/2;
-	let moyTotalSem = (lunHeure + marHeure + merHeure + jeuHeure + venHeure + samHeure + dimHeure)/7;
+	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0;
+
+	lengthSleepWeek.slice(0, 4).map(hour => {avgSleepWeek+=hour; avgSleepGlobal+=hour});
+	lengthSleepWeek.slice(5, 6).map(hour => {avgSleepWE+=hour; avgSleepGlobal+=hour});
+	avgSleepWeek /= 5;
+	avgSleepWE /= 2;
+	avgSleepGlobal /= 7;
 
 	//Dates
-
-	let lunDate = 'Feb 22 2021';
-	let marDate = 'Feb 23 2021';
-	let merDate = 'Feb 24 2021';
-	let jeuDate = 'Feb 25 2021';
-	let venDate = 'Feb 26 2021';
-	let samDate = 'Feb 27 2021';
-	let dimDate = 'Feb 28 2021';
+	let dateLegend = ["Feb 22 2021", "Feb 23 2021", "Feb 24 2021", "Feb 25 2021", "Feb 26 2021", "Feb 27 2021", "Feb 28 2021"];
 
 	//Heures du coucher
-
-	let lunCoucher = '23:00';
-	let marCoucher = '23:00';
-	let merCoucher = '1:30';
-	let jeuCoucher = '22:00';
-	let venCoucher = '23:00';
-	let samCoucher = '00:00';
-	let dimCoucher = '23:30';
+	let hourSleepData = ["23:00", "23:00", "1:30", "22:00", "23:00", "00:00", "23:30"];
 
 	//Heure du lever
+	let hourWakeUpData = ["7:00", "8:00", "6:30", "5:00", "5:00", "8:00", "7:30"];
 
-	let lunLever = '7:00';
-	let marLever = '8:00';
-	let merLever = '6:30';
-	let jeuLever = '5:00';
-	let venLever = '5:00';
-	let samLever = '8:00';
-	let dimLever = '7:30';
+	//Récupère la couleur principale
+	let primaryColor = getComputedStyle(document.body).getPropertyValue('--main-color');
+	let secondaryColor = getComputedStyle(document.body).getPropertyValue('--main-color-var1');
 
 
 	//data graphique sommeil
@@ -55,32 +36,26 @@ function Sleep(){
 			datasets: [{
 				label: ["Heure de sommeil"],
 
-				//données
-				//heures de sommeil
-				data: [lunHeure,marHeure,merHeure,jeuHeure,venHeure,8,6],
-				//dates
-				data1: [lunDate,marDate,merDate,jeuDate,venDate,samDate,dimDate],
+				/*Données*/
+				//Heures de sommeil
+				data: lengthSleepWeek,
+				//Dates
+				data1: dateLegend,
 				//Heure du coucher
-				data2: [lunCoucher,marCoucher,merCoucher,jeuCoucher,venCoucher,samCoucher,dimCoucher],
+				data2: hourSleepData,
 				//Heure du lever
-				data3: [lunLever,marLever,merLever,jeuLever,venLever,samLever,dimLever],
-				backgroundColor:'rgb(50,144,255)',
-				borderWidth:1,
-				borderColor: '#777',
-				hoverBorderColor:'#000',
-				hoverBorderWidth:3
+				data3: hourWakeUpData,
+				//Styles
+				maxBarThickness: 80,
+				backgroundColor: primaryColor,
+				hoverBackgroundColor: secondaryColor
 			}]
 		};
 
 	//Option graphique sommeil
 	let optionChartBar = {
 		responsive: true,
-		title: {
-			display: true, //affiche le titre
-			text: "Nombre d'heures de sommeil",
-			fontSize: 30,
-			fontColor: 'rgb(0,0,0)'
-		},
+		maintainAspectRatio: false, //Le graphique ne garde pas la même forme (bien pour le responsive)
 		//Infobulle
 		tooltips: {
 			mode: 'label',
@@ -93,6 +68,14 @@ function Sleep(){
 							'\nHeure du lever: ' + data.datasets[tooltipItem.datasetIndex].data3[tooltipItem.index];
 				},
 			},
+			backgroundColor: "#2f2f2f",
+			titleFontFamily: "karla",
+			titleFontStyle: 800,
+			titleFontSize: 20,
+			titleMarginBottom: 10,
+			bodyFontFamily: "karla",
+			bodyFontStyle: "600",
+			bodyFontSize: 15
 		},
 		hover: {
 			mode: 'nearest',
@@ -103,54 +86,56 @@ function Sleep(){
 		},
 		scales: {
 			xAxes: [{
+				gridLines: {display: false}, //Enlève grille de fond
 				offset: true, //décalage par rapport à l'origine
 				categoryPercentage: 0.5
 			}],
 			yAxes: [{
+				gridLines: {display: false},
 				ticks: {
 					beginAtZero: true,
 					max: 12
 				}
 			}]
 		}		
-	};	
+	};
 
     return (
-		<div>
+		<>
 			<h2>Sommeil</h2>
-
 			<div className="data-recap">
-				<div className="data-case">
-					<h3>Heure moyenne du réveil</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Heure moyenne du réveil</p>
+					<span>22:30</span>
 				</div>
-				<div className="data-case">
-					<h3>Heure moyenne du coucher</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Heure moyenne du coucher</p>
+					<span>2:30</span>
 				</div>
-				<div className="data-case">
-					<h3>Durée moyenne en semaine</h3>
-					<p>{Math.round(moyHeureSem)}h</p>
+				<div className="data-card">
+					<p>Durée moyenne en semaine</p>
+					<span>{Math.round(avgSleepWeek)}<small>h</small></span>
 				</div>
-				<div className="data-case">
-					<h3>Durée moyenne en week-end</h3>
-					<p>{Math.round(moyHeureWE)}h</p>
+				<div className="data-card">
+					<p>Durée moyenne en week-end</p>
+					<span>{Math.round(avgSleepWE)}<small>h</small></span>
 				</div>
-				<div className="data-case">
-					<h3>Durée moyenne total de la semaine</h3>
-					<p>{Math.round(moyTotalSem)}h</p>
+				<div className="data-card">
+					<p>Durée moyenne total de la semaine</p>
+					<span>{Math.round(avgSleepGlobal)}<small>h</small></span>
 				</div>
-				<div className="data-case">
-					<h3>Fluctuation moyenne du sommeil</h3>
-					<p>données</p>
+				<div className="data-card">
+					<p>Fluctuation moyenne du sommeil</p>
+					<span>7<small>h</small></span>
 				</div>						
 			</div>
-			
-			<div className="Chart">
-				<Bar data={dataChartBar} options={optionChartBar}/>		
-			</div>	
-		</div>
 
+			<h2>Graphiques</h2>
+			<div className="data-box">
+				<h3>Nombre d'heures de sommeil</h3>
+				<Bar data={dataChartBar} options={optionChartBar} />		
+			</div>
+		</>
 	);
 }
 
