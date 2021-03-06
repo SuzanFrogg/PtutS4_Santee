@@ -40,7 +40,7 @@ let createVaccines = async (req, res) => {
 /**
  * Permet de modifier les données de vaccin
  */
-let updateVaccines = (req, res) => {
+let updateVaccines = async (req, res) => {
     
     //Vérifie l'id
     if(!mongoose.isValidObjectId(req.params.id))
