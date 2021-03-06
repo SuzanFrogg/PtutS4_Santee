@@ -5,6 +5,7 @@ const app = express();
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
 import sleepRoutes from "./routes/sleep.routes.js";
+import vaccinesRoutes from "./routes/vaccines.routes.js";
 import authMiddleware from "./middleware/auth.middleware.js";
 import cors from "cors";
 import jwt from "jsonwebtoken";
@@ -59,6 +60,7 @@ app.post("/refresh_token", async (req, res) => {
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
 app.use("/api/sleep", sleepRoutes); //Route de sleep
+app.use("/api/vaccines", vaccinesRoutes); //Route de vaccines
 
 /*---Server listener---*/
 app.listen(process.env.PORT, () => {
