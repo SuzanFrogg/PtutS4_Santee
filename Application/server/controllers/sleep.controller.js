@@ -118,6 +118,10 @@ let deleteSleep = (req, res) => {
 				}
 			}
 		},
+		{
+			//Renvoie l'élément modifié
+			new: true
+		},
 		(err, docs) => {
 			if(!err) res.send(docs);
 			else console.log("Delete error : " + err);
