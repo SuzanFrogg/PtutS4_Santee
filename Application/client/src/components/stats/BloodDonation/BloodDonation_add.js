@@ -25,25 +25,25 @@ function BloodDonation_add()
 
         <label htmlFor="dons">Dons</label> 
         <input 
-          type="img" 
+          type="image" 
           id="sang"
-          src="../../temp1.png"
+          src="../../../media/icons/stats/temp1.png"
           value={sang}
           onChange={(event) => setSang(event.target.value)}
         />
               
         <input 
-          type="img" 
+          type="image" 
           id="plaquette"
-          src="../../temp1.png"
+          src="../../../media/icons/stats/temp1.png"
           value={plaquette}
           onChange={(event) => setPlaquette(event.target.value)}
         />
 
         <input 
-          type="img" 
+          type="image" 
           id="plasma"
-          src="../../temp1.png"
+          src="../../../media/icons/stats/temp1.png"
           value={plasma}
           onChange={(event) => setPlasma(event.target.value)}
         />
