@@ -1,4 +1,5 @@
 import React from "react";
+import {useState} from "react";
 
 function Weight_add()
 {
@@ -21,7 +22,7 @@ function Weight_add()
                   onChange={(event) => setDate(event.target.value)}
               />
 
-              <label htmlFor="time">Temps</label> 
+              <label htmlFor="time">Poids</label> 
               <input 
                   type="text" 
                   id="poids"
@@ -29,7 +30,8 @@ function Weight_add()
                   onChange={(event) => setPoids(event.target.value)}
               />
               
-      <input 
+	      <label htmlFor="time">Taille</label> 
+      	      <input 
                   type="text" 
                   id="taille"
                   value={taille}

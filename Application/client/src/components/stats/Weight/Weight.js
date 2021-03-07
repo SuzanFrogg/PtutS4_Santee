@@ -1,5 +1,7 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import Weight_add from "./Weight_add";
+import {useState} from "react";
 
 function Weight()
 {
@@ -168,7 +170,9 @@ function Weight()
 				}
 			}
 		
-	};		
+	};	
+
+    const [showAddForm, setShowAddForm] = useState(false);	
 
     return (
 		<>
@@ -196,6 +200,11 @@ function Weight()
 			<div className="data-box">
 				<h3>Courbe IMC</h3>
 				<Line data={dataChart2} options={optionsChart2} />
+			</div>
+
+			<div>
+				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
+				{showAddForm && <Weight_add />}
 			</div>
 		</>
 	);
