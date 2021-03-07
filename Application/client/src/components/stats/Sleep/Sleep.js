@@ -1,5 +1,7 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import Sleep_add from "./Sleep_add";
+import {useState} from "react";
 
 function Sleep(){
 	//DONNEES
@@ -100,6 +102,8 @@ function Sleep(){
 		}		
 	};
 
+    const [showAddForm, setShowAddForm] = useState(false);
+
     return (
 		<>
 			<h2>Sommeil</h2>
@@ -134,6 +138,11 @@ function Sleep(){
 			<div className="data-box">
 				<h3>Nombre d'heures de sommeil</h3>
 				<Bar data={dataChartBar} options={optionChartBar} />		
+			</div>
+
+			<div>
+				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
+				{showAddForm && <Sleep_add />}
 			</div>
 		</>
 	);
