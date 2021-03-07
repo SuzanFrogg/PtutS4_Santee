@@ -17,7 +17,7 @@ let getSleep = async (req, res) => {
  */
 let createSleep = async (req, res) => {
 	let newSleep = new sleepModel({
-		idUser: req.body.userId,
+		userId: req.body.userId,
 		Sleep: {
 			dateStart: req.body.dateStart,
 			dateEnd: req.body.dateEnd
@@ -46,7 +46,7 @@ let createSleep = async (req, res) => {
 			return res.status(400).json("wrong id : " + req.body.userId);
 
 		const docs = await sleepModel.findOneAndUpdate(
-			{ idUser: req.body.userId, "Sleep._id": req.params.sleepId },
+			{ userId: req.body.userId, "Sleep._id": req.params.sleepId },
 			{
 				$set: {
 					"Sleep.$.dateStart": req.body.dateStart,
@@ -78,7 +78,7 @@ let addSleep = async (req, res) => {
 			return res.status(400).send("wrong id : " + req.body.userId);
 
 		const docs = await sleepModel.findOneAndUpdate(
-			{ idUser: req.body.userId },
+			{ userId: req.body.userId },
 			{
 				$push: {
 					Sleep: {
@@ -110,7 +110,7 @@ let deleteSleep = (req, res) => {
 		return res.status(400).send("wrong id : " + req.params.id);
 
 	sleepModel.findOneAndUpdate(
-		{ idUser: req.body.userId, "Sleep._id": req.params.sleepId },
+		{ userId: req.body.userId, "Sleep._id": req.params.sleepId },
 		{
 			$pull: {
 				Sleep: {

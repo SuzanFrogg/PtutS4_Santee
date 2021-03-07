@@ -49,7 +49,7 @@ let createVaccines = async (req, res) => {
 			return res.status(400).json("wrong id : " + req.body.userId);
 
 		const docs = await vaccinesModel.findOneAndUpdate(
-			{ idUser: req.body.userId, "vaccines._id": req.params.vaccinesId },
+			{ userId: req.body.userId, "vaccines._id": req.params.vaccinesId },
 			{
 				$set: {
 					"vaccines.$.name": req.body.name,

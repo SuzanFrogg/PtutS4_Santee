@@ -1,47 +1,36 @@
 import mongoose from "mongoose";
 
-const vaccinesNestedSchema = new mongoose.Schema(
-{
-    name :
-    {
+const vaccinesNestedSchema = mongoose.Schema({
+    name: {
         type : String,
         required: true
     },
-    possibleStartAge :
-    {
+    possibleStartAge: {
         type : Number,
         required: true
     },
-    possibleEndAge :
-    {
+    possibleEndAge: {
         type : Number,
         required: true
     },
-    doseNeeded :
-    {
-        type : Number,
+    doseNeeded: {
+        type: Number,
         required: true
     },
-    doseMade :
-    {
-        type : Number,
+    doseMade : {
+        type: Number,
         required: true
     }
-
-}
-);
+});
 
 
-const vaccinesSchema = new mongoose.Schema(
-{
-    userId: 
-    {
+const vaccinesSchema = mongoose.Schema({
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         unique: true,
         required: true
     },
     vaccines: [vaccinesNestedSchema]
-    
 });
 
 
