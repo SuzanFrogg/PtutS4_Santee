@@ -34,7 +34,7 @@ const vaccinesNestedSchema = new mongoose.Schema(
 
 const vaccinesSchema = new mongoose.Schema(
 {
-    idUser: 
+    userId: 
     {
         type: mongoose.Schema.Types.ObjectId,
         unique: true,
