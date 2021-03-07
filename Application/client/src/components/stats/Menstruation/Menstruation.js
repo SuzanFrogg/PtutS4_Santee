@@ -1,7 +1,10 @@
 import React from "react";
+import Menstruation_add from "./Menstruation_add";
+import {useState} from "react";
 
 function Menstruation()
 {
+    const [showAddForm, setShowAddForm] = useState(false);
     return (
 		<>
 			<h2>Règles</h2>
@@ -18,6 +21,10 @@ function Menstruation()
 					<p>Fluctuation moyenne du cycle</p>
 					<span>28<small>j</small></span>
 				</div>						
+			</div>
+			<div>
+				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
+				{showAddForm && <Menstruation_add />}
 			</div>
 		</>
 	);
