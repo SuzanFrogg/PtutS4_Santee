@@ -28,6 +28,7 @@ function BloodDonation_add()
           type="image" 
           id="sang"
           src="../../../media/icons/stats/temp1.png"
+          alt="sang"
           value={sang}
           onChange={(event) => setSang(event.target.value)}
         />
@@ -36,6 +37,7 @@ function BloodDonation_add()
           type="image" 
           id="plaquette"
           src="../../../media/icons/stats/temp1.png"
+          alt="plaquette"
           value={plaquette}
           onChange={(event) => setPlaquette(event.target.value)}
         />
@@ -44,6 +46,7 @@ function BloodDonation_add()
           type="image" 
           id="plasma"
           src="../../../media/icons/stats/temp1.png"
+          alt="plasma"
           value={plasma}
           onChange={(event) => setPlasma(event.target.value)}
         />

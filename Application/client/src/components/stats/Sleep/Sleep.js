@@ -1,6 +1,6 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import Sleep_add from "./Sleep_add";
+import SleepAdd from "./Sleep_add";
 import {useState} from "react";
 
 function Sleep(){
@@ -11,8 +11,8 @@ function Sleep(){
 
 	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0;
 
-	lengthSleepWeek.slice(0, 4).map(hour => {avgSleepWeek+=hour; avgSleepGlobal+=hour});
-	lengthSleepWeek.slice(5, 6).map(hour => {avgSleepWE+=hour; avgSleepGlobal+=hour});
+	lengthSleepWeek.slice(0, 4).forEach(hour => {avgSleepWeek+=hour; avgSleepGlobal+=hour});
+	lengthSleepWeek.slice(5, 6).forEach(hour => {avgSleepWE+=hour; avgSleepGlobal+=hour});
 	avgSleepWeek /= 5;
 	avgSleepWE /= 2;
 	avgSleepGlobal /= 7;
@@ -89,8 +89,7 @@ function Sleep(){
 		scales: {
 			xAxes: [{
 				gridLines: {display: false}, //Enlève grille de fond
-				offset: true, //décalage par rapport à l'origine
-				categoryPercentage: 0.5
+				offset: true //décalage par rapport à l'origine
 			}],
 			yAxes: [{
 				gridLines: {display: false},
@@ -99,7 +98,12 @@ function Sleep(){
 					max: 12
 				}
 			}]
-		}		
+		},
+		datasets: {
+			bar: {
+				categoryPercentage: 0.5 //Pourcentage de la largeur disponible pour chaque bar
+			}
+		}
 	};
 
     const [showAddForm, setShowAddForm] = useState(false);
@@ -142,7 +146,7 @@ function Sleep(){
 
 			<div>
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
-				{showAddForm && <Sleep_add />}
+				{showAddForm && <SleepAdd />}
 			</div>
 		</>
 	);

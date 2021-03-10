@@ -1,5 +1,5 @@
 import React from "react";
-import Menstruation_add from "./Menstruation_add";
+import MenstruationAdd from "./Menstruation_add";
 import {useState} from "react";
 
 function Menstruation()
@@ -24,7 +24,7 @@ function Menstruation()
 			</div>
 			<div>
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
-				{showAddForm && <Menstruation_add />}
+				{showAddForm && <MenstruationAdd />}
 			</div>
 		</>
 	);

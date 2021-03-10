@@ -1,12 +1,12 @@
 import React from "react";
 import {ReactComponent as PocheSang} from '../../../media/icons/stats/Grand_blood_bag.svg';
-import BloodDonation_add from "./BloodDonation_add";
+import BloodDonationAdd from "./BloodDonation_add";
 import {useState} from "react";
 
 
-function BloodDonation()
-{	
+function BloodDonation() {
     const [showAddForm, setShowAddForm] = useState(false);
+
     return (
 		<>
 			<h2>Don du Sang</h2>
@@ -33,7 +33,7 @@ function BloodDonation()
 
 			<div>
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
-				{showAddForm && <BloodDonation_add />}
+				{showAddForm && <BloodDonationAdd />}
 			</div>
 		</>
 	);

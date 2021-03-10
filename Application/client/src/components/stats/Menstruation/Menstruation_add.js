@@ -30,6 +30,7 @@ function Menstruation_add()
             type="image" 
             name="low"
             src="../../../media/icons/stats/temp1.png"
+            alt="low flux"
             value={low}
             onChange={(event) => setLow(event.target.value)}
           />
@@ -38,6 +39,7 @@ function Menstruation_add()
             type="image" 
             name="medium"
             src="../../../media/icons/stats/temp1.png"
+            alt="medium flux"
             value={medium}
             onChange={(event) => setMedium(event.target.value)}
           />
@@ -45,6 +47,7 @@ function Menstruation_add()
           <input 
             type="image" 
             name="high"
+            alt="high flux"
             src="../../../media/icons/stats/temp1.png"
             value={high}
             onChange={(event) => setHigh(event.target.value)}
@@ -55,6 +58,7 @@ function Menstruation_add()
             type="image" 
             id="estomac"
             src="../../../media/icons/stats/temp1.png"
+            alt="estomac"
             value={estomac}
             onChange={(event) => setStomach(event.target.value)}
           />
@@ -63,6 +67,7 @@ function Menstruation_add()
             type="image" 
             id="tete"
             src="../../../media/icons/stats/temp1.png"
+            alt="tete"
             value={tete}
             onChange={(event) => setHead(event.target.value)}
           />
