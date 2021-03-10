@@ -32,8 +32,8 @@ const donNestedSchema = mongoose.Schema({
 const donSchema = mongoose.Schema({
 	userId: {
 		type: mongoose.Schema.Types.ObjectId,
-		unique: true,
-		required: true
+		required: true,
+		unique: true
 	},
 	Don: [donNestedSchema]
 });

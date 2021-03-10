@@ -27,11 +27,11 @@ const vaccinesNestedSchema = mongoose.Schema({
 const vaccinesSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        unique: true,
-        required: true
+        required: true,
+        unique: true
     },
     vaccines: [vaccinesNestedSchema]
 });
 
 
-export default mongoose.model("vaccines", vaccinesSchema);
+export default mongoose.model("vaccine", vaccinesSchema);

@@ -16,8 +16,8 @@ const sleepNestedSchema = mongoose.Schema({
 const sleepSchema = mongoose.Schema({
 	userId: {
 		type: mongoose.Schema.Types.ObjectId,
-		unique: true,
-		required: true
+		required: true,
+		unique: true
 	},
 	Sleep: [sleepNestedSchema]
 });
