@@ -56,13 +56,14 @@ app.post("/refresh_token", async (req, res) => {
 	const expiresIn = 30*1000; //30s
 	return res.status(200).json({ accessToken, userId, expiresIn });
 });
-//app.get("*", authMiddleware.checkUser);
+app.get("*", authMiddleware.checkUser);
 
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
 app.use("/api/sleep", sleepRoutes); //Route de sleep
 app.use("/api/vaccines", vaccinesRoutes); //Route de vaccines
-app.use("api/weight",weightRoutes); //Route de weight
+app.use("/api/weight",weightRoutes); //Route de weight
+
 /*---Server listener---*/
 app.listen(process.env.PORT, () => {
 	console.log(`Listening on port ${process.env.PORT}`);

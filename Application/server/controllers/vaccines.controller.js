@@ -5,10 +5,18 @@ import mongoose from "mongoose";
  * Permet d'obtenir les informations d'un vaccin 
  */
 let getVaccines = async (req, res) => {
-	vaccinesModel.find((err, docs) => {
-        if(!err) res.send(docs);
-        else console.log('Error to get data : ' + err);
-    })
+	if (req.user._id) {
+		vaccinesModel.findOne(
+			{ userId: req.user._id },
+			(err, docs) => {
+				if(!err) res.send(docs);
+				else console.log('Error to get data : ' + err);
+			}
+		);
+	}
+	else {
+		res.status(400).send("no user");
+	}
 };
 
 /**
@@ -17,8 +25,7 @@ let getVaccines = async (req, res) => {
 let createVaccines = async (req, res) => {
     let newVaccines = new vaccinesModel({
         userId: req.body.userId,
-        vaccines: 
-        {
+        vaccines: {
             name: req.body.name,
             possibleStartAge: req.body.possibleStartAge,
             possibleEndAge: req.body.possibleEndAge,
@@ -31,8 +38,7 @@ let createVaccines = async (req, res) => {
         const vaccines = await newVaccines.save();
         return res.status(201).json(vaccines);
     }
-    catch (err)
-    {
+    catch (err) {
         return res.status(400).send(err);
     }
 };

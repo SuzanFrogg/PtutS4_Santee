@@ -1,15 +1,22 @@
 import sleepModel from "../models/sleep.model.js";
-import sleepNestedSchema from "../models/sleep.model.js";
 import mongoose from "mongoose";
 
 /**
  * Permet d'obtenir les informations d'un sommeil 
  */
 let getSleep = async (req, res) => {
-	sleepModel.find((err, docs) => {
-		if(!err) res.send(docs);
-		else console.log('Error to get data : ' + err);
-	})
+	if (req.user._id) {
+		sleepModel.findOne(
+			{ userId: req.user._id },
+			(err, docs) => {
+				if(!err) res.send(docs);
+				else console.log('Error to get data : ' + err);
+			}
+		);
+	}
+	else {
+		res.status(400).send("no user");
+	}
 };
 
 /**
