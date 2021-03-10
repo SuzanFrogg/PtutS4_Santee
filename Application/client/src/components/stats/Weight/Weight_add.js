@@ -4,7 +4,7 @@ import {useState} from "react";
 function Weight_add()
 {
   const [date, setDate] = useState("");
-  const [poids, setpoids] = useState("");
+  const [poids, setPoids] = useState("");
   const [taille, setTaille] = useState("");
 
   const handleSubmit = async (event) => {
@@ -27,7 +27,7 @@ function Weight_add()
                   type="text" 
                   id="poids"
                   value={poids}
-                  onChange={(event) => setpoids(event.target.value)}
+                  onChange={(event) => setPoids(event.target.value)}
               />
               
 	      <label htmlFor="time">Taille</label> 
