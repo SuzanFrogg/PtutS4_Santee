@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
 import sleepRoutes from "./routes/sleep.routes.js";
 import vaccinesRoutes from "./routes/vaccines.routes.js";
+import weightRoutes from "./routes/weight.routes.js";
 import authMiddleware from "./middleware/auth.middleware.js";
 import cors from "cors";
 import jwt from "jsonwebtoken";
@@ -61,7 +62,7 @@ app.post("/refresh_token", async (req, res) => {
 app.use("/api/user", userRoutes); //Route de l'utilisateur
 app.use("/api/sleep", sleepRoutes); //Route de sleep
 app.use("/api/vaccines", vaccinesRoutes); //Route de vaccines
-
+app.use("api/weight",weightRoutes); //Route de weight
 /*---Server listener---*/
 app.listen(process.env.PORT, () => {
 	console.log(`Listening on port ${process.env.PORT}`);

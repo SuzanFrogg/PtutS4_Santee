@@ -14,12 +14,26 @@ function Profile() {
 		success: []
 	});
 
+	const [listvaccines, setListVaccines] = useState([]);
+	
 	useEffect(() => {
+
 		const fetchUser = async () => {
 			const response = await axios.get(`/api/user/${uid}`);
 			setUser(response.data);
 		}
 		fetchUser();
+
+		
+		const fetchVaccin = async () =>
+		{
+			const response = await axios.get('/api/vaccines/');// + uid);
+			setListVaccines(response.data[0].vaccines)
+		}
+		fetchVaccin();
+
+
+
 	}, [uid]);
 
 	const logout = async () => {
@@ -27,11 +41,15 @@ function Profile() {
 		setUid(null);
 		window.location = "/";
 	};
-	
+
+
+const listlist = listvaccines.map((vaccine) => <li>{vaccine.name}</li>);
+
+
 	let expTotale = 100;
 	let age = 19;
 
-	console.log(user);
+
 
 	return (
 		<section>
@@ -48,12 +66,12 @@ function Profile() {
 					</div>
 				</div>
 
+
+
 				<div className="vaccinsP">
 					<h3>Vaccins</h3>
-
 					<ul>
-						<li> Diphétrie</li>
-						<li> Tétanos</li>
+						{listlist}
 					</ul>
 
 				</div>
