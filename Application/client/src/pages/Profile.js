@@ -17,24 +17,19 @@ function Profile() {
 	const [listvaccines, setListVaccines] = useState([]);
 	
 	useEffect(() => {
-
 		const fetchUser = async () => {
 			const response = await axios.get(`/api/user/${uid}`);
-			setUser(response.data);
+			setUser({ ...user, ...response.data });
 		}
 		fetchUser();
 
-		
 		const fetchVaccin = async () =>
 		{
-			const response = await axios.get('/api/vaccines/');// + uid);
-			setListVaccines(response.data[0].vaccines)
+			const response = await axios.get('/api/vaccines/');
+			setListVaccines(response.data.vaccines);
 		}
 		fetchVaccin();
-
-
-
-	}, [uid]);
+	}, [user, uid]);
 
 	const logout = async () => {
 		await axios.get("/api/user/logout", { withCredentials: true });
@@ -42,14 +37,8 @@ function Profile() {
 		window.location = "/";
 	};
 
-
-const listlist = listvaccines.map((vaccine) => <li>{vaccine.name}</li>);
-
-
 	let expTotale = 100;
 	let age = 19;
-
-
 
 	return (
 		<section>
@@ -61,42 +50,37 @@ const listlist = listvaccines.map((vaccine) => <li>{vaccine.name}</li>);
 
 				<p> Niveau : {user.experience.level}</p>
 				<div id="level" style={{width: "70%"}}>
-					<div id="progress" style={{width: user.experience.xp * 100 / expTotale + "%"}}>
-
-					</div>
+					<div id="progress" style={{width: user.experience.xp * 100 / expTotale + "%"}}></div>
 				</div>
-
-
 
 				<div className="vaccinsP">
 					<h3>Vaccins</h3>
 					<ul>
-						{listlist}
+						{listvaccines && listvaccines.map((vaccine, key) => {
+							return (
+								<li key={key}>{vaccine.name}</li>
+							)
+						})}
 					</ul>
-
 				</div>
 
 				<div className="detailsP">
 					<h3>Informations</h3>
 					<ul>
-						<li> Sexe : {user.experience.xp}</li>
-						<li> Age : {age} ans</li>
+						<li>Sexe : {user.experience.xp}</li>
+						<li>Age : {age} ans</li>
 					</ul>
-
 				</div>
 
 				<div className="allergiesP">
 					<h3>Allergies</h3>
-
 					<ul>
-						<li> Allergie1</li>
-						<li> Allergie2</li>
+						<li>Allergie1</li>
+						<li>Allergie2</li>
 					</ul>
-
 				</div>
 
 				<Success />
-				
 			</div>
 
 			<button onClick={logout}>Se déconnecter</button>
