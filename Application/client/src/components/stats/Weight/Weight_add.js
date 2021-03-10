@@ -27,7 +27,7 @@ function Weight_add()
                   type="text" 
                   id="poids"
                   value={poids}
-                  onChange={(event) => setPoids(event.target.value)}
+                  onChange={(event) => setpoids(event.target.value)}
               />
               
 	      <label htmlFor="time">Taille</label> 
