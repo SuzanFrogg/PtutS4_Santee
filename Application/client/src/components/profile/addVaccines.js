@@ -16,11 +16,10 @@ function AddVaccines(props) {
 
     
     const handleSubmit = async (nbButton) => {
-        //event.preventDefault();
 
         if (nbButton === 1)
         {
-            await axios.get("/api/vaccines/put/", { userId: uid.uid, name: name, possibleStartAge : possibleStartAge, possibleEndAge : possibleEndAge, doseNeeded : doseNeeded, doseMade : doseMade});
+            await axios.put("/api/vaccines/", { userId: uid.uid, name: name, possibleStartAge : possibleStartAge, possibleEndAge : possibleEndAge, doseNeeded : doseNeeded, doseMade : doseMade});
         }
 
        props.handle(false);

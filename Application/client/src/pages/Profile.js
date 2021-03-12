@@ -15,10 +15,12 @@ function Profile() {
 		success: []
 	});
 
+	//ajouts vaccins
 	const [showAddVaccineFrom, setVaccineForm] = useState(false);
 
 	const [listvaccines, setListVaccines] = useState([]);
 	const handleAdd = (val) => setVaccineForm(val)
+	
 	
 	useEffect(() => {
 		const fetchUser = async () => {
