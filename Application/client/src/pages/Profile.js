@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../utils/store.js";
 import Success from '../components/profile/Success';
+import AddVaccines from '../components/profile/addVaccines';
 
 function Profile() {
 	const { uid, setUid } = useUser();
@@ -14,7 +15,10 @@ function Profile() {
 		success: []
 	});
 
+	const [showAddVaccineFrom, setVaccineForm] = useState(false);
+
 	const [listvaccines, setListVaccines] = useState([]);
+	const handleAdd = (val) => setVaccineForm(val)
 	
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -63,6 +67,10 @@ function Profile() {
 						})}
 					</ul>
 				</div>
+				
+				{/*Ajouter Vaccin*/}
+				<button onClick={(event) => setVaccineForm(true)}>+</button>
+				{showAddVaccineFrom && <AddVaccines handle={handleAdd} /> }
 
 				<div className="detailsP">
 					<h3>Informations</h3>
