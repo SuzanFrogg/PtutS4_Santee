@@ -13,7 +13,7 @@ function Profile() {
 		picture: "default-user.jpg",
 		pseudo: "",
 		sex: "",
-		dateOfBirth: "",
+		birth: "",
 		experience: {xp: 0, level: 0},
 		success: []
 	});
@@ -40,19 +40,20 @@ function Profile() {
 	
 	//se lance a chaque chargement
 	useEffect(() => {
+		let isMounted = true;
 		const fetchUser = async () => {
 			const response = await axios.get(`/api/user/${uid}`);
-			setUser({ ...user, ...response.data });
+			if (isMounted) setUser({ ...user, ...response.data });
 		}
-		fetchUser();
-
-		//récuper vaccins
 		const fetchVaccin = async () =>
 		{
 			const response = await axios.get('/api/vaccines/');
-			setListVaccines(response.data.vaccines);
+			if (isMounted) setListVaccines(response.data.vaccines);
 		}
+
+		fetchUser();
 		fetchVaccin();
+		return () => { isMounted = false };
 	}, [user, uid]);
 
 
@@ -110,7 +111,7 @@ function Profile() {
 				<div className="detailsP">
 					<h3>Informations</h3>
 					<ul>
-						<li>Sexe : {user.experience.xp}</li>
+						<li>Sexe : {user.sex}</li>
 						<li>Age : {age} ans</li>
 					</ul>
 				</div>
