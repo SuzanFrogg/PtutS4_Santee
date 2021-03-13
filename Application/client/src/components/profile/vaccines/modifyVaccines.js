@@ -1,13 +1,13 @@
 import React, {useState } from "react";
-import { useUser } from "../../utils/store.js";
+import { useUser } from "../../../utils/store.js";
 import axios from "axios";
 
-function AddVaccines(props) {
+function ModifyVaccine (props) {
 
     const uid = useUser();
 
 
-    const [name, setName] = useState("");
+    const [name, setName] = useState(""); //valeur par défault celle du vaccin de base !
     const [possibleStartAge, setPossibleStartAge] = useState("");
     const [possibleEndAge, setPossibleEndAge] = useState("");
     const [doseNeeded, setDoseNeeded] = useState("");
@@ -19,7 +19,7 @@ function AddVaccines(props) {
 
         if (nbButton === 1)
         {
-            await axios.put("/api/vaccines/", { userId: uid.uid, name: name, possibleStartAge : possibleStartAge, possibleEndAge : possibleEndAge, doseNeeded : doseNeeded, doseMade : doseMade});
+           // await axios.put("/api/vaccines/", { userId: uid.uid, name: name, possibleStartAge : possibleStartAge, possibleEndAge : possibleEndAge, doseNeeded : doseNeeded, doseMade : doseMade});
         }
 
        props.handle(false);
@@ -89,4 +89,4 @@ function AddVaccines(props) {
 	);
 }
 
-export default AddVaccines;
+export default ModifyVaccine;

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../utils/store.js";
 import Success from '../components/profile/Success';
-import AddVaccines from '../components/profile/addVaccines';
+import AddVaccines from '../components/profile/vaccines/addVaccines';
+import ModifyVaccines from '../components/profile/vaccines/modifyVaccines';
+//import DeleteVaccines from '../components/profile/vaccines/deleteVaccines';
+
 
 function Profile() {
 	const { uid, setUid } = useUser();
@@ -15,13 +18,27 @@ function Profile() {
 		success: []
 	});
 
-	//ajouts vaccins
-	const [showAddVaccineFrom, setVaccineForm] = useState(false);
+	//gérer vaccins
+	//ajouts
+	const [showAddVaccineFrom, setAddVaccineForm] = useState(false);
+	const handleAddVaccines = (val) => setAddVaccineForm(val)
+
+
+	const [showVaccineFrom, setVaccineForm] = useState(false);
+
+	//modifier
+	const [showModifyVaccineFrom, setModifyVaccineForm] = useState(false);
+	const handleModifyVaccines = (val) => setModifyVaccineForm(val)
+
+	//supprimer
+	const [showDeleteVaccineFrom, setDeleteVaccineForm] = useState(false);
+	const handleDeleteVaccines =  (val) => setModifyVaccineForm(val)
+
 
 	const [listvaccines, setListVaccines] = useState([]);
-	const handleAdd = (val) => setVaccineForm(val)
 	
 	
+	//se lance a chaque chargement
 	useEffect(() => {
 		const fetchUser = async () => {
 			const response = await axios.get(`/api/user/${uid}`);
@@ -29,6 +46,7 @@ function Profile() {
 		}
 		fetchUser();
 
+		//récuper vaccins
 		const fetchVaccin = async () =>
 		{
 			const response = await axios.get('/api/vaccines/');
@@ -37,6 +55,8 @@ function Profile() {
 		fetchVaccin();
 	}, [user, uid]);
 
+
+	//deconection
 	const logout = async () => {
 		await axios.get("/api/user/logout", { withCredentials: true });
 		setUid(null);
@@ -64,15 +84,28 @@ function Profile() {
 					<ul>
 						{listvaccines && listvaccines.map((vaccine, key) => {
 							return (
-								<li key={key}>{vaccine.name}</li>
+								<li onClick={(event) => setVaccineForm(true)} key={key}>{vaccine.name}</li>
 							)
 						})}
 					</ul>
 				</div>
 				
+
+				{/* Formulaire modifier/delete*/}
+				{showVaccineFrom && <button onClick={(event) => setModifyVaccineForm(true)}>Modifier</button>}
+				{showVaccineFrom && <button onClick={(event) => setDeleteVaccineForm(true)}>Supprimer</button>}
+				{showVaccineFrom && <button onClick={(event) => setVaccineForm(false)}>Annuler</button>}
+
+				{showModifyVaccineFrom && <ModifyVaccines handle={handleModifyVaccines}/> }
+				{/*showDeleteVaccineFrom && <DeleteVaccines handle={handleDeleteVaccines} /> */}
+
+
 				{/*Ajouter Vaccin*/}
-				<button onClick={(event) => setVaccineForm(true)}>+</button>
-				{showAddVaccineFrom && <AddVaccines handle={handleAdd} /> }
+				<button onClick={(event) => setAddVaccineForm(true)}>+</button>
+				{showAddVaccineFrom && <AddVaccines handle={handleAddVaccines} /> }
+
+				
+				
 
 				<div className="detailsP">
 					<h3>Informations</h3>

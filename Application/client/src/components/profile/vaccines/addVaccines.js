@@ -1,8 +1,8 @@
 import React, {useState } from "react";
-import { useUser } from "../../utils/store.js";
+import { useUser } from "../../../utils/store.js";
 import axios from "axios";
 
-function modify(props) {
+function AddVaccines(props) {
 
     const uid = useUser();
 
