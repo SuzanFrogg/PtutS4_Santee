@@ -3,4 +3,5 @@
 @import "./components/header/header.css";
 @import "./components/stats/stats.css";
 @import "./components/log/log.css";
+@import "./components/calendar/calendar.css";
 @import "./pages/profile.css";
