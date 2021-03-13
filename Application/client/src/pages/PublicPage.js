@@ -24,14 +24,14 @@ function PublicPage() {
 					<>
 						<SignUpForm />
 						<p>
-							Vous êtes déjà inscris ? Connectez-vous <span id="form-btn-login" onClick={handleModals}>ici</span>
+							Vous êtes déjà inscrit ? Connectez-vous <span id="form-btn-login" onClick={handleModals}>ici</span>
 						</p>
 					</>
 					:
 					<>
 						<LoginForm />
 						<p>
-							Vous n'êtes pas inscris ? Inscrivez-vous <span id="form-btn-signup" onClick={handleModals}>ici</span>
+							Vous n'êtes pas inscrit ? Inscrivez-vous <span id="form-btn-signup" onClick={handleModals}>ici</span>
 						</p>
 					</>
 				}
