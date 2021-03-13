@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 function HeaderItem(props) {
 	return (
 		<li>
-			<NavLink exact to={props.link}>
+			<NavLink exact={props.isExact} to={props.link} activeClassName="header-active">
 				{props.icon}
 				<span>{props.text}</span>
 			</NavLink>

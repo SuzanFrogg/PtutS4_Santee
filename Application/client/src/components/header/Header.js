@@ -15,10 +15,10 @@ function Header() {
 				</Link>
 			</div>
 			<ul className="header-menu">
-				<HeaderItem link="/" text="Accueil" icon={<Home />} />
-				<HeaderItem link="/stats" text="Statistiques" icon={<Stats />} />
-				<HeaderItem link="/calendar" text="Calendrier" icon={<Calendar />} />
-				<HeaderItem link="/objectives" text="Objectifs" icon={<Objectives />} />
+				<HeaderItem isExact={true} link="/" text="Accueil" icon={<Home />} />
+				<HeaderItem isExact={false} link="/stats" text="Statistiques" icon={<Stats />} />
+				<HeaderItem isExact={true} link="/calendar" text="Calendrier" icon={<Calendar />} />
+				<HeaderItem isExact={true} link="/objectives" text="Objectifs" icon={<Objectives />} />
 			</ul>
 			<div className="header-profile">
 				<Link to="/profile">
