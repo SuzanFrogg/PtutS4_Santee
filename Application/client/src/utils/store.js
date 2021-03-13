@@ -25,7 +25,7 @@ function UserWrapper({ children }) {
 				//On appelle la fonction de nouveau quand le refreshToken n'est plus valide
 				setTimeout(() => {
 					refreshToken();
-				}, res.data.expiresIn - 500); //-500ms
+				}, res.data.expiresIn - 10000); //-10s
 	
 				setUid(res.data.userId);
 			})

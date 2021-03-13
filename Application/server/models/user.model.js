@@ -66,7 +66,7 @@ userSchema.methods.matchPassword = async function(password) {
  */
 userSchema.methods.getAccessToken = async function() {
 	return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN_SECRET, {
-		expiresIn: "30s"
+		expiresIn: "60s"
 	});
 }
 
