@@ -8,6 +8,7 @@ import sleepRoutes from "./routes/sleep.routes.js";
 import vaccinesRoutes from "./routes/vaccines.routes.js";
 import weightRoutes from "./routes/weight.routes.js";
 import successRoutes from "./routes/success.routes.js";
+import allergyRoutes from "./routes/allergy.routes.js";
 import authMiddleware from "./middleware/auth.middleware.js";
 import cors from "cors";
 import jwt from "jsonwebtoken";
@@ -65,6 +66,7 @@ app.use("/api/sleep", sleepRoutes); //Route de sleep
 app.use("/api/vaccines", vaccinesRoutes); //Route de vaccines
 app.use("/api/weight",weightRoutes); //Route de weight
 app.use("/api/success",successRoutes); //Route de success
+app.use("/api/allergy",allergyRoutes); //Route de success
 
 /*---Server listener---*/
 app.listen(process.env.PORT, () => {

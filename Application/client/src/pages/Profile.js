@@ -5,6 +5,7 @@ import Success from '../components/profile/Success';
 import AddVaccines from '../components/profile/vaccines/addVaccines';
 import ModifyVaccines from '../components/profile/vaccines/modifyVaccines';
 //import DeleteVaccines from '../components/profile/vaccines/deleteVaccines';
+import AddAllergy from '../components/profile/allergy/addAllergy';
 
 
 function Profile() {
@@ -34,8 +35,16 @@ function Profile() {
 	const [showDeleteVaccineFrom, setDeleteVaccineForm] = useState(false);
 	const handleDeleteVaccines =  (val) => setModifyVaccineForm(val)
 
-
+	//vaccins
 	const [listvaccines, setListVaccines] = useState([]);
+
+
+	//gerer allergies
+	const [listAllergies, setListAllergies] = useState([]);
+
+	//ajouts
+	const [showAddAllergyFrom, setAddAllergyForm] = useState(false);
+	const handleAddAllergy = (val) => setAddAllergyForm(val)
 	
 	
 	//se lance a chaque chargement
@@ -45,14 +54,24 @@ function Profile() {
 			const response = await axios.get(`/api/user/${uid}`);
 			if (isMounted) setUser({ ...user, ...response.data });
 		}
+
+		//initialiser vaccins
 		const fetchVaccin = async () =>
 		{
 			const response = await axios.get('/api/vaccines/');
 			if (isMounted) setListVaccines(response.data.vaccines);
 		}
 
+		//initialiser allergies
+		const fetchAllergy = async () =>
+		{
+			const response = await axios.get('/api/allergy/');
+			if (isMounted) setListAllergies(response.data.allergies);
+		}
+
 		fetchUser();
 		fetchVaccin();
+		fetchAllergy();
 		return () => { isMounted = false };
 	}, [user, uid]);
 
@@ -89,21 +108,24 @@ function Profile() {
 							)
 						})}
 					</ul>
-				</div>
+				
 				
 
-				{/* Formulaire modifier/delete*/}
-				{showVaccineFrom && <button onClick={(event) => setModifyVaccineForm(true)}>Modifier</button>}
-				{showVaccineFrom && <button onClick={(event) => setDeleteVaccineForm(true)}>Supprimer</button>}
-				{showVaccineFrom && <button onClick={(event) => setVaccineForm(false)}>Annuler</button>}
+					{/* Formulaire modifier/delete*/}
+					{showVaccineFrom && <button onClick={(event) => setModifyVaccineForm(true)}>Modifier</button>}
+					{showVaccineFrom && <button onClick={(event) => setDeleteVaccineForm(true)}>Supprimer</button>}
+					{showVaccineFrom && <button onClick={(event) => setVaccineForm(false)}>Annuler</button>}
 
-				{showModifyVaccineFrom && <ModifyVaccines handle={handleModifyVaccines}/> }
-				{/*showDeleteVaccineFrom && <DeleteVaccines handle={handleDeleteVaccines} /> */}
+					{showModifyVaccineFrom && <ModifyVaccines handle={handleModifyVaccines}/> }
+					{/*showDeleteVaccineFrom && <DeleteVaccines handle={handleDeleteVaccines} /> */}
 
 
-				{/*Ajouter Vaccin*/}
-				<button onClick={(event) => setAddVaccineForm(true)}>+</button>
-				{showAddVaccineFrom && <AddVaccines handle={handleAddVaccines} /> }
+					{/*Ajouter Vaccin*/}
+					<button onClick={(event) => setAddVaccineForm(true)}>+</button>
+					{showAddVaccineFrom && <AddVaccines handle={handleAddVaccines} /> }
+
+
+				</div>
 
 				
 				
@@ -119,9 +141,18 @@ function Profile() {
 				<div className="allergiesP">
 					<h3>Allergies</h3>
 					<ul>
-						<li>Allergie1</li>
-						<li>Allergie2</li>
+						{listAllergies && listAllergies.map((allergy, key) => {
+								return (
+									<li key={key}>{allergy.toAvoid}</li>
+								)
+							})}
 					</ul>
+
+					{/*Ajouter Allergy*/}
+					<button onClick={(event) => setAddAllergyForm(true)}>+</button>
+					{showAddAllergyFrom && <AddAllergy handle={handleAddAllergy} /> }
+
+
 				</div>
 
 				<Success />
