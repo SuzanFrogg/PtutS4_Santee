@@ -69,6 +69,7 @@ app.use("/api/weight",weightRoutes); //Route de weight
 app.use("/api/success",successRoutes); //Route de success
 app.use("/api/allergy",allergyRoutes); //Route de allergy
 app.use("/api/don",donRoutes); //Route de don
+app.use("/api/periods", authMiddleware.checkUser, periodsRoutes); //Route des régles
 
 /*---Server listener---*/
 app.listen(process.env.PORT, () => {

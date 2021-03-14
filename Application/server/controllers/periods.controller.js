@@ -4,11 +4,48 @@ import mongoose from "mongoose";
 /**
  * Permet d'obtenir les informations d'un cycle 
  */
-let getPeriods = async (req, res) => {
-	periodsModel.find((err, docs) => {
-        if(!err) res.send(docs);
-        else console.log('Error to get data : ' + err);
-    })
+ let getPeriods = async (req, res) => {
+	if (req.user._id) {
+		periodsModel.findOne(
+			{ userId: req.user._id },
+			(err, docs) => {
+				if(!err) res.status(201).json(docs);
+				else res.status(404).json({ errors: err });
+			}
+		);
+	}
+	else {
+		res.status(400).send("no user");
+	}
+};
+
+/**
+ * Permet d'obtenir les informations d'un cycle en fonction de deux dates
+ */
+let getPeriodsDate = async (req, res) => {
+	if (req.user._id) {
+		const periods = await periodsModel.aggregate(
+			[
+				{$match: { //On récupère le document correspondant à l'id de l'utilisateur
+					userId: req.user._id
+				}},
+				{$unwind: "$periods"},
+				{$unset: "_id"}, //Enlève le champs id
+				{$unset: "userId"}, //Enlève le champs userId
+				{$match: {
+					$or: [
+						{"periods.dateStart": {$gte: new Date(req.body.dateStart), $lte: new Date(req.body.dateEnd)}},
+						{"periods.dateEnd": {$gte: new Date(req.body.dateStart), $lte: new Date(req.body.dateEnd)}}
+					]
+				}},
+				{$replaceRoot: {newRoot: "$periods"}}
+			]
+		)
+		res.status(201).json(periods);
+	}
+	else {
+		res.status(400).send("no user");
+	}
 };
 
 /**
@@ -17,7 +54,7 @@ let getPeriods = async (req, res) => {
 let createPeriods = async (req, res) => {
 	let newPeriods = new periodsModel({
 		userId: req.body.userId,
-		Periods: {
+		periods: {
 			dateStart: req.body.dateStart,
 			dateEnd: req.body.dateEnd,
             flux: req.body.flux
@@ -49,14 +86,14 @@ let updatePeriods = async (req, res) => {
 			{ userId: req.body.userId, "periods._id": req.params.periodsId },
 			{
 				$set: {
-					"Periods.$.dateStart": req.body.dateStart,
-					"Periods.$.dateEnd": req.body.dateEnd,
-					"Periods.$.flux": req.body.flux
+					"periods.$.dateStart": req.body.dateStart,
+					"periods.$.dateEnd": req.body.dateEnd,
+					"periods.$.flux": req.body.flux
 				}
 			},
 			{
 				//Renvoie juste l'élément qui correspond (et pas toute la liste)
-				projection: { Periods: { $elemMatch: { _id: req.params.periodsId } } },
+				projection: { periods: { $elemMatch: { _id: req.params.periodsId } } },
 				//Renvoie l'élément modifié
 				new: true
 			}
@@ -91,7 +128,7 @@ let addPeriods = async (req, res) => {
 			},
 			{
 				//Renvoie juste le dernier élément
-				projection: { Periods: {$slice: -1} },
+				projection: { periods: {$slice: -1} },
 				//Renvoie l'élément modifié
 				new: true
 			}
@@ -116,7 +153,7 @@ let deletePeriods = (req, res) => {
 		{ userId: req.body.userId, "Periods._id": req.params.periodsId },
 		{
 			$pull: {
-				Periods: {
+				periods: {
 					_id: req.params.periodsId
 				}
 			}
@@ -132,4 +169,4 @@ let deletePeriods = (req, res) => {
 	);
 };
 
-export default {getPeriods, createPeriods, updatePeriods, addPeriods, deletePeriods};
+export default {getPeriods, getPeriodsDate, createPeriods, updatePeriods, addPeriods, deletePeriods};

@@ -23,7 +23,7 @@ const periodsSchema = mongoose.Schema({
 		unique: true,
 		required: true
 	},
-	Periods: [periodsNestedSchema]
+	periods: [periodsNestedSchema]
 });
 
 export default mongoose.model("periods", periodsSchema);
