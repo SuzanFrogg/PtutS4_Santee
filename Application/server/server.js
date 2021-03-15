@@ -9,6 +9,7 @@ import vaccinesRoutes from "./routes/vaccines.routes.js";
 import weightRoutes from "./routes/weight.routes.js";
 import successRoutes from "./routes/success.routes.js";
 import allergyRoutes from "./routes/allergy.routes.js";
+import periodsRoutes from "./routes/periods.routes.js";
 import donRoutes from "./routes/don.routes.js";
 import authMiddleware from "./middleware/auth.middleware.js";
 import cors from "cors";
