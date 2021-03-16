@@ -2,29 +2,13 @@ import objectivesModel from "../models/objectives.model.js";
 import mongoose from "mongoose";
 
 /**
- * Permet d'obtenir les informations d'un objectives  a partir d'une date
+ * Permet d'obtenir les informations d'un objectives
  */
  let getObjectivesAll = async (req, res) => {
 
-    try
-    {
-        const obj = await objectivesModel.find();
-        res.status(200).json(obj);
-    }
-    catch(err)
-    {
-        res.status(400).json({errors: err});
-    }
-    
-
-
-};
-
-let getObjectivesDate = async (req, res) => {
-
-    if (req.param.date ) {
+    if (req.user._id) {
 		objectivesModel.findOne(
-			{ dateEnd: req.param.date },
+			{ userId: req.user._id },
 			(err, docs) => {
 				if(!err) res.send(docs);
 				else console.log('Error to get data : ' + err);
@@ -32,9 +16,40 @@ let getObjectivesDate = async (req, res) => {
 		);
 	}
 	else {
-		res.status(400).send("not found");
+		res.status(400).send("no user");
 	}
+    
 
+
+};
+
+/**
+ * Permet d'obtenir les informations d'un objectives  a partir d'une date
+ */
+let getObjectivesDate = async (req, res) => {
+    if (req.user._id) {
+		const objectives = await objectivesModel.aggregate(
+			[
+				{$match: { //On récupère le document correspondant à l'id de l'utilisateur
+					userId: req.user._id
+				}},
+				{$unwind: "$objectives"},
+				{$unset: "_id"}, //Enlève le champs id
+				{$unset: "userId"}, //Enlève le champs userId
+				{$match: {
+					$or: [
+						{"objectives.dateEnd": {$gte: new Date(req.body.date), $lte: new Date(req.body.date)}}
+					]
+				}},
+				{$replaceRoot: {newRoot: "$objectives"}}
+			]
+		)
+		res.status(201).json(objectives);
+	}
+	else {
+		res.status(400).send("no user");
+	}
+   
 };
 
 
@@ -44,9 +59,14 @@ let getObjectivesDate = async (req, res) => {
 let createObjectives = async (req, res) => {
 
    let newObjectif = new objectivesModel({
-        obj : req.body.obj,
-        isDone : req.body.isDone,
-        dateEnd : req.body.dateEnd
+        userId : req.body.userId,
+        objectives : 
+        {
+            obj : req.body.obj,
+            isDone : req.body.isDone,
+            dateEnd : req.body.dateEnd
+        }
+        
     });
 
     try {

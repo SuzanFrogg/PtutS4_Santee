@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const objectifSchema = mongoose.Schema({
+const objectifNesteedSchema = mongoose.Schema({
 	obj: {
 		type: String,
 		required: true
@@ -14,6 +14,15 @@ const objectifSchema = mongoose.Schema({
 		required: true,
 		default: Date.now
 	}
+});
+
+const objectifSchema = mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        unique: true
+    },
+    objectives: [objectifNesteedSchema]
 });
 
 
