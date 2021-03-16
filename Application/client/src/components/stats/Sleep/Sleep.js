@@ -1,9 +1,23 @@
 import React from "react";
+import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import SleepAdd from "./Sleep_add";
 import {useState} from "react";
 
+
 function Sleep(){
+	
+	//Semaine précédente
+	/*Gérer la date
+	const getPrevWeek = () => {
+		setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth(), 1));
+	}
+
+	//Semaine suivante
+	const getNextWeek = () => {
+		setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth(), 1));
+	}*/
+
 	//DONNEES
 	//Heures de sommeil
 

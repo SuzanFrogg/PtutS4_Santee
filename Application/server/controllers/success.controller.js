@@ -2,7 +2,7 @@ import successModel from "../models/success.model.js";
 import mongoose from "mongoose";
 
 /**
- * Permet d'obtenir les informations d'un sommeil 
+ * Permet d'obtenir les informations d'un succes
  */
 let getSuccess = async (req, res) => {
 

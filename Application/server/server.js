@@ -11,6 +11,7 @@ import successRoutes from "./routes/success.routes.js";
 import allergyRoutes from "./routes/allergy.routes.js";
 import periodsRoutes from "./routes/periods.routes.js";
 import donRoutes from "./routes/don.routes.js";
+import astuceRoutes from "./routes/astuce.routes.js";
 import objectivesRoutes from "./routes/objectives.routes.js";
 import authMiddleware from "./middleware/auth.middleware.js";
 import cors from "cors";
@@ -72,6 +73,7 @@ app.use("/api/success",successRoutes); //Route de success
 app.use("/api/allergy",allergyRoutes); //Route de allergy
 app.use("/api/don",donRoutes); //Route de don
 app.use("/api/objectives",objectivesRoutes); //Route de don
+app.use("/api/astuce",astuceRoutes); //Route de astuce
 app.use("/api/periods", authMiddleware.checkUser, periodsRoutes); //Route des régles
 
 /*---Server listener---*/
