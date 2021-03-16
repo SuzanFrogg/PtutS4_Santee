@@ -33,7 +33,7 @@ let login = async (req, res) => {
 		if (!isMatch)
 			throw Error("invalid password");
 
-		const maxAge = 1 * 24 * 60 * 60 * 1000; //1 jour
+		const maxAge = 3 * 24 * 60 * 60 * 1000; //1 jour
 		const accessToken = await user.getAccessToken();
 		const refreshToken = await user.getRefreshToken();
 		res.cookie("jwt", refreshToken, { httpOnly: true, maxAge });
