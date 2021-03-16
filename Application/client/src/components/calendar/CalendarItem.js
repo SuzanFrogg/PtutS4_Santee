@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import useCalendar from "./useCalendar.js";
-import {ReactComponent as ArrowIcon} from '../../media/icons/next-arrow.svg';
 import axios from "axios";
+import {ReactComponent as ArrowIcon} from '../../media/icons/next-arrow.svg';
+import DescriptionItem from "./DescriptionItem.js";
 
 //Dimanche correspond à 0 donc on le met en premier
 const daysNames = [
@@ -59,6 +59,11 @@ function CalendarItem() {
 		return yearAsText + "-" + monthAsText + "-" + dayAsText;
 	}
 
+	const dateWithoutTime = (date) => {
+		date.setHours(0, 0, 0, 0);
+		return date;
+	};
+
 	const getDateList = () => {
 		const month = currentDate.getMonth();
 		const year = currentDate.getFullYear();
@@ -86,12 +91,12 @@ function CalendarItem() {
 						<span>{day.getDate()}</span>
 						<div className="calendar-day-info">
 							{calendarData.periods.map((data, key) => {
-								let dateStart = new Date(data.dateStart);
-								let dateEnd = new Date(data.dateEnd);
-								dateStart = new Date(dateStart.getFullYear(), dateStart.getMonth(), dateStart.getDate());
-								dateEnd = new Date(dateEnd.getFullYear(), dateEnd.getMonth(), dateEnd.getDate());
+								let dateStart = dateWithoutTime(new Date(data.dateStart));
+								let dateEnd = dateWithoutTime(new Date(data.dateEnd));
 								if (day >= dateStart && day <= dateEnd)
-									return <div key={key} className="calendar-day-info-periods"></div>;
+									return <div className="calendar-day-info-periods" key={key}></div>;
+								else
+									return null;
 							})}
 						</div>
 					</time>
@@ -105,7 +110,7 @@ function CalendarItem() {
 	
 	const dateClickHandler = (date) => {
 		let dateSplit = date.target.dateTime.split("-");
-		setSelectedDate(new Date(dateSplit[0], parseInt(dateSplit[1])-1, parseInt(dateSplit[2])));
+		setSelectedDate(dateWithoutTime(new Date(dateSplit[0], parseInt(dateSplit[1])-1, parseInt(dateSplit[2]))));
 	}
 
 	return (
@@ -125,13 +130,15 @@ function CalendarItem() {
 				+ selectedDate.getDate() + " "
 				+ monthsNames[selectedDate.getMonth()] + " "
 				+ selectedDate.getFullYear()}</h4>
-				<div className="calendar-selected-item">
-					<span className="calendar-selected-time">20h52</span>
-					<div className="calendar-selected-desc">
-						<h5>Aller dans le module lunaire</h5>
-						<p>Aller dans le module lunaire</p>
-					</div>
-				</div>
+				
+				{calendarData.periods.map((data, key) => {
+					let dateStart = dateWithoutTime(new Date(data.dateStart));
+					let dateEnd = dateWithoutTime(new Date(data.dateEnd));
+					if (selectedDate >= dateStart && selectedDate <= dateEnd)
+						return <DescriptionItem id={data._id} title="Règles" description={`Flux = ${data.flux}`} key={key} />;
+					else
+						return null;
+				})}
 			</section>
 		</div>
 	)
