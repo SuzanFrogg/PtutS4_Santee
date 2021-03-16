@@ -16,9 +16,5 @@ const objectifSchema = mongoose.Schema({
 	}
 });
 
-const calendarSchema = mongoose.Schema({
 
-	objectives: [objectifSchema]
-});
-
-export default mongoose.model("calendar", calendarSchema);
+export default mongoose.model("calendar", objectifSchema);
