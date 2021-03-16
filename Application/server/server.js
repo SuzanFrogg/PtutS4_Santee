@@ -11,6 +11,7 @@ import successRoutes from "./routes/success.routes.js";
 import allergyRoutes from "./routes/allergy.routes.js";
 import periodsRoutes from "./routes/periods.routes.js";
 import donRoutes from "./routes/don.routes.js";
+import calendarRoutes from "./routes/calendar.routes.js";
 import authMiddleware from "./middleware/auth.middleware.js";
 import cors from "cors";
 import jwt from "jsonwebtoken";
@@ -70,6 +71,7 @@ app.use("/api/weight",weightRoutes); //Route de weight
 app.use("/api/success",successRoutes); //Route de success
 app.use("/api/allergy",allergyRoutes); //Route de allergy
 app.use("/api/don",donRoutes); //Route de don
+app.use("/api/calendar",calendarRoutes); //Route de don
 app.use("/api/periods", authMiddleware.checkUser, periodsRoutes); //Route des régles
 
 /*---Server listener---*/
