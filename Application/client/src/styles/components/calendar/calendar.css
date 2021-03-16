@@ -81,6 +81,7 @@
 .calendar-day-info {
 	display: flex;
 	height: 10px;
+	mix-blend-mode: luminosity;
 }
 .calendar-day-info-periods {
 	width: 10px;
