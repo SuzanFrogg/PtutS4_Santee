@@ -1,10 +1,22 @@
-.profile-info {
+.profile-section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
+}
+.profile-info {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	padding: 50px;
+	width: 100%;
+	align-items: center;
 	justify-content: center;
+	border-radius: 30px;
+	background-color: var(--middle-color);
 }
 .profile-picture {
+	max-width: 300px;
 	border-radius: 50%;
 	border: 5px solid var(--middle-color);
 }
@@ -66,8 +78,8 @@
 	display: inline-block;
 	content: "-";
 	font-weight: 900;
-	width: 15px;
-	margin-left: -15px;
+	width: 25px;
+	margin-left: -25px;
 }
 
 .profile-success ul {
@@ -89,26 +101,12 @@
 	fill: var(--fore-color);
 }
 .profile-success svg {
-	max-width: 70px;
-	max-height: 70px;
+	max-width: 65px;
+	max-height: 65px;
 }
 .success-item p {
 	text-align: center;
 }
-
-/*button {
-	color:var(--back-color);
-	background-color: var(--main-color);
-	border-radius: 5em;
-	padding: 0.5em;
-	margin: 0.2em;
+.profile-btns {
+	margin-bottom: 40px;
 }
-
-button:hover {
-	background-color: var(--main-color-var2);
-	font-weight: bold;
-}
-
-img {
-	border-radius: 6em;
-}*/

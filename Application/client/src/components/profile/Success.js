@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as Lock } from "../../media/icons/padlock-full.svg";
+import { ReactComponent as Lock } from "../../media/icons/lock.svg";
 
 function Success(props) {
 	return (

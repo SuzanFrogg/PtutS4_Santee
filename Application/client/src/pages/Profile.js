@@ -11,14 +11,6 @@ import { ReactComponent as Success1 } from "../media/icons/health-insurance.svg"
 
 function Profile() {
 	const { user, setUser } = useUser();
-	const [user, setUser] = useState({
-		picture: "default-user.jpg",
-		pseudo: "",
-		sex: "N/A",
-		birth: new Date(),
-		experience: {xp: 0, level: 0},
-		success: []
-	});
 
 	//gérer vaccins
 	//ajouts
@@ -51,10 +43,6 @@ function Profile() {
 	//se lance a chaque chargement
 	useEffect(() => {
 		let isMounted = true;
-		const fetchUser = async () => {
-			const response = await axios.get(`/api/user/${uid}`);
-			if (isMounted) setUser({ ...user, ...response.data });
-		}
 
 		//Initialiser vaccins
 		const fetchVaccin = async () =>
@@ -70,7 +58,6 @@ function Profile() {
 			if (isMounted) setListAllergies(response.data.allergies);
 		}
 
-		fetchUser();
 		fetchVaccin();
 		fetchAllergy();
 		return () => { isMounted = false };
@@ -93,11 +80,11 @@ function Profile() {
 	let expTotale = 100;
 
 	return (
-		<section>
-			<div className="profile-info">
-				<img className="profile-picture" onClick={logout} src={`./uploads/profil/${user.picture}`} alt="profil" />
-				<h2>{user.pseudo}</h2>
+		<section className="profile-section">
+			<img className="profile-picture" src={`./uploads/profil/${user.picture}`} alt="profil" />
+			<h2>{user.pseudo}</h2>
 
+			<div className="profile-info">
 				<div className="level-container">
 					<div className="level">
 						<div className="progress" style={{width: (user.experience.xp * 100 / expTotale) + "%"}}></div>
@@ -161,8 +148,10 @@ function Profile() {
 				</div>
 			</div>
 
-			<button onClick={logout}>Se déconnecter</button>
-			<button>Modifier</button>
+			<div className="profile-btns">
+				<button onClick={logout}>Se déconnecter</button>
+				<button>Modifier</button>
+			</div>
 		</section>
 	);
 }
