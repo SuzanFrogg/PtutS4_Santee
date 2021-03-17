@@ -1,14 +1,19 @@
 import React from "react";
 import {useState} from "react";
+import axios from "axios";
+import { useUser } from "../../../utils/store.js";
 
 function Sleep_add()
 {
+    const user = useUser();
     const [date, setDate] = useState("");
     const [timeS, setTimeS] = useState("");
     const [timeR, setTimeR] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        await axios.put("/api/sleep/", {userId: user._id, dateStart : timeS, dateEnd : timeR});
     }
         
 
