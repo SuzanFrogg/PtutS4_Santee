@@ -62,7 +62,7 @@ app.post("/refresh_token", async (req, res) => {
 	const expiresIn = 60*1000; //60s
 	return res.status(200).json({ accessToken, userId, expiresIn });
 });
-//app.get("*", authMiddleware.checkUser);
+app.get("*", authMiddleware.checkUser);
 
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur

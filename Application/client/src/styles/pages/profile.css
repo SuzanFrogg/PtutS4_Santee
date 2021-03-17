@@ -1,34 +1,99 @@
-.vaccinsP ul{
-	list-style-type: none;
+.profile-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
-
-.vaccinsP li{
-	background-color: var(--main-color);
-	color:var(--back-color);
-	margin-left: 0.2em;
-	margin-right: 0.2em;
-	padding: 0.3em;
-	display: inline;
-	border-radius: 5em;
-
+.profile-picture {
+	border-radius: 50%;
+	border: 5px solid var(--middle-color);
 }
-
-.detailsP ul{
-	list-style-type: none;
+.level-container {
+	width: 100%;
 }
-
-.allergiesP ul{
-	list-style-type: symbols("-");
-}
-
-#level {
-	height: 0.8em;
+.level {
+	height: 60px;
+	border-radius: 100px;
 	border: 2px solid var(--main-color);
 }
-
-#progress {
-	height: 0.8em;
+.progress {
+	height: 100%;
 	background-color: var(--main-color) ;
+}
+.level-numbers {
+	display: flex;
+	justify-content: space-between;
+}
+
+.profile-details-box {
+	width: 100%;
+}
+.profile-details-box h3 {
+	font-weight: 600;
+	color: var(--fore-color);
+}
+.profile-details-box h3::after {
+	content: "";
+	display: block;
+	width: 100%;
+	height: 2px;
+	background-color: var(--fore-color);
+}
+
+.profile-vaccines ul {
+	padding: 0;
+	list-style-type: none;
+}
+.profile-vaccines li {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 15px;
+	padding: 10px 25px;
+	border-radius: 100px;
+	background-color: var(--main-color);
+	color: white;
+}
+
+.profile-details {
+	display: flex;
+	flex-direction: column;
+}
+
+.profile-allergies ul {
+	list-style-type: none;
+}
+.profile-allergies li::before {
+	display: inline-block;
+	content: "-";
+	font-weight: 900;
+	width: 15px;
+	margin-left: -15px;
+}
+
+.profile-success ul {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.profile-success li {
+	float: left;
+	list-style-type: none;
+	width: 125px;
+}
+.success-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 125px;
+	border-radius: 50%;
+	border: 4px solid var(--fore-color);
+	fill: var(--fore-color);
+}
+.profile-success svg {
+	max-width: 70px;
+	max-height: 70px;
+}
+.success-item p {
+	text-align: center;
 }
 
 /*button {
