@@ -7,8 +7,15 @@ const useUser = () => useContext(UserContext)
 
 function UserWrapper({ children }) {
 	const [working, setWorking] = useState(false);
-	const [uid, setUid] = useState(null);
-
+	const [user, setUser] = useState({
+		picture: "default-user.jpg",
+		email: "--",
+		pseudo: "--",
+		sex: "--",
+		birth: new Date(),
+		experience: {xp: 0, level: 0},
+		success: []
+	});
 
 	//Dès que la page est initialisé (mount) on demande le token d'authentification
 	useEffect(() => {
@@ -27,7 +34,7 @@ function UserWrapper({ children }) {
 					refreshToken();
 				}, res.data.expiresIn - 10000); //-10s
 	
-				setUid(res.data.userId);
+				setUser({ ...user, ...res.data.user });
 			})
 			.catch((err) => console.log("No token"))
 			.finally(() => {
@@ -35,10 +42,10 @@ function UserWrapper({ children }) {
 			});
 		}
 		refreshToken();
-	}, [uid]);
+	}, [user.email]);
 
 	return (
-		<UserContext.Provider value={{ uid, setUid }}>
+		<UserContext.Provider value={{ user, setUser }}>
 			{working ? children : null}
 		</UserContext.Provider>
 	);

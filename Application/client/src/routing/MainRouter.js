@@ -12,11 +12,11 @@ import Calendar from "../pages/Calendar";
 import PublicPage from "../pages/PublicPage";
 
 function MainRouter() {
-	const { uid } = useUser();
+	const { user } = useUser();
 
 	return (
 		<>
-			{uid ?
+			{(user.email !== "--") ?
 				<>
 					<Header />
 					

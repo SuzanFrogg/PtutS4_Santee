@@ -5,8 +5,11 @@ import { ReactComponent as Home } from "../../media/icons/fi-home.svg";
 import { ReactComponent as Stats } from "../../media/icons/fi-stats.svg";
 import { ReactComponent as Calendar } from "../../media/icons/fi-calendar.svg";
 import { ReactComponent as Objectives } from "../../media/icons/fi-badge.svg";
+import { useUser } from "../../utils/store";
 
 function Header() {
+	const { user } = useUser();
+
 	return (
 		<header>
 			<div className="header-logo">
@@ -22,7 +25,7 @@ function Header() {
 			</ul>
 			<div className="header-profile">
 				<Link to="/profile">
-					<img src="/uploads/profil/default-user.jpg" alt="Profil"/>
+					<img src={`/uploads/profil/${user.picture}`} alt="Profil"/>
 				</Link>
 			</div>
 		</header>

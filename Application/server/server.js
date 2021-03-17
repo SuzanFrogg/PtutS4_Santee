@@ -44,23 +44,23 @@ app.use(cookieParser());
 /*---jwt---*/
 app.post("/refresh_token", async (req, res) => {
 	const token = req.cookies.jwt;
-	if (!token) return res.status(400).json({ accessToken: "", userId: "" });
+	if (!token) return res.status(400).json({ accessToken: "", user: "", expiresIn: 100000 });
 
 	//On vérifie que le token est valide
 	let payload = null;
 	try {
 		payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
 	} catch (err) {
-		return res.status(400).json({ accessToken: "", userId: "" });
+		return res.status(400).json({ accessToken: "", user: "", expiresIn: 100000 });
 	}
 
 	const user = await userModel.findById({ _id: payload.id });
-	if (!user) return res.status(400).json({ accessToken: "", userId: "" });
+	if (!user) return res.status(400).json({ accessToken: "", user: "", expiresIn: 100000 });
 
 	const accessToken = await user.getAccessToken();
-	const userId = user._id;
 	const expiresIn = 60*1000; //60s
-	return res.status(200).json({ accessToken, userId, expiresIn });
+	console.log(user);
+	return res.status(200).json({ accessToken, user, expiresIn });
 });
 app.get("*", authMiddleware.checkUser);
 

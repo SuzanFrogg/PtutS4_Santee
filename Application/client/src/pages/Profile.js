@@ -10,7 +10,7 @@ import { ReactComponent as Success1 } from "../media/icons/health-insurance.svg"
 
 
 function Profile() {
-	const { uid, setUid } = useUser();
+	const { user, setUser } = useUser();
 	const [user, setUser] = useState({
 		picture: "default-user.jpg",
 		pseudo: "",
@@ -37,7 +37,7 @@ function Profile() {
 	const handleDeleteVaccines =  (val) => setModifyVaccineForm(val)
 
 	//vaccins
-	const [listvaccines, setListVaccines] = useState([]);
+	const [listVaccines, setListVaccines] = useState([]);
 
 
 	//gerer allergies
@@ -56,14 +56,14 @@ function Profile() {
 			if (isMounted) setUser({ ...user, ...response.data });
 		}
 
-		//initialiser vaccins
+		//Initialiser vaccins
 		const fetchVaccin = async () =>
 		{
 			const response = await axios.get('/api/vaccines/');
 			if (isMounted) setListVaccines(response.data.vaccines);
 		}
 
-		//initialiser allergies
+		//Initialiser allergies
 		const fetchAllergy = async () =>
 		{
 			const response = await axios.get('/api/allergy/');
@@ -74,13 +74,13 @@ function Profile() {
 		fetchVaccin();
 		fetchAllergy();
 		return () => { isMounted = false };
-	}, [user, uid]);
+	}, [user, listVaccines.length, listAllergies.length]);
 
 
 	//deconection
 	const logout = async () => {
 		await axios.get("/api/user/logout", { withCredentials: true });
-		setUid(null);
+		setUser({email: "--"});
 		window.location = "/";
 	};
 
@@ -111,7 +111,7 @@ function Profile() {
 				<div className="profile-details-box profile-vaccines">
 					<h3>Vaccins</h3>
 					<ul>
-						{listvaccines && listvaccines.map((vaccine, key) => {
+						{listVaccines && listVaccines.map((vaccine, key) => {
 							return <li onClick={(event) => setVaccineForm(true)} key={key}>{vaccine.name}</li>
 						})}
 					</ul>
