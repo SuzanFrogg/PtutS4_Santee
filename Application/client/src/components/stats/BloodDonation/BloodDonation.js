@@ -12,6 +12,9 @@ function BloodDonation() {
 	let listSang;
 	let listPlasma;
 	let listPlaquette;
+	let nbDonSang = 3;
+	let nbDonPlasma = 1;
+	let nbDonPlaquette = 0;
 
 	//se lance a chaque chargement
 	useEffect(() => {
@@ -25,48 +28,33 @@ function BloodDonation() {
 				listSang = dataDons.data.DonsSang;
 				listPlasma = dataDons.data.DonsPlasma;
 				listPlaquette = dataDons.data.DonsPlaquette;
+				/*listSang.forEach((don) => {
+					nbDonSang++;
+				});
+				listPlasma.forEach((don) => {
+					nbDonPlasma++;
+				});
+				listPlaquette.forEach((don) => {
+					nbDonPlaquette++;
+				});*/
 			}
 		}
 
 		fetchDon();
 		return () => { isMounted = false };
 	});
-	
-	const nbDonSang = 2;
 
-	const getNbPersoSauver = (listSang, listPlasma, listPlaquette) => {
-		const nb = 3;
-		//Calcul du nombre de personne sauver
-		return nb;
+	const getNbPersoSauver = (nbDonSang, nbDonPlasma, nbDonPlaquette) => {
+		let nbSauver = 0;
+		nbSauver += (nbDonSang*3)+(nbDonPlasma*3)+(nbDonPlaquette*3);
+		return nbSauver;
 	}
 
-	const Clone_Element = (dv) => {
-		var O_Clone = dv.cloneNode(true);
-		document.getElementById("miniPocheSang").appendChild( O_Clone);
-	}
-
-	const getNbDonSang = (listSang) => {
-		const nb = 0;
-		for(let i = 0; i < nb; i++){
-			//document.getElementById("miniPocheSang");
-		}
-		return nb;
-	}
-
-	const getNbDonPlasma = (listPlasma) => {
-		const nb = 1;
-		for(let i = 0; i < nb; i++){
-			//document.getElementById("miniPocheSang");
-		}
-		return nb;
-	}
-
-	const getNbDonPlaquette = (listPlaquette) => {
-		let nb = 1;
-		for(let i = 0; i < nb; i++){
-			//document.getElementById("miniPocheSang");
-		}
-		return nb;
+	const AjoutImgDon = (nbDon) => {
+		/*for(let i = 0; i < nbDon; i++){
+			var el = document.getElementById("data-card");
+   			el.innerHTML='<MiniPocheSang id=miniPocheSang/>';
+		}*/
 	}
 
 	/*for(let i = 0; i < nbDon; i++){
@@ -84,30 +72,30 @@ function BloodDonation() {
 		<>
 			<h2>Don du Sang</h2>
 			<div className="data-recap">
-				<div className="data-card" id="data-card">
+				<div className="data-card" id="data-card1">
 					<p>Nombre de don de sang</p>
-					<span>
-						{getNbDonSang(listSang)}
+					<span id="test">
+						{AjoutImgDon(nbDonSang)}
 						<MiniPocheSang id="miniPocheSang"/>
 					</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de don de plasma</p>
 					<span>
-						{getNbDonPlasma(listPlasma)}
+						{AjoutImgDon(nbDonPlasma)}
 						<MiniPocheSang id="miniPocheSang"/>
 					</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de don de plaquette</p>
 					<span>
-						{getNbDonPlaquette(listPlaquette)}
+						{AjoutImgDon(nbDonPlaquette)}
 						<MiniPocheSang id="miniPocheSang"/>
 					</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de personnes sauvées</p>
-					<span>{getNbPersoSauver(listSang, listPlasma, listPlaquette)}</span>
+					<span>{getNbPersoSauver(nbDonSang, nbDonPlasma, nbDonPlaquette)}</span>
 				</div>
 			</div>
 
