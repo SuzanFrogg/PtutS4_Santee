@@ -59,7 +59,6 @@ app.post("/refresh_token", async (req, res) => {
 
 	const accessToken = await user.getAccessToken();
 	const expiresIn = 60*1000; //60s
-	console.log(user);
 	return res.status(200).json({ accessToken, user, expiresIn });
 });
 app.get("*", authMiddleware.checkUser);

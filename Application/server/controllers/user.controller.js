@@ -36,10 +36,7 @@ let updateUser = async (req, res) => {
 		await userModel.findByIdAndUpdate(
 			req.params.id,
 			{
-				$set: {
-					prenom: req.body.prenom,
-					nom: req.body.nom
-				}
+				$set: req.body
 			},
 			{ new: true, upsert: true, setDefaultsOnInsert: true },
 			(err, docs) => {

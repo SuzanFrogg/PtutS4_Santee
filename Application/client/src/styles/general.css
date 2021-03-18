@@ -168,7 +168,6 @@ input {
 	font-size: 22px;
 	color: var(--fore-color-var1);
 }
-
 input[type="submit"] {
 	cursor: pointer;
 	padding: 10px;
@@ -177,6 +176,12 @@ input[type="submit"] {
 	color: white;
 	font-weight: bold;
 	font-size: 28px;
+}
+input[type="radio"] {
+	cursor: pointer;
+	margin: 0 10px;
+	width: 18px;
+	min-height: calc(var(--size-input)/2);
 }
 
 button {

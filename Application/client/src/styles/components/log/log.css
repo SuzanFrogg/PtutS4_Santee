@@ -2,7 +2,6 @@
 	position: relative;
 	display: flex;
 	justify-content: space-evenly;
-	align-items: center;
 	width: 100%;
 	height: 100%;
 }
@@ -10,6 +9,7 @@
 .main-hero-title {
 	max-width: 600px;
 	text-align: center;
+    margin: auto 0;
 }
 .main-hero-title h1 {
 	color: var(--fore-color);
@@ -22,6 +22,7 @@
 .main-form-container {
 	max-width: 500px;
 	width: 100%;
+    margin: auto 0;
 }
 
 .main-form-container form {
@@ -41,7 +42,12 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	margin-top: 30px;
+}
+.form-radio {
+	position: initial;
+	flex-direction: row;
 }
 	.form-input-icon {
 		position: absolute;
@@ -56,7 +62,7 @@
 			height: 25px;
 			fill: var(--fore-color-var1);
 		}
-	.main-form-container input:not([type="submit"]),
+	.main-form-container input:not([type="submit"], [type="radio"]),
 	.main-form-container label {
 		margin: 0;
 		padding-left: var(--size-input);
@@ -72,7 +78,13 @@
 		transition:  all .3s ease;
 		user-select: none;
 	}
-	.main-form-container input:not([type="submit"]):not(:placeholder-shown) + label {
+	.form-radio label {
+		cursor: pointer;
+		position: initial;
+		line-height: calc(var(--size-input)/2);
+		padding: 0;
+	}
+	.main-form-container input:not([type="submit"], [type="radio"], [type="checkbox"]):not(:placeholder-shown) + label {
 		display: block;
 		transform: translateY(calc(-1 * var(--size-input)/3 + 2px));
 		font-size: 16px;

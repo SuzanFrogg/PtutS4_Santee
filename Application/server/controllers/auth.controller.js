@@ -6,11 +6,11 @@ import errorsUtils from "../utils/errors.utils.js";
  */
 let signUp = async (req, res) => {
 	//On récupère ce que le client nous envoie
-	const {pseudo, email, password} = req.body;
+	const {pseudo, email, password, sex, birth} = req.body;
 
 	try {
-		const user = await userModel.create({pseudo, email, password});
-		res.status(201).json({ user: user._id });
+		const user = await userModel.create({pseudo, email, password, sex, birth});
+		res.status(201).json({ user });
 	}
 	catch (err) {
 		const errors = errorsUtils.signUpErrors(err);

@@ -26,17 +26,30 @@ const userSchema = mongoose.Schema({
 			unique: true,
 			trim: true
 		},
-		nom: {
+		firstname: {
 			type: String,
 			maxlength: 64
 		},
-		prenom: {
+		lastname: {
 			type: String,
 			maxlength: 64
+		},
+		sex: {
+			type: String,
+			enum: ["M", "F"],
+			required: true
+		},
+		birth: {
+			type: Date,
+			required: true
 		},
 		picture: {
 			type: String,
-			default: "default_user.jpg"
+			default: "default-user.jpg"
+		},
+		xp: {
+			type: Number,
+			default: 0
 		}
 	},
 	{

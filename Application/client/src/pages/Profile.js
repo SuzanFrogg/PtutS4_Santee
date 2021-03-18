@@ -31,7 +31,6 @@ function Profile() {
 	//vaccins
 	const [listVaccines, setListVaccines] = useState([]);
 
-
 	//gerer allergies
 	const [listAllergies, setListAllergies] = useState([]);
 
@@ -61,7 +60,7 @@ function Profile() {
 		fetchVaccin();
 		fetchAllergy();
 		return () => { isMounted = false };
-	}, [user, listVaccines.length, listAllergies.length]);
+	}, [user, JSON.stringify(listVaccines), JSON.stringify(listAllergies)]);
 
 
 	//deconection
@@ -72,6 +71,7 @@ function Profile() {
 	};
 
 	const getAge = (birthDate) => {
+		console.log(birthDate);
 		let ageDifMs = Date.now() - birthDate.getTime();
 		let ageDate = new Date(ageDifMs);
 		return Math.abs(ageDate.getUTCFullYear() - 1970);

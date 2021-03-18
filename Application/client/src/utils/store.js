@@ -34,7 +34,7 @@ function UserWrapper({ children }) {
 					refreshToken();
 				}, res.data.expiresIn - 10000); //-10s
 	
-				setUser({ ...user, ...res.data.user });
+				setUser({ ...user, ...res.data.user, birth: new Date(res.data.user.birth) });
 			})
 			.catch((err) => console.log("No token"))
 			.finally(() => {
