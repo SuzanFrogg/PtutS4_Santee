@@ -2,17 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {ReactComponent as ArrowIcon} from '../../media/icons/next-arrow.svg';
 import DescriptionItem from "./DescriptionItem.js";
-
-//Dimanche correspond à 0 donc on le met en premier
-const daysNames = [
-	"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi",
-	"Vendredi", "Samedi"
-];
-
-const monthsNames = [
-	"Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
-	"Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
-];
+import { daysNames, monthsNames } from "../../utils/date.js";
 
 function CalendarItem() {
 	//Aujourd'hui (sans l'heure)
