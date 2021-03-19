@@ -9,9 +9,9 @@ import {useEffect, useState} from "react";
 function BloodDonation() {
     const [showAddForm, setShowAddForm] = useState(false);
 
-	let listSang;
-	let listPlasma;
-	let listPlaquette;
+	let listSang = [];
+	let listPlasma = [];
+	let listPlaquette = [];
 	let nbDonSang = 3;
 	let nbDonPlasma = 1;
 	let nbDonPlaquette = 0;
@@ -23,20 +23,20 @@ function BloodDonation() {
 		//Récupération des informations de don
 		const fetchDon = async () =>
 		{
-			const dataDons = await axios.get('/api/don/');
+			const dataDons = await axios.get('/api/don/', {withCredentials: true});
 			if (isMounted) {
 				listSang = dataDons.data.DonsSang;
 				listPlasma = dataDons.data.DonsPlasma;
 				listPlaquette = dataDons.data.DonsPlaquette;
-				/*listSang.forEach((don) => {
+				/*for (const [index, value] of listSang.entries()) {
 					nbDonSang++;
-				});
-				listPlasma.forEach((don) => {
+				  }
+				  for (const [index, value] of listPlasma.entries()) {
 					nbDonPlasma++;
-				});
-				listPlaquette.forEach((don) => {
+				  }
+				  for (const [index, value] of listPlaquette.entries()) {
 					nbDonPlaquette++;
-				});*/
+				  }*/
 			}
 		}
 
@@ -50,47 +50,35 @@ function BloodDonation() {
 		return nbSauver;
 	}
 
-	const AjoutImgDon = (nbDon) => {
-		/*for(let i = 0; i < nbDon; i++){
-			var el = document.getElementById("data-card");
-   			el.innerHTML='<MiniPocheSang id=miniPocheSang/>';
-		}*/
+	const AjoutImgDon = (list) => {
+		const imgDon = [];
+		let nbItems = 3;
+		for (let i=0; i<nbItems; i++) {
+			imgDon.push(<MiniPocheSang id="miniPocheSang"/>);
+		}	
+		return imgDon;
 	}
-
-	/*for(let i = 0; i < nbDon; i++){
-		//Recup objet destination
-		let divDon = document.getElementById("data-card");
-		//Cretation image
-		let imgDon = document.createElement('img');
-		//Ajout image
-		divDon.appendChild(imgDon);
-		//Affecte l'image
-		imgDon.src = "../../../media/icons/stats/Mini_blood_bag.svg";
-	}*/
 
     return (
 		<>
 			<h2>Don du Sang</h2>
 			<div className="data-recap">
-				<div className="data-card" id="data-card1">
+				<div className="data-card" id="data-card">
 					<p>Nombre de don de sang</p>
-					<span id="test">
-						{AjoutImgDon(nbDonSang)}
-						<MiniPocheSang id="miniPocheSang"/>
+					<span id="span-img">
+						{AjoutImgDon(listSang)}
 					</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de don de plasma</p>
-					<span>
-						{AjoutImgDon(nbDonPlasma)}
-						<MiniPocheSang id="miniPocheSang"/>
+					<span id="span-img">
+						{AjoutImgDon(listPlasma)}
 					</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de don de plaquette</p>
-					<span>
-						{AjoutImgDon(nbDonPlaquette)}
-						<MiniPocheSang id="miniPocheSang"/>
+					<span id="span-img">
+						{AjoutImgDon(listPlaquette)}
 					</span>
 				</div>
 				<div className="data-card">
