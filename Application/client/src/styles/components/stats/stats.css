@@ -55,9 +55,8 @@
 }
 
 .data-recap {
-	display: flex;
-	margin-bottom: 40px;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 	column-gap: 55px;
 	row-gap: 35px;
 	width: 100%;
@@ -67,7 +66,6 @@
 	display: flex;
 	flex-direction: column;
 	padding: 40px 50px;
-  	width: 430px;
   	border-radius: 30px;
 	background-color: var(--middle-color);
 	justify-content: center;
@@ -76,7 +74,6 @@
 	font-size: 20px;
 	margin: 0 0 5px 0;
 	color: var(--fore-color-var1);
-	white-space: nowrap;
 }
 .data-card span {
 	color: var(--fore-color);

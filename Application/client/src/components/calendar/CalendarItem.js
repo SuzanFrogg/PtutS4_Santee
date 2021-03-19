@@ -17,7 +17,7 @@ function CalendarItem() {
 
 	useEffect(() => {
 		const fetchPeriodsData = async (dateStart, dateEnd) => {
-			const response = await axios.post("api/periods/findDate", { dateStart, dateEnd })
+			const response = await axios.post("api/periods/findDate", { dateStart, dateEnd });
 			
 			setCalendarData((cData) => { return { ...cData, periods: response.data }});
 		}

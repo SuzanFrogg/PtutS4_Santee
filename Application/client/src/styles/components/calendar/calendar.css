@@ -3,11 +3,14 @@
 	width: 100%;
 }
 
+.calendar-display,
+.calendar-selected-container {
+	max-width: 700px;
+}
 
 .calendar-display {
 	padding: 30px;
 	width: 60%;
-	max-width: 700px;
 	border-radius: 20px;
 	background-color: var(--middle-color);
 }
@@ -18,6 +21,7 @@
 }
 .calendar-header h3 {
 	font-size: 34px;
+	text-align: center;
 }
 .calendar-header button {
 	display: flex;
