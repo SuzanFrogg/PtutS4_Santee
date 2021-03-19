@@ -1,6 +1,7 @@
 import objectivesModel from "../models/objectives.model.js";
 import mongoose from "mongoose";
 
+
 /**
  * Permet d'obtenir les informations d'un objectives
  */
@@ -27,7 +28,7 @@ import mongoose from "mongoose";
  * Permet d'obtenir les informations d'un objectives  a partir d'une date
  */
 let getObjectivesDate = async (req, res) => {
-    if (req.user._id) {
+	if (req.user._id) {
 		const objectives = await objectivesModel.aggregate(
 			[
 				{$match: { //On récupère le document correspondant à l'id de l'utilisateur
@@ -36,11 +37,11 @@ let getObjectivesDate = async (req, res) => {
 				{$unwind: "$objectives"},
 				{$unset: "_id"}, //Enlève le champs id
 				{$unset: "userId"}, //Enlève le champs userId
-				{$match: {
-					$or: [
-						{"objectives.dateEnd": {$gte: new Date(req.body.date), $lte: new Date(req.body.date)}}
-					]
-				}},
+				{$match:
+						{"objectives.dateEnd": {$gte: new Date(req.body.dateStart), $lte: new Date(req.body.dateEnd)}}
+						
+					
+				},
 				{$replaceRoot: {newRoot: "$objectives"}}
 			]
 		)
@@ -84,6 +85,37 @@ let createObjectives = async (req, res) => {
  */
 let updateObjectives = async (req, res) => {
 
+	try {
+		//Vérifie les id
+		if(!mongoose.isValidObjectId(req.params.objectivesId))
+			return res.status(400).json("wrong id : " + req.params.objectivesId);
+		if(!mongoose.isValidObjectId(req.body.userId))
+			return res.status(400).json("wrong id : " + req.body.userId);
+
+		const docs = await objectivesModel.findOneAndUpdate(
+			{ userId: req.body.userId, "objectives._id": req.params.objectivesId },
+			{
+				$set: {
+					"objectives.$.obj": req.body.obj,
+                    "objectives.$.isDone": req.body.isDone,
+                    "objectives.$.dateEnd": req.body.dateEnd
+					
+				}
+			},
+			{
+				//Renvoie juste l'élément qui correspond (et pas toute la liste)
+				projection: { objectives: { $elemMatch: { _id: req.params.objectivesId } } },
+				//Renvoie l'élément modifié
+				new: true
+			}
+		);
+		if (docs) return res.status(200).json(docs);
+		else return res.status(404).json({ error: "not found" });
+	}
+	catch (err) {
+		return res.status(500).json({ error: err });
+	}
+
 };
 
 let addObjectives = async (req, res) => {
@@ -124,7 +156,31 @@ let addObjectives = async (req, res) => {
 /**
  * Permet de supprimer une donnée d'un calendrier
  */
-let deleteObjectives = (req, res) => {
+let deleteObjectives = async(req, res) => {
+	try {
+		if(!mongoose.isValidObjectId(req.params.objectivesId))
+			return res.status(400).send("wrong id : " + req.params.objectivesId);
+
+        const docs = await objectivesModel.findOneAndUpdate(
+            { userId: req.body.userId, "objectives._id": req.params.objectivesId },
+            {
+                $pull: {
+                    objectives: {
+                        _id: req.params.objectivesId
+                    }
+                }
+            },
+            {
+                //Renvoie l'élément modifié
+                new: true
+            }
+        );
+        if (docs) return res.status(200).json(docs);
+        else return res.status(404).json({ error: "not found" });
+    }
+    catch (err) {
+        return res.status(500).json({ error: err });
+    }
 
 };
 
