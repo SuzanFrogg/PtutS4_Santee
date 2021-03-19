@@ -86,6 +86,40 @@ let updateObjectives = async (req, res) => {
 
 };
 
+let addObjectives = async (req, res) => {
+	try {
+		//Vérifie l'id
+		if(!mongoose.isValidObjectId(req.body.userId))
+			return res.status(400).send("wrong id : " + req.body.userId);
+
+		const docs = await objectivesModel.findOneAndUpdate(
+			{ userId: req.body.userId },
+			{
+				$push: 
+				{
+					objectives : 
+					{
+						obj : req.body.obj,
+						isDone : req.body.isDone,
+						dateEnd : req.body.dateEnd
+					}
+				}
+			},
+			{
+				//Renvoie juste le dernier élément (et pas toute la liste)
+				projection: { objectives: {$slice: -1} },
+				//Renvoie l'élément modifié
+				new: true
+			}
+		);
+		if (docs) return res.status(200).json(docs);
+		else return res.status(404).json({ error: "not found" });
+	}
+	catch (err) {
+		return res.status(500).json({ error: err });
+	}
+};
+
 
 /**
  * Permet de supprimer une donnée d'un calendrier
@@ -94,4 +128,4 @@ let deleteObjectives = (req, res) => {
 
 };
 
-export default {getObjectivesAll, getObjectivesDate, createObjectives, updateObjectives, deleteObjectives};
+export default {getObjectivesAll, getObjectivesDate, createObjectives, updateObjectives, addObjectives, deleteObjectives};
