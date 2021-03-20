@@ -19,7 +19,7 @@ function AddVaccines(props) {
 
         if (nbButton === 1)
         {
-            await axios.put("/api/vaccines/", { userId: uid.uid, name: name, possibleStartAge : possibleStartAge, possibleEndAge : possibleEndAge, doseNeeded : doseNeeded, doseMade : doseMade});
+            await axios.put("/api/vaccines/", { userId: uid.user._id, name: name, possibleStartAge : possibleStartAge, possibleEndAge : possibleEndAge, doseNeeded : doseNeeded, doseMade : doseMade});
         }
 
        props.handle(false);

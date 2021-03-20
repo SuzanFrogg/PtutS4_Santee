@@ -6,40 +6,31 @@ import { useUser } from "../../../utils/store.js";
 function Sleep_add()
 {
     const user = useUser();
-    const [date, setDate] = useState("");
-    const [timeS, setTimeS] = useState("");
-    const [timeR, setTimeR] = useState("");
+    const [dateStart, setDateStart] = useState("");
+    const [dateEnd, setDateEnd] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        await axios.put("/api/sleep/", {userId: user._id, dateStart : timeS, dateEnd : timeR});
+        await axios.put("/api/sleeps/", {userId: user._id, dateStart : dateStart, dateEnd : dateEnd});
     }
         
 
     return (
 			<form action="" onSubmit={handleSubmit} className="form-sleep">
-                <label htmlFor="dateS">Date</label>
+                <label htmlFor="dateStart">Date d'endormissement</label>
                 <input 
-                    type="date" 
-                    id="dateS"
-                    value={date}
-                    onChange={(event) => setDate(event.target.value)}
+                    type="datetime-local" 
+                    id="dateStart"
+                    value={dateStart}
+                    onChange={(event) => setDateStart(event.target.value)}
                 />
-
-                <label htmlFor="time">Temps</label> 
+                <label htmlFor="dateend">Date de réveil</label>
                 <input 
-                    type="time" 
-                    id="timeS"
-                    value={timeS}
-                    onChange={(event) => setTimeS(event.target.value)}
-                />
-                
-				<input 
-                    type="time" 
-                    id="timeR"
-                    value={timeR}
-                    onChange={(event) => setTimeR(event.target.value)}
+                    type="datetime-local" 
+                    id="dateEnd"
+                    value={dateEnd}
+                    onChange={(event) => setDateEnd(event.target.value)}
                 />
 
                 <input type="submit" value="Valider"/>
@@ -47,6 +38,7 @@ function Sleep_add()
             </form>
 	);
 }
+
 
 
 export default Sleep_add;

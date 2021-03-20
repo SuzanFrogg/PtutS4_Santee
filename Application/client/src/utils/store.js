@@ -12,7 +12,7 @@ function UserWrapper({ children }) {
 		email: "--",
 		pseudo: "--",
 		sex: "--",
-		birth: new Date(),
+		birth: new Date().toJSON(),
 		experience: {xp: 0, level: 0},
 		success: []
 	});
@@ -34,7 +34,7 @@ function UserWrapper({ children }) {
 					refreshToken();
 				}, res.data.expiresIn - 10000); //-10s
 	
-				setUser({ ...user, ...res.data.user, birth: new Date(res.data.user.birth) });
+				setUser({ ...user, ...res.data.user });
 			})
 			.catch((err) => console.log("No token"))
 			.finally(() => {

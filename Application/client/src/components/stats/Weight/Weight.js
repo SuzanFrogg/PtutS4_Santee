@@ -1,7 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import WeightAdd from "./Weight_add";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 function Weight()
 {
@@ -172,6 +173,46 @@ function Weight()
 		
 	};	
 
+	let poidsActu;
+	let tailleActu;
+
+	//se lance a chaque chargement
+	useEffect(() => {
+		let isMounted = true;
+
+		//Récupération des informations de weight
+		const fetchDon = async () =>
+		{
+			const dataWeight = await axios.get('/api/weights/', {withCredentials: true});
+			if (isMounted) {
+				poidsActu = dataWeight.mass;
+				tailleActu = dataWeight.height;
+			}
+		}
+
+		fetchDon();
+		return () => { isMounted = false };
+	});
+
+	const getTaille1 = (taille) => {
+		let taille1= 0;
+		taille1 = Math.floor(taille/100);
+		return taille1;
+	}
+
+	const getTaille2 = (taille) => {
+		let taille2= 0;
+		taille2 = taille % 100;
+		return taille2;
+	}
+
+	const getIMC = (poids, taille) => {
+		let IMC = 0;
+		IMC = poids/ ((taille/100)^2);
+		IMC = Math.round(IMC * 100)/100;
+		return IMC;
+	}
+
     const [showAddForm, setShowAddForm] = useState(false);	
 
     return (
@@ -184,11 +225,11 @@ function Weight()
 				</div>
 				<div className="data-card">
 					<p>Taille</p>
-					<span>1<small>m</small>60</span>
+					<span>{getTaille1(176)}<small>m</small>{getTaille2(176)}</span>
 				</div>
 				<div className="data-card">
 					<p>IMC</p>
-					<span>30</span>
+					<span>{getIMC(65,176)}</span>
 				</div>	
 			</div>
 			
