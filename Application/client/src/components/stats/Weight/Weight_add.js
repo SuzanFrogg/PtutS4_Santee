@@ -14,12 +14,12 @@ function Weight_add()
     const handleSubmit = async (event) => {
       event.preventDefault();
 
-      await axios.put("/api/weight/", {userId: user._id, entryDate : date, mass : poids});
+      await axios.put("/api/weights/", {userId: user._id, entryDate : date, mass : poids, height: taille});
     }
       
 
     return (
-        <form action="" onSubmit={handleSubmit} className="form-sleep">
+        <form action="" onSubmit={handleSubmit} className="form-weight">
                 <label htmlFor="dateS">Date</label>
                 <input 
                     type="date" 
@@ -28,17 +28,17 @@ function Weight_add()
                     onChange={(event) => setDate(event.target.value)}
                 />
 
-                <label htmlFor="time">Poids</label> 
+                <label htmlFor="weight">Poids</label> 
                 <input 
-                    type="text" 
+                    type="number" 
                     id="poids"
                     value={poids}
                     onChange={(event) => setPoids(event.target.value)}
                 />
                 
-            <label htmlFor="time">Taille</label> 
+            <label htmlFor="height">Taille</label> 
                 <input 
-                    type="text" 
+                    type="number" 
                     id="taille"
                     value={taille}
                     onChange={(event) => setTaille(event.target.value)}

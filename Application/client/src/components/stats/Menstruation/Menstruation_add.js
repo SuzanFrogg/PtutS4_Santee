@@ -1,76 +1,49 @@
 import React from "react";
 import {useState} from "react";
+import axios from "axios";
+import { useUser } from "../../../utils/store.js";
 
 function Menstruation_add()
 {
-    const [date, setDate] = useState("");
-    const [low, setLow] = useState("");
-    const [medium, setMedium] = useState("");
-    const [high, setHigh] = useState("");
-    const [estomac, setStomach] = useState("");
-    const [tete, setHead] = useState("");
+    const user = useUser();
+    const [dateStart, setDateStart] = useState("");
+    const [dateEnd, setDateEnd] = useState("");
+    const [flux, setFlux] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        console.log(user._id);
+        console.log(dateStart);
+        console.log(dateEnd);
+        console.log(flux);
+        await axios.put("/api/periods/", {userId: user._id, dateStart : dateStart, dateEnd : dateEnd, flux : flux});
     }
         
 
     return (
 		  <form action="" onSubmit={handleSubmit} className="form-dons">
-          <label htmlFor="dateR">Date</label>
+          <label htmlFor="dateStart">Date de début</label>
           <input 
             type="date" 
-            id="dateR"
-            value={date}
-            onChange={(event) => setDate(event.target.value)}
+            id="dateStart"
+            value={dateStart}
+            onChange={(event) => setDateStart(event.target.value)}
+          />
+          <label htmlFor="dateEnd">Date de fin</label>
+          <input 
+            type="date" 
+            id="dateEnd"
+            value={dateEnd}
+            onChange={(event) => setDateEnd(event.target.value)}
           />
 
           <label htmlFor="flux">Flux</label> 
-          <input 
-            type="image" 
-            name="low"
-            src="../../../media/icons/stats/temp1.png"
-            alt="low flux"
-            value={low}
-            onChange={(event) => setLow(event.target.value)}
-          />
-                
-		  <input 
-            type="image" 
-            name="medium"
-            src="../../../media/icons/stats/temp1.png"
-            alt="medium flux"
-            value={medium}
-            onChange={(event) => setMedium(event.target.value)}
-          />
-
-          <input 
-            type="image" 
-            name="high"
-            alt="high flux"
-            src="../../../media/icons/stats/temp1.png"
-            value={high}
-            onChange={(event) => setHigh(event.target.value)}
-          />
-
-          <label htmlFor="douleur">Douleur</label> 
-          <input 
-            type="image" 
-            id="estomac"
-            src="../../../media/icons/stats/temp1.png"
-            alt="estomac"
-            value={estomac}
-            onChange={(event) => setStomach(event.target.value)}
-          />
-
-          <input 
-            type="image" 
-            id="tete"
-            src="../../../media/icons/stats/temp1.png"
-            alt="tete"
-            value={tete}
-            onChange={(event) => setHead(event.target.value)}
-          />
+          <select id="fluxPeriods" onChange={(event) => setFlux(event.target.value)}>
+            <option type="number" value='0'>Faible</option>
+            <option type="number" value='1'>Moyen</option>
+            <option type="number" value='2'>Elevé</option>
+          </select>    
 
           <input type="submit" value="Valider"/>
 
