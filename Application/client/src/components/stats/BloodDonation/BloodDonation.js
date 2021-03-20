@@ -58,21 +58,15 @@ function BloodDonation() {
 			<div className="data-recap">
 				<div className="data-card" id="data-card">
 					<p>Nombre de don de sang</p>
-					<span id="span-img">
-						{AjoutImgDon(nbDonSang)}
-					</span>
+					<span>{AjoutImgDon(nbDonSang)}</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de don de plasma</p>
-					<span id="span-img">
-						{AjoutImgDon(nbDonPlasma)}
-					</span>
+					<span>{AjoutImgDon(nbDonPlasma)}</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de don de plaquette</p>
-					<span id="span-img">
-						{AjoutImgDon(nbDonPlaquette)}
-					</span>
+					<span>{AjoutImgDon(nbDonPlaquette)}</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de personnes sauvées</p>
