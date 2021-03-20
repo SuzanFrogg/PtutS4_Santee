@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 /**
  * Permet d'obtenir les informations d'un sommeil 
  */
-let getAllAstuce = async (req, res) => {
+/*let getAllAstuce = async (req, res) => {
 
     if(!mongoose.isValidObjectId(req.param.idAstuce))
 			return res.status(400).send("wrong id : " + req.param.idAstuce);
@@ -14,16 +14,16 @@ let getAllAstuce = async (req, res) => {
     );
     if (docs) return res.status(200).json(docs);
     else return res.status(404).json({ error: "not found" });
-
-};
+    
+};*/
 
 /**
  * Permet d'obtenir une astuce aléatoire
  */
 let getRandomAstuce = (req, res) => {
-
+    astuceModel.aggregate( [ { $sample : { size : 1 } } ] )
 };
 
 
 
-export default {getAllAstuce, getRandomAstuce};
+export default {getRandomAstuce};
