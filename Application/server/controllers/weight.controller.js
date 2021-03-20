@@ -21,6 +21,7 @@ let getWeight = async(req,res) => {
 		weightList: {
 			entryDate: req.body.entryDate,
 			mass: req.body.mass,
+            		height: req.body.height
 		}
 	});
 
@@ -55,6 +56,7 @@ let updateWeight = async (req,res) => {
                 $set: {
                     "Weight.$.entryDate": req.body.entryDate,
                     "Weight.$.mass": req.body.mass,
+                    "Weight.$.height": req.body.height
                 },
             },
             {
@@ -83,6 +85,7 @@ let addWeight = async(req,res) => {
                     Weight: {
                         entryDate:req.body.entryDate,
                         mass:req.body.mass,
+                        height:req.body.height
                     }
                 }
             },
