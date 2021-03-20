@@ -8,16 +8,23 @@ function ModifyObjectives(props) {
 
 
 	const [obj, setObj] = useState(props.obj.obj);
-    const [isDone, setIsDone] = useState("");//props.obj.isDone);
+    const [isDone, setIsDone] = useState(props.obj.isDone);
 	const [dateEnd, setDateEnd] = useState(props.obj.dateEnd);
 
-    
+   // let date =  new Date(dateEnd);
+    /*const testDate = new Date.now();
+    testDate.setDate(date.getDate());
+    testDate.setFullYear(date.getFullYear());
+    testDate.setMonth(date.getMonth());*/
+   // console.log(date);
+
+   
     const handleSubmit = async (nbButton) => {
 
         if (nbButton === 1)
         {
-            console.log(isDone);
-            //await axios.put("/api/objectives/", { userId: uid.user._id, isDone: isDone, obj: obj, dateEnd : dateEnd}); 
+
+            await axios.put("/api/objectives/", { userId: uid.user._id, isDone: isDone, obj: obj, dateEnd : dateEnd}); 
         }
 
        props.handle(false);
@@ -43,8 +50,8 @@ function ModifyObjectives(props) {
 					<input 
 						type="checkbox" 
 						id="isDone"
-						value="Terminé"  
-						onChange={(event) => setIsDone(event.target.value)}
+						checked={isDone} 
+						onChange={(event) => setIsDone(event.target.checked)}
 					/>
 
 					<label htmlFor="dateEnd">Date limite pour atteindre l'objectif : </label> 
