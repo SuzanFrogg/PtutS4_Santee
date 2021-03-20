@@ -29,7 +29,7 @@ import mongoose from "mongoose";
  */
 let getObjectivesDate = async (req, res) => {
 	if (req.user._id) {
-		const objectives = await objectivesModel.aggregate(
+		const objectif = await objectivesModel.aggregate(
 			[
 				{$match: { //On récupère le document correspondant à l'id de l'utilisateur
 					userId: req.user._id
@@ -38,14 +38,14 @@ let getObjectivesDate = async (req, res) => {
 				{$unset: "_id"}, //Enlève le champs id
 				{$unset: "userId"}, //Enlève le champs userId
 				{$match:
-						{"objectives.dateEnd": {$gte: new Date(req.body.dateStart), $lte: new Date(req.body.dateEnd)}}
+						{"objectives.dateEnd": {$gte: new Date(req.body.dateStartS), $lte: new Date(req.body.dateEndS)}}
 						
 					
 				},
 				{$replaceRoot: {newRoot: "$objectives"}}
 			]
 		)
-		res.status(201).json(objectives);
+		res.status(201).json(objectif);
 	}
 	else {
 		res.status(400).send("no user");

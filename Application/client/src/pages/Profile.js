@@ -3,7 +3,7 @@ import axios from "axios";
 import { useUser } from "../utils/store.js";
 import Success from '../components/profile/Success';
 import AddVaccines from '../components/profile/vaccines/addVaccines';
-import ModifyVaccines from '../components/profile/vaccines/modifyVaccines';
+//import ModifyVaccines from '../components/profile/vaccines/modifyVaccines';
 //import DeleteVaccines from '../components/profile/vaccines/deleteVaccines';
 import AddAllergy from '../components/profile/allergy/addAllergy';
 import { ReactComponent as Success1 } from "../media/icons/health-insurance.svg"; {/* Succès exemple, à supp */}
@@ -15,18 +15,18 @@ function Profile() {
 	//gérer vaccins
 	//ajouts
 	const [showAddVaccineFrom, setAddVaccineForm] = useState(false);
-	const handleAddVaccines = (val) => setAddVaccineForm(val)
+	const handleAddVaccines = (val) => setAddVaccineForm(val);
 
 
 	const [showVaccineFrom, setVaccineForm] = useState(false);
 
 	//modifier
 	const [showModifyVaccineFrom, setModifyVaccineForm] = useState(false);
-	const handleModifyVaccines = (val) => setModifyVaccineForm(val)
+	const handleModifyVaccines = (val) => setModifyVaccineForm(val);
 
 	//supprimer
 	const [showDeleteVaccineFrom, setDeleteVaccineForm] = useState(false);
-	const handleDeleteVaccines =  (val) => setModifyVaccineForm(val)
+	const handleDeleteVaccines =  (val) => setModifyVaccineForm(val);
 
 	//vaccins
 	const [listVaccines, setListVaccines] = useState([]);
@@ -36,7 +36,7 @@ function Profile() {
 
 	//ajouts
 	const [showAddAllergyFrom, setAddAllergyForm] = useState(false);
-	const handleAddAllergy = (val) => setAddAllergyForm(val)
+	const handleAddAllergy = (val) => setAddAllergyForm(val);
 	
 	
 	//se lance a chaque chargement
@@ -108,7 +108,7 @@ function Profile() {
 					{showVaccineFrom && <button onClick={(event) => setDeleteVaccineForm(true)}>Supprimer</button>}
 					{showVaccineFrom && <button onClick={(event) => setVaccineForm(false)}>Annuler</button>}
 
-					{showModifyVaccineFrom && <ModifyVaccines handle={handleModifyVaccines}/> }
+					{/*showModifyVaccineFrom && <ModifyVaccines handle={handleModifyVaccines}/>*/ }
 					{/*showDeleteVaccineFrom && <DeleteVaccines handle={handleDeleteVaccines} /> */}
 
 
