@@ -12,8 +12,8 @@ function BloodDonation() {
 	let listSang = [];
 	let listPlasma = [];
 	let listPlaquette = [];
-	let nbDonSang = 3;
-	let nbDonPlasma = 1;
+	let nbDonSang = 0;
+	let nbDonPlasma = 0;
 	let nbDonPlaquette = 0;
 
 	//se lance a chaque chargement
@@ -28,15 +28,9 @@ function BloodDonation() {
 				listSang = dataDons.data.DonsSang;
 				listPlasma = dataDons.data.DonsPlasma;
 				listPlaquette = dataDons.data.DonsPlaquette;
-				/*for (const [index, value] of listSang.entries()) {
-					nbDonSang++;
-				  }
-				  for (const [index, value] of listPlasma.entries()) {
-					nbDonPlasma++;
-				  }
-				  for (const [index, value] of listPlaquette.entries()) {
-					nbDonPlaquette++;
-				  }*/
+				nbDonSang = listSang.length;
+				nbDonPlasma = listPlasma.length;
+				nbDonPlaquette = listPlaquette.length;
 			}
 		}
 
@@ -50,10 +44,9 @@ function BloodDonation() {
 		return nbSauver;
 	}
 
-	const AjoutImgDon = (list) => {
+	const AjoutImgDon = (nbDons) => {
 		const imgDon = [];
-		let nbItems = 3;
-		for (let i=0; i<nbItems; i++) {
+		for (let i=0; i<nbDons; i++) {
 			imgDon.push(<MiniPocheSang id="miniPocheSang"/>);
 		}	
 		return imgDon;
@@ -66,19 +59,19 @@ function BloodDonation() {
 				<div className="data-card" id="data-card">
 					<p>Nombre de don de sang</p>
 					<span id="span-img">
-						{AjoutImgDon(listSang)}
+						{AjoutImgDon(nbDonSang)}
 					</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de don de plasma</p>
 					<span id="span-img">
-						{AjoutImgDon(listPlasma)}
+						{AjoutImgDon(nbDonPlasma)}
 					</span>
 				</div>
 				<div className="data-card">
 					<p>Nombre de don de plaquette</p>
 					<span id="span-img">
-						{AjoutImgDon(listPlaquette)}
+						{AjoutImgDon(nbDonPlaquette)}
 					</span>
 				</div>
 				<div className="data-card">
