@@ -4,7 +4,7 @@ import axios from "axios";
 
 function ModifyObjectives(props) {
 
-    const uid = useUser();
+    const {user} = useUser();
 
 
 	const [obj, setObj] = useState(props.obj.obj);
@@ -24,10 +24,14 @@ function ModifyObjectives(props) {
         if (nbButton === 1)
         {
 
-            await axios.put("/api/objectives/", { userId: uid.user._id, isDone: isDone, obj: obj, dateEnd : dateEnd}); 
+            await axios.put("/api/objectives/" + props.obj._id, { userId: user._id, isDone: isDone, obj: obj, dateEnd : dateEnd}); 
+
+            window.location.reload(true); //recharger la page
         }
 
        props.handle(false);
+
+       
     }
 
 	return (

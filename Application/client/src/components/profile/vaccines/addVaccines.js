@@ -4,7 +4,7 @@ import axios from "axios";
 
 function AddVaccines(props) {
 
-    const uid = useUser();
+    const {user} = useUser();
 
 
     const [name, setName] = useState("");
@@ -19,7 +19,7 @@ function AddVaccines(props) {
 
         if (nbButton === 1)
         {
-            await axios.put("/api/vaccines/", { userId: uid.user._id, name: name, possibleStartAge : possibleStartAge, possibleEndAge : possibleEndAge, doseNeeded : doseNeeded, doseMade : doseMade});
+            await axios.put("/api/vaccines/", { userId: user._id, name: name, possibleStartAge : possibleStartAge, possibleEndAge : possibleEndAge, doseNeeded : doseNeeded, doseMade : doseMade});
         }
 
        props.handle(false);

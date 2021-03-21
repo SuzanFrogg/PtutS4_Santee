@@ -8,7 +8,7 @@ import DeleteObjectives from "../components/objectives/deleteObjectives";
 function Objectives() {
 
 	//user
-	const uid = useUser();
+	const {user} = useUser();
 
 
 	//objectifs
@@ -21,7 +21,7 @@ function Objectives() {
 		//Initialiser objectifs
 		const fetchObj = async () =>
 		{
-			//const response =  await axios.post('api/objectives/findDate', { "dateStartS" :  "1900-04-01T15:00:00.002Z", "DateEndS" :  "2300-04-28T15:23:59.002Z" });
+			//const response =  await axios.post('api/objectives/findDate', { "dateStartS" :  "1900-04-01T15:00:00.002Z", "dateEndS" :  "2021-02-28T15:23:59.002Z" });
 			const response = await axios.get('/api/objectives/');
 			if (isMounted) setListObjectives(response.data.objectives);
 		}
@@ -57,7 +57,7 @@ function Objectives() {
 
         if (nbButton === 1)
         {
-            await axios.put("/api/objectives/", { userId: uid.user._id, obj: obj, dateEnd : dateEnd}); //par default en non terminé 
+            await axios.put("/api/objectives/", { userId: user._id, obj: obj, dateEnd : dateEnd}); //par default en non terminé 
         }
 
 		window.location.reload(true); //recharger la page
@@ -90,6 +90,7 @@ function Objectives() {
 						//date de fin
 						return <li onClick={(event) => {setObjectivesForm(true); setObjectifInstance(objectif)}} key={key}>{objectif.obj} 
 							<ul> 
+								<li>TEMP id : {objectif._id}</li>
 								<li>Terminé : {termine}</li>
 								<li>Date de fin prévue : {daysNames[date.getDate()] + " " + date.getDate() + " " + monthsNames[date.getMonth()] + " " + date.getFullYear()}</li>
 							</ul>

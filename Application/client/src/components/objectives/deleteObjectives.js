@@ -4,21 +4,21 @@ import axios from "axios";
 
 function DeleteObjectives(props) {
 
-    const uid = useUser();
+    const {user} = useUser();
 
-	const idObj = props.obj._id;
-	const test = "" + idObj;
-	console.log(test);
-	console.log(uid.user._id);
-    
+
     const handleSubmit = async (nbButton) => {
 
         if (nbButton === 1)
         {
-            await axios.delete(`/api/objectives/${test}` , { userId: uid.user._id}); 
+            await axios.delete("/api/objectives/" + props.obj._id); 
+
+            window.location.reload(true); //recharger la page
         }
 
        props.handle(false);
+
+       
     }
 
 	return (

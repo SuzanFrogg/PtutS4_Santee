@@ -161,8 +161,11 @@ let deleteObjectives = async(req, res) => {
 		if(!mongoose.isValidObjectId(req.params.objectivesId))
 			return res.status(400).send("wrong id : " + req.params.objectivesId);
 
+			console.log("idObj" + req.params.objectivesId);
+			console.log("idUser" +  req.user._id);
+
         const docs = await objectivesModel.findOneAndUpdate(
-            { userId: req.body.userId, "objectives._id": req.params.objectivesId },
+            { userId: req.user._id, "objectives._id": req.params.objectivesId },
             {
                 $pull: {
                     objectives: {

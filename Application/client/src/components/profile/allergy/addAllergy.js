@@ -4,7 +4,7 @@ import axios from "axios";
 
 function AddAllergy(props) {
 
-    const uid = useUser();
+    const {user} = useUser();
 
 
     const [toAvoid, setToAvoid] = useState("");
@@ -15,7 +15,7 @@ function AddAllergy(props) {
 
         if (nbButton === 1)
         {
-            await axios.put("/api/allergy/", { userId: uid.uid, toAvoid : toAvoid});
+            await axios.put("/api/allergy/", { userId: user._id, toAvoid : toAvoid});
         }
 
        props.handle(false);
