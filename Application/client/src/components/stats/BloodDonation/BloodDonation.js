@@ -9,13 +9,13 @@ import {useEffect, useState} from "react";
 function BloodDonation() {
     const [showAddForm, setShowAddForm] = useState(false);
 
-	let listSang = [];
-	let listPlasma = [];
-	let listPlaquette = [];
-	let nbDonSang = 0;
-	let nbDonPlasma = 0;
-	let nbDonPlaquette = 0;
-
+	let listSang = useState([]);
+	let listPlasma = useState([]);
+	let listPlaquette = useState([]);
+	const [nbDonSang, setNbDonSang] = useState(0);
+	const [nbDonPlasma, setNbDonPlasma] = useState(0);
+	const [nbDonPlaquette, setNbDonPlaquette] = useState(0);
+	
 	//se lance a chaque chargement
 	useEffect(() => {
 		let isMounted = true;
@@ -28,9 +28,9 @@ function BloodDonation() {
 				listSang = dataDons.data.DonsSang;
 				listPlasma = dataDons.data.DonsPlasma;
 				listPlaquette = dataDons.data.DonsPlaquette;
-				nbDonSang = listSang.length;
-				nbDonPlasma = listPlasma.length;
-				nbDonPlaquette = listPlaquette.length;
+				setNbDonSang(listSang.length);
+				setNbDonPlasma(listPlasma.length);
+				setNbDonPlaquette(listPlaquette.length);
 			}
 		}
 
