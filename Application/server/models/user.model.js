@@ -50,7 +50,8 @@ const userSchema = mongoose.Schema({
 		xp: {
 			type: Number,
 			default: 0
-		}
+		},
+		success: [mongoose.Types.ObjectId]
 	},
 	{
 		timestamps: true
