@@ -1,0 +1,13 @@
+
+"Aie ca pique" => premier don
+"Petit infirmier" => 5 don
+"Il y a bien que 5L dans le corps?" => 10 dons
+"Fournisseur particulier de Dracula"  = > 20 dons (du sang ? ou tous?)
+"Dans les bras de morphé" => temps d'une nuit de someil supérieur a 15h
+"Ryhtme régulier" => 5 jours à la suite avec 8h de someil (par nuit)
+"Insomiaque" => 5 jours à la suite avec - de 4h de someil (par nuit)
+"J'y survivrais peut etre" => cycle de règle avec flux a 3 et les deux douleurs selectionnée
+"Chanceuse" => cycle de règle avec flux a 1 et aucune douleur
+"Malchance" => + de 5 allergies
+"AH NON PAS UNE AIGUILLIE" => 1 vaccin
+"Virus, NE les attrapez PAS tous! " => 10 vaccins
