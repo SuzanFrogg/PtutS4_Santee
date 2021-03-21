@@ -7,9 +7,9 @@ function Menstruation()
 {
     const [showAddForm, setShowAddForm] = useState(false);
 
-	let userPeriods = [];
-	let dateStartP = [];
-	let dateEndP = [];
+	let userPeriods = useState([]);
+	const [dateStartP, setDateStart] = useState(0);
+	const [dateEndP, setDateEnd] = useState(0);
 
 	//se lance a chaque chargement
 	useEffect(() => {
@@ -22,8 +22,8 @@ function Menstruation()
 			if (isMounted) {
 				userPeriods = dataDons.data.periods;
 				for (let i=0; i<(userPeriods.length); i++) {
-					dateStartP = userPeriods[i].dateStart;
-					dateEndP = userPeriods[i].dateEnd;
+					setDateStart(userPeriods[i].dateStart);
+					setDateEnd(userPeriods[i].dateEnd);
 				}
 			}
 		}
@@ -32,17 +32,28 @@ function Menstruation()
 		return () => { isMounted = false };
 	});
 
+	const dateDiff = (dateStart, dateEnd) => {
+		let date1 = new Date(Date.parse(dateStart));
+		let date2 = new Date(Date.parse(dateEnd));
+		date1 = date1.getTime() / 86400000;
+		date2 = date2.getTime() / 86400000;
+		return new Number(date2 - date1).toFixed(0);
+	}
+
 	const getMoyCycle = (periods, dateStart, dateEnd) => {
 		let moy = 0;
+		let temp = 0;
+		for (let i=0; i<(periods.length); i++) {
+			temp += dateDiff(dateStart,dateEnd);
+		}
+		moy = (temp / (periods.length));
 		return moy;
 	}
 
 	const getMoyRegle = (periods, dateStart, dateEnd) => {
 		let moy = 0;
-		let dS = dateStart;
-		let dE = dateEnd;
 		for (let i=0; i<(periods.length); i++) {
-			moy += (dS[i] - dE[i]);
+			moy = dateDiff(dateStart,dateEnd);
 		}
 		return moy;
 	}
@@ -67,6 +78,5 @@ function Menstruation()
 		</>
 	);
 }
-
 
 export default Menstruation;
