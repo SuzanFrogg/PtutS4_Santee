@@ -20,8 +20,8 @@ import mongoose from "mongoose";
 /**
  * Permet d'obtenir une astuce aléatoire
  */
-let getRandomAstuce = (req, res) => {
-    astuceModel.aggregate( [ { $sample : { size : 1 } } ] )
+let getRandomAstuce = async (req, res) => {
+    astuceModel.aggregate( [ { $sample : { size : 1 } } ] );
 };
 
 
