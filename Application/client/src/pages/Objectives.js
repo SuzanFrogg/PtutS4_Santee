@@ -14,6 +14,7 @@ function Objectives() {
 	//objectifs
 	const [listObjectives, setListObjectives] = useState([]);
 
+	let depObjectives = JSON.stringify(listObjectives);
 	useEffect(() => 
 	{
 		let isMounted = true;
@@ -29,7 +30,7 @@ function Objectives() {
 
 		fetchObj();
 		return () => { isMounted = false };
-	}, [JSON.stringify(listObjectives)]);
+	}, [depObjectives]);
 
 
 
@@ -92,9 +93,9 @@ function Objectives() {
 							<ul> 
 								<li>TEMP id : {objectif._id}</li>
 								<li>Terminé : {termine}</li>
+									<li>Date de fin prévue : {daysNames[date.getDay()] + " " + date.getDate() + " " + monthsNames[date.getMonth()] + " " + date.getFullYear()}</li>
 								<li>Date de fin prévue : {daysNames[date.getDate()] + " " + date.getDate() + " " + monthsNames[date.getMonth()] + " " + date.getFullYear()}</li>
 							</ul>
-
 							</li>
 					})}
 				</ul>

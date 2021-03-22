@@ -38,9 +38,7 @@ let getObjectivesDate = async (req, res) => {
 				{$unset: "_id"}, //Enlève le champs id
 				{$unset: "userId"}, //Enlève le champs userId
 				{$match:
-						{"objectives.dateEnd": {$gte: new Date(req.body.dateStartS), $lte: new Date(req.body.dateEndS)}}
-						
-					
+					{"objectives.dateEnd": {$gte: new Date(req.body.dateStart), $lte: new Date(req.body.dateEnd)}}
 				},
 				{$replaceRoot: {newRoot: "$objectives"}}
 			]
