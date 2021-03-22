@@ -1,7 +1,7 @@
 import React from "react";
 
 function DescriptionItem(props) {
-	const id = props._id;
+	//const id = props._id;
 
 	return (
 		<div className="calendar-selected-item">

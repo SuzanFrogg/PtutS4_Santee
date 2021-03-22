@@ -87,10 +87,16 @@
 	height: 10px;
 	mix-blend-mode: luminosity;
 }
-.calendar-day-info-periods {
+.calendar-day-info-periods,
+.calendar-day-info-objectives {
 	width: 10px;
 	height: 10px;
+}
+.calendar-day-info-periods {
 	background-color: red;
+}
+.calendar-day-info-objectives {
+	background-color: purple;
 }
 
 

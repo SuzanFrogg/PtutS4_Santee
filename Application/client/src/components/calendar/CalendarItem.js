@@ -12,14 +12,17 @@ function CalendarItem() {
 	const [currentDate, setCurrentDate] = useState(today);
 	const [calendarData, setCalendarData] = useState({
 		periods: [],
-		event: []
+		objectives: []
 	});
 
 	useEffect(() => {
 		const fetchPeriodsData = async (dateStart, dateEnd) => {
 			const response = await axios.post("api/periods/findDate", { dateStart, dateEnd });
-			
 			setCalendarData((cData) => { return { ...cData, periods: response.data }});
+		}
+		const fetchObjectivesData = async (dateStart, dateEnd) => {
+			const response = await axios.post("api/objectives/findDate", { dateStart, dateEnd });
+			setCalendarData((cData) => { return { ...cData, objectives: response.data }});
 		}
 
 		const month = currentDate.getMonth();
@@ -28,6 +31,7 @@ function CalendarItem() {
 		let dateEnd = new Date(year, month+1, 0);
 
 		fetchPeriodsData(dateStart, dateEnd);
+		fetchObjectivesData(dateStart, dateEnd);
 	}, [currentDate]);
 
 	const getPrevMonth = () => {
@@ -69,6 +73,7 @@ function CalendarItem() {
 		listOfDays = Array(firstDayInMonth-1).fill(null).concat(listOfDays);
 		
 		return listOfDays.map((day, key) => {
+			day = dateWithoutTime(new Date(day));
 			if (day) {
 				let isSelected = day.getTime() === selectedDate.getTime();
 				let isToday = day.getTime() === today.getTime();
@@ -85,6 +90,14 @@ function CalendarItem() {
 								let dateEnd = dateWithoutTime(new Date(data.dateEnd));
 								if (day >= dateStart && day <= dateEnd)
 									return <div className="calendar-day-info-periods" key={key}></div>;
+								else
+									return null;
+							})}
+							{calendarData.objectives.map((data, key) => {
+								let dateEnd = dateWithoutTime(new Date(data.dateEnd));
+								if (day.getTime() == dateEnd.getTime()) {
+									return <div className="calendar-day-info-objectives" key={key}></div>;
+								}
 								else
 									return null;
 							})}
@@ -128,6 +141,16 @@ function CalendarItem() {
 						return <DescriptionItem id={data._id} title="Règles" description={`Flux = ${data.flux}`} key={key} />;
 					else
 						return null;
+				})}
+				{calendarData.objectives.map((data, key) => {
+					let dateEnd = dateWithoutTime(new Date(data.dateEnd));
+					if (selectedDate.getTime() == dateEnd.getTime()) {
+						let objectiveTitle = "Objectif" + (data.isDone ? " terminé" : " non terminé");
+						return <DescriptionItem id={data._id} title={objectiveTitle} description={data.obj} key={key} />;
+					}
+					else {
+						return null;
+					}
 				})}
 			</section>
 		</div>
