@@ -23,47 +23,71 @@ let getVaccines = async (req, res) => {
  * Permet de créer une donnée de vaccin
  */
 let createVaccines = async (req, res) => {
-    let newVaccines = new vaccinesModel({
-        userId: req.body.userId,
-        vaccines: {
-            name: req.body.name,
-            possibleStartAge: req.body.possibleStartAge,
-            possibleEndAge: req.body.possibleEndAge,
-            doseNeeded: req.body.doseNeeded,
-            doseMade: req.body.doseMade
-        }
-    });
+	let newVaccines = new vaccinesModel({
+		userId: req.body.userId,
+		vaccines: {
+			name: req.body.name,
+			possibleStartAge: req.body.possibleStartAge,
+			possibleEndAge: req.body.possibleEndAge,
+			doseNeeded: req.body.doseNeeded,
+			doseMade: req.body.doseMade
+		}
+	});
 
-    try {
-        const vaccines = await newVaccines.save();
-        return res.status(201).json(vaccines);
-    }
-    catch (err) {
-        return res.status(400).send(err);
-    }
+	try {
+		const vaccines = await newVaccines.save();
+		return res.status(201).json(vaccines);
+	}
+	catch (err) {
+		return res.status(400).send(err);
+	}
 };
 
 /**
- * Permet de modifier les données de vaccin
+ * Permet de modifier l'ensemble de la liste des vaccins
+ */
+ let updateAllVaccines = async (req, res) => {
+	try {
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).json("wrong id : " + req.user._id);
+
+		const docs = await vaccinesModel.findOneAndUpdate(
+			{ userId: req.user._id },
+			{
+				$set: {
+					"vaccines": req.body.vaccines
+				}
+			},
+			{new: true}
+		);
+		if (docs) return res.status(200).json(docs);
+		else return res.status(404).json({ error: "not found" });
+	}
+	catch (err) {
+		return res.status(500).json({ error: err });
+	}
+};
+
+/**
+ * Permet de modifier un vaccin dans la liste des vaccins
  */
  let updateVaccines = async (req, res) => {
 	try {
 		//Vérifie les id
 		if(!mongoose.isValidObjectId(req.params.vaccinesId))
 			return res.status(400).json("wrong id : " + req.params.vaccinesId);
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).json("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).json("wrong id : " + req.user._id);
 
 		const docs = await vaccinesModel.findOneAndUpdate(
-			{ userId: req.body.userId, "vaccines._id": req.params.vaccinesId },
+			{ userId: req.user._id, "vaccines._id": req.params.vaccinesId },
 			{
 				$set: {
 					"vaccines.$.name": req.body.name,
-                    "vaccines.$.possibleStartAge": req.body.possibleStartAge,
-                    "vaccines.$.possibleEndAge": req.body.possibleEndAge,
-                    "vaccines.$.doseNeeded": req.body.doseNeeded,
-                    "vaccines.$.doseMade": req.body.doseMade
-					
+					"vaccines.$.possibleStartAge": req.body.possibleStartAge,
+					"vaccines.$.possibleEndAge": req.body.possibleEndAge,
+					"vaccines.$.doseNeeded": req.body.doseNeeded,
+					"vaccines.$.doseMade": req.body.doseMade
 				}
 			},
 			{
@@ -122,31 +146,31 @@ let addVaccines = async (req, res) => {
  * Permet de supprimer une donnée de vaccin
  */
  let deleteVaccines = async (req, res) => {
-    try {
-        if(!mongoose.isValidObjectId(req.params.vaccinesId))
-            return res.status(400).send("wrong id : " + req.params.vaccinesId);
+	try {
+		if(!mongoose.isValidObjectId(req.params.vaccinesId))
+			return res.status(400).send("wrong id : " + req.params.vaccinesId);
 
-        const docs = await vaccinesModel.findOneAndUpdate(
-            { userId: req.body.userId, "vaccines._id": req.params.vaccinesId },
-            {
-                $pull: {
-                    vaccines: {
-                        _id: req.params.vaccinesId
-                    }
-                }
-            },
-            {
-                //Renvoie l'élément modifié
-                new: true
-            }
-        );
-        if (docs) return res.status(200).json(docs);
-        else return res.status(404).json({ error: "not found" });
-    }
-    catch (err) {
-        return res.status(500).json({ error: err });
+		const docs = await vaccinesModel.findOneAndUpdate(
+			{ userId: req.body.userId, "vaccines._id": req.params.vaccinesId },
+			{
+				$pull: {
+					vaccines: {
+						_id: req.params.vaccinesId
+					}
+				}
+			},
+			{
+				//Renvoie l'élément modifié
+				new: true
+			}
+		);
+		if (docs) return res.status(200).json(docs);
+		else return res.status(404).json({ error: "not found" });
+	}
+	catch (err) {
+		return res.status(500).json({ error: err });
 		//console.log(err);
-    }
+	}
 };
 
-export default {getVaccines, createVaccines, updateVaccines,addVaccines, deleteVaccines};
+export default {getVaccines, createVaccines, updateAllVaccines, updateVaccines, addVaccines, deleteVaccines};

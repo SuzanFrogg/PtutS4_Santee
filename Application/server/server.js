@@ -65,14 +65,14 @@ app.get("*", authMiddleware.checkUser);
 
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
-app.use("/api/sleep", sleepRoutes); //Route de sleep
-app.use("/api/vaccines", vaccinesRoutes); //Route de vaccines
-app.use("/api/weight", weightRoutes); //Route de weight
-app.use("/api/success", successRoutes); //Route de success
-app.use("/api/allergy", allergyRoutes); //Route de allergy
+app.use("/api/sleep", sleepRoutes); //Route du sommeil
+app.use("/api/vaccines", authMiddleware.checkUser, vaccinesRoutes); //Route des vaccins
+app.use("/api/weight", weightRoutes); //Route du poids
+app.use("/api/success", successRoutes); //Route de succès
+app.use("/api/allergy", authMiddleware.checkUser, allergyRoutes); //Route des allergies
 app.use("/api/don", donRoutes); //Route de don
-app.use("/api/objectives", authMiddleware.checkUser, objectivesRoutes); //Route de don
-app.use("/api/astuce", astuceRoutes); //Route de astuce
+app.use("/api/objectives", authMiddleware.checkUser, objectivesRoutes); //Route des objectifs
+app.use("/api/astuce", astuceRoutes); //Route des astuces
 app.use("/api/periods", authMiddleware.checkUser, periodsRoutes); //Route des régles
 
 /*---Server listener---*/

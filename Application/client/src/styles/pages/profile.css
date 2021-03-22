@@ -110,3 +110,43 @@
 .profile-btns {
 	margin-bottom: 40px;
 }
+
+
+.edit-list {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+}
+.edit-list li {
+	margin-right: 0;
+	margin-bottom: 15px;
+	padding: 0;
+	padding-left: 15px;
+	background: none;
+	color: initial;
+	border-radius: initial;
+	border-left: 2px solid var(--fore-color);
+}
+.edit-list li::before {
+	display: none;
+}
+.profile-edit input {
+	margin: 10px 0;
+	width: 100%;
+	min-width: 100px;
+	min-height: calc(var(--size-input)*1.5/2);
+}
+.edit-list li details {
+	margin: 0;
+}
+.edit-list li details summary {
+	user-select: none;
+}
+.edit-list li details div {
+	display: flex;
+	align-items: center;
+}
+.edit-list li details label {
+	white-space: nowrap;
+	margin-right: 10px;
+}

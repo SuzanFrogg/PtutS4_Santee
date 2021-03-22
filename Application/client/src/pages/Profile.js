@@ -56,13 +56,13 @@ function Profile() {
 
 	return (
 		<section className="profile-section">
-			{editModal ? 
-			<>
-				<EditProfile user={user} allergies={listAllergies} vaccines={listVaccines} />
-				<div className="profile-btns">
-					<button onClick={() => setEditModal(false)}>Annuler</button>
-				</div>
-			</>
+			{editModal ?
+				<EditProfile
+					user={user}
+					allergies={{list: listAllergies, set: setListAllergies}}
+					vaccines={{list: listVaccines, set: setListVaccines}}
+					modal={{editModal, setEditModal}}
+				/>
 			:
 			<>
 				<img className="profile-picture" src={`./uploads/profil/${user.picture}`} alt="profil" />

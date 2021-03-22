@@ -183,6 +183,9 @@ input[type="radio"] {
 	width: 18px;
 	min-height: calc(var(--size-input)/2);
 }
+input[type=number]::-webkit-inner-spin-button {
+	opacity: 1;
+}
 
 button {
 	cursor: pointer;
