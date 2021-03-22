@@ -71,7 +71,7 @@ function Menstruation()
 					<span>{getMoyRegle(userPeriods, dateStartP, dateEndP)}<small>j</small></span>
 				</div>					
 			</div>
-			<div>
+			<div className="data-add">
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
 				{showAddForm && <MenstruationAdd />}
 			</div>

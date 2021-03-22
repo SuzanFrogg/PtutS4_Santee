@@ -158,7 +158,7 @@ function Sleep(){
 				<Bar data={dataChartBar} options={optionChartBar} />		
 			</div>
 
-			<div>
+			<div className="data-add">
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
 				{showAddForm && <SleepAdd />}
 			</div>

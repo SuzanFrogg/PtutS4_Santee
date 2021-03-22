@@ -76,7 +76,7 @@ function BloodDonation() {
 
 			<PocheSang/>
 
-			<div>
+			<div className="data-add">
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
 				{showAddForm && <BloodDonationAdd />}
 			</div>

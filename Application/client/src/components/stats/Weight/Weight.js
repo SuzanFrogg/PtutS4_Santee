@@ -243,7 +243,7 @@ function Weight()
 				<Line data={dataChart2} options={optionsChart2} />
 			</div>
 
-			<div>
+			<div className="data-add">
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
 				{showAddForm && <WeightAdd />}
 			</div>
