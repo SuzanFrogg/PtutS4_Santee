@@ -21,7 +21,13 @@ import mongoose from "mongoose";
  * Permet d'obtenir une astuce aléatoire
  */
 let getRandomAstuce = async (req, res) => {
-    astuceModel.aggregate( [ { $sample : { size : 1 } } ] );
+    try {
+        const tips = await astuceModel.aggregate( [ { $sample : { size : 1 } } ] );
+        res.status(201).json(tips);
+    }
+    catch (err) {
+        res.status(400).send({ error: err });
+    }
 };
 
 
