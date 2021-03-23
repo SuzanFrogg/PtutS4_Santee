@@ -9,24 +9,22 @@ import {useEffect, useState} from "react";
 
 function Sleep(){
 
-	let dataLever = new Date();
-	let dataCoucher = new Date();
+	let today = new Date();
+	today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+	const [currentDate, setCurrentDate] = useState(today);	
+	const [sleepData, setsleepData] = useState([]);
+
 	//se lance a chaque chargement
 	useEffect(() => {
-		let isMounted = true;
 
 		//Récupération des informations de don
 		const fetchSleep = async () =>
 		{
 			const dataSleep = await axios.get('/api/sleep/', {withCredentials: true});
-			if (isMounted) {
-				dataLever = dataSleep.data.dateEnd;
-				dataCoucher = dataSleep.data.dateStart;
-			}
+			setsleepData((sData) => { return {...sData, dataSleep}});
 		}
 
-		fetchSleep();
-		return () => { isMounted = false };
+		
 	});
 
 	const daysNames = [
@@ -39,17 +37,14 @@ function Sleep(){
 		"Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
 	];
 	
-	let currentDate = new Date();
-	currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-	const [selectedDate] = useState(currentDate);
 	
 	//Get semaine prec et suiv
 	const getPrevWeek = () => {
-		selectedDate.setDate(selectedDate.getDate() - selectedDate.getDay() - 7 + 1);
+		setCurrentDate(prev => new Date(prev.setDate(prev.getDate() - prev.getDay() - 7 + 1)));
 	};
 
 	const getNextWeek = () => {
-		selectedDate.setDate(selectedDate.getDate() - selectedDate.getDay() + 7 + 1);
+		setCurrentDate(prev => new Date(prev.setDate(prev.getDate() - prev.getDay() + 7 + 1)));
 	};
 	
 	
@@ -190,7 +185,7 @@ function Sleep(){
 			<h2>Graphiques</h2>
 			<div className="calendar-header">
 					<button onClick={getPrevWeek}><ArrowIcon /></button>
-					<h3>{daysNames[selectedDate.getDay()] + " " + selectedDate.getDate() + " " + monthsNames[selectedDate.getMonth()] + " " + selectedDate.getFullYear()}</h3>
+					<h3>{daysNames[currentDate.getDay()] + " " + currentDate.getDate() + " " + monthsNames[currentDate.getMonth()] + " " + currentDate.getFullYear()}</h3>
 					<button onClick={getNextWeek}><ArrowIcon /></button>
 				</div>
 			<div className="data-box">
