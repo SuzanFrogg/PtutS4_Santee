@@ -5,21 +5,19 @@ function Tips() {
     const [tips, setTips] = useState("Pas d'astuce pour aujourd'hui !");
     useEffect(()=> {
         let isMounted = true;
-        console.log("useEffect");
+        
         //Recup d'une astuce
         const fetchTip = async () => {
-            console.log(tips);
-            const dataTips = await axios.get('api/astuce/',{withCredentials: true});
-            console.log("test" +dataTips.data);
+            const dataTips = await axios.get('/api/astuce/',{withCredentials: true});
+            
             if(isMounted) {
-                setTips(dataTips.data.astuce);
+                setTips(dataTips.data[0].astuce);
             }
         }
-
         fetchTip();
-        console.log("fetch : "+tips);
+
 		return () => { isMounted = false };
-    },[tips]);
+    }, []);
 
     return (
         <>
