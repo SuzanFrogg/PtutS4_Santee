@@ -2,22 +2,57 @@ import React from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import SleepAdd from "./Sleep_add";
-import {useState} from "react";
+import {ReactComponent as ArrowIcon} from '../../../media/icons/next-arrow.svg';
+import {useEffect, useState} from "react";
+
 
 
 function Sleep(){
+
+	let dataLever = new Date();
+	let dataCoucher = new Date();
+	//se lance a chaque chargement
+	useEffect(() => {
+		let isMounted = true;
+
+		//Récupération des informations de don
+		const fetchSleep = async () =>
+		{
+			const dataSleep = await axios.get('/api/sleep/', {withCredentials: true});
+			if (isMounted) {
+				dataLever = dataSleep.data.dateEnd;
+				dataCoucher = dataSleep.data.dateStart;
+			}
+		}
+
+		fetchSleep();
+		return () => { isMounted = false };
+	});
+
+	const daysNames = [
+		"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi",
+		"Vendredi", "Samedi"
+	];
 	
-	//Semaine précédente
-	/*Gérer la date
+	const monthsNames = [
+		"Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+		"Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+	];
+	
+	let currentDate = new Date();
+	currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+	const [selectedDate] = useState(currentDate);
+	
+	//Get semaine prec et suiv
 	const getPrevWeek = () => {
-		setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth(), 1));
-	}
+		selectedDate.setDate(selectedDate.getDate() - selectedDate.getDay() - 7 + 1);
+	};
 
-	//Semaine suivante
 	const getNextWeek = () => {
-		setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth(), 1));
-	}*/
-
+		selectedDate.setDate(selectedDate.getDate() - selectedDate.getDay() + 7 + 1);
+	};
+	
+	
 	//DONNEES
 	//Heures de sommeil
 
@@ -153,6 +188,11 @@ function Sleep(){
 			</div>
 
 			<h2>Graphiques</h2>
+			<div className="calendar-header">
+					<button onClick={getPrevWeek}><ArrowIcon /></button>
+					<h3>{daysNames[selectedDate.getDay()] + " " + selectedDate.getDate() + " " + monthsNames[selectedDate.getMonth()] + " " + selectedDate.getFullYear()}</h3>
+					<button onClick={getNextWeek}><ArrowIcon /></button>
+				</div>
 			<div className="data-box">
 				<h3>Nombre d'heures de sommeil</h3>
 				<Bar data={dataChartBar} options={optionChartBar} />		
