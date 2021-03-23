@@ -5,7 +5,7 @@ import { useUser } from "../../../utils/store.js";
 
 function Menstruation_add()
 {
-    const user = useUser();
+    const uid = useUser();
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
     const [flux, setFlux] = useState("");
@@ -13,11 +13,7 @@ function Menstruation_add()
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(user._id);
-        console.log(dateStart);
-        console.log(dateEnd);
-        console.log(flux);
-        await axios.put("/api/periods/", {userId: user._id, dateStart : dateStart, dateEnd : dateEnd, flux : flux});
+        await axios.put("/api/periods/", {userId: uid.user._id, dateStart : dateStart, dateEnd : dateEnd, flux : flux});
     }
         
 

@@ -5,14 +5,14 @@ import { useUser } from "../../../utils/store.js";
 
 function Sleep_add()
 {
-    const user = useUser();
+    const uid = useUser();
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        await axios.put("/api/sleeps/", {userId: user._id, dateStart : dateStart, dateEnd : dateEnd});
+        await axios.put("/api/sleep/", {userId: uid.user._id, dateStart : dateStart, dateEnd : dateEnd});
     }
         
 

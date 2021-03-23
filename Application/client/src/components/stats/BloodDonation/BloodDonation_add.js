@@ -7,18 +7,14 @@ import { useUser } from "../../../utils/store.js";
 function BloodDonation_add()
 {
 
-  const user = useUser();
+  const uid = useUser();
   const [date, setDate] = useState("");
   const [dons, setDon] = useState("");
 
   const handleSubmit = async (event) => {
       event.preventDefault();
 
-      console.log(user._id);
-      console.log(date);
-      console.log(dons);
-
-      await axios.put("/api/dons/", {userId: user._id, date : date, don : dons});
+      await axios.put("/api/don/", {userId: uid.user._id, date : date, don : dons});
   }
       
 

@@ -6,7 +6,7 @@ import { useUser } from "../../../utils/store.js";
 function Weight_add()
 {
 
-    const user = useUser();
+    const uid = useUser();
     const [date, setDate] = useState("");
     const [poids, setPoids] = useState("");
     const [taille, setTaille] = useState("");
@@ -14,7 +14,7 @@ function Weight_add()
     const handleSubmit = async (event) => {
       event.preventDefault();
 
-      await axios.put("/api/weights/", {userId: user._id, entryDate : date, mass : poids, height: taille});
+      await axios.put("/api/weight/", {userId: uid.user._id, entryDate : date, mass : poids, height: taille});
     }
       
 
