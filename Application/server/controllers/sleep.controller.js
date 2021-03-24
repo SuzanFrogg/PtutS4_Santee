@@ -19,6 +19,32 @@ let getSleep = async (req, res) => {
 	}
 };
 
+let getSleepDate = async (req, res) => {
+	if (req.user._id) {
+		const Sleep = await SleepModel.aggregate(
+			[
+				{$match: { //On récupère le document correspondant à l'id de l'utilisateur
+					userId: req.user._id
+				}},
+				{$unwind: "$Sleep"},
+				{$unset: "_id"}, //Enlève le champs id
+				{$unset: "userId"}, //Enlève le champs userId
+				{$match: {
+					$or: [
+						{"Sleep.dateStart": {$gte: new Date(req.body.dateStart), $lte: new Date(req.body.dateEnd)}},
+						{"Sleep.dateEnd": {$gte: new Date(req.body.dateStart), $lte: new Date(req.body.dateEnd)}}
+					]
+				}},
+				{$replaceRoot: {newRoot: "$Sleep"}}
+			]
+		)
+		res.status(201).json(Sleep);
+	}
+	else {
+		res.status(400).send("no user");
+	}
+};
+
 /**
  * Permet de créer une donnée de sleep
  */
@@ -136,4 +162,4 @@ let deleteSleep = (req, res) => {
 	);
 };
 
-export default {getSleep, createSleep, updateSleep, addSleep, deleteSleep};
+export default {getSleep, createSleep, updateSleep, addSleep, deleteSleep, getSleepDate};

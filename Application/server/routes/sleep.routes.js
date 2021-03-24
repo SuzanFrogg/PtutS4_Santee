@@ -3,6 +3,7 @@ const router = express.Router();
 import sleepController from "../controllers/sleep.controller.js";
 
 router.get("/", sleepController.getSleep); //READ
+router.post("/findDate", sleepController.getSleepDate); //READ
 router.post('/', sleepController.createSleep); //CREATE
 router.put("/:sleepId", sleepController.updateSleep); //UPDATE
 router.put("/", sleepController.addSleep); //UPDATE

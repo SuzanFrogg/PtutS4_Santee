@@ -65,7 +65,7 @@ app.get("*", authMiddleware.checkUser);
 
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
-app.use("/api/sleep", sleepRoutes); //Route du sommeil
+app.use("/api/sleep", authMiddleware.checkUser,sleepRoutes); //Route du sommeil
 app.use("/api/vaccines", authMiddleware.checkUser, vaccinesRoutes); //Route des vaccins
 app.use("/api/weight", weightRoutes); //Route du poids
 app.use("/api/success", successRoutes); //Route de succès
