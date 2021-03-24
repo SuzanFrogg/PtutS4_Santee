@@ -24,7 +24,7 @@ const weightSchema = mongoose.Schema({
         unique: true,
         required:true,
     },
-    weightList: [weightNestedSchema],
+    Weight: [weightNestedSchema],
 });
 
 export default mongoose.model("weight",weightSchema);

@@ -186,7 +186,7 @@ function Weight()
 		{
 			const dataWeight = await axios.get('/api/weight/', {withCredentials: true});
 			if (isMounted) {
-				userWeight = dataWeight.data.weightList;
+				userWeight = dataWeight.data.Weight;
 				for (let i=0; i<(userWeight.length); i++) {
 					setPoids(userWeight[i].mass);
 					setTaille(userWeight[i].height);

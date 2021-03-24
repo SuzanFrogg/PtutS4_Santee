@@ -26,7 +26,7 @@ let getWeight = async(req,res) => {
  let createWeight = async (req, res) => {
 	let newWeight = new weightModel({
 		userId: req.body.userId,
-		weightList: {
+		Weight: {
 			entryDate: req.body.entryDate,
 			mass: req.body.mass,
             		height: req.body.height
