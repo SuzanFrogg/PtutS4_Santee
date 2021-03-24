@@ -20,16 +20,18 @@ function Sleep(){
 		//Récupération des informations de don
 		const fetchSleep = async () =>
 		{
-			const dataSleep = await axios.get('/api/sleep/findDate', {withCredentials: true});
+			const dataSleep = await axios.post('/api/sleep/findDate', {withCredentials: true});
 			setsleepData(dataSleep.data);
 		}
-		
-
+			
+		let monday = currentDate.getDate() - currentDate.getDay() + 1;
 		const month = currentDate.getMonth();
 		const year = currentDate.getFullYear();
-		let dateStart = new Date(year, month, 1);
-		let dateEnd = new Date(year, month, 0);
-
+		
+		//Premier jour de la semaine en cours
+		let dateStart = new Date(year, month, monday);
+		//Dernier jour de la semaine en cours
+		let dateEnd = new Date(year, month, monday + 6);
 
 		fetchSleep(dateStart, dateEnd);
 	}, [currentDate]);
@@ -44,8 +46,7 @@ function Sleep(){
 		let newDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 7 + 1));
 		setCurrentDate(newDate);
 	};
-	
-	
+
 	//DONNEES
 	//Heures de sommeil
 
