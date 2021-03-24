@@ -6,10 +6,18 @@ import mongoose from "mongoose";
  * Permet d'obtenir toutes les informations de poids
  */
 let getWeight = async(req,res) => {
-    weightModel.find((err,docs)=> {
-        if(!err) res.send(docs);
-		else console.log('Error to get data : ' + err);
-    });
+    if (req.user._id) {
+		weightModel.findOne(
+			{ userId: req.user._id },
+			(err, docs) => {
+				if(!err) res.send(docs);
+				else console.log('Error to get data : ' + err);
+			}
+		);
+	}
+	else {
+		res.status(400).send("no user");
+	}
 };
 
 /**

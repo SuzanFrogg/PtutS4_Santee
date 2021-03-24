@@ -173,23 +173,29 @@ function Weight()
 		
 	};	
 
-	let poidsActu;
-	let tailleActu;
+	let userWeight = useState([]);
+	const [poids, setPoids] = useState(0);
+	const [taille, setTaille] = useState(0);
+	const [poidsActu, setPoidsActu] = useState(0);
+	const [tailleActu, setTailleActu] = useState(0);
 
-	//se lance a chaque chargement
 	useEffect(() => {
 		let isMounted = true;
 
-		//Récupération des informations de weight
 		const fetchDon = async () =>
 		{
-			const dataWeight = await axios.get('/api/weights/', {withCredentials: true});
+			const dataWeight = await axios.get('/api/weight/', {withCredentials: true});
 			if (isMounted) {
-				poidsActu = dataWeight.mass;
-				tailleActu = dataWeight.height;
+				userWeight = dataWeight.data.weightList;
+				for (let i=0; i<(userWeight.length); i++) {
+					setPoids(userWeight[i].mass);
+					setTaille(userWeight[i].height);
+				}
+				setPoidsActu(userWeight[userWeight.length-1].mass);
+				setTailleActu(userWeight[userWeight.length-1].height);
 			}
+			
 		}
-
 		fetchDon();
 		return () => { isMounted = false };
 	});
@@ -221,15 +227,15 @@ function Weight()
 			<div className="data-recap">
 				<div className="data-card">
 					<p>Poids</p>
-					<span>10<small>kg</small></span>
+					<span>{poidsActu}<small>kg</small></span>
 				</div>
 				<div className="data-card">
 					<p>Taille</p>
-					<span>{getTaille1(176)}<small>m</small>{getTaille2(176)}</span>
+					<span>{getTaille1(tailleActu)}<small>m</small>{getTaille2(tailleActu)}</span>
 				</div>
 				<div className="data-card">
 					<p>IMC</p>
-					<span>{getIMC(65,176)}</span>
+					<span>{getIMC(poidsActu,tailleActu)}</span>
 				</div>	
 			</div>
 			
