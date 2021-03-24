@@ -14,7 +14,15 @@ function BloodDonation_add()
   const handleSubmit = async (event) => {
       event.preventDefault();
 
-      await axios.put("/api/don/", {userId: uid.user._id, date : date, don : dons});
+      if (dons == "DonsSang"){
+        await axios.put("/api/don/addSang", {userId: uid.user._id, dateDon : date});
+      }
+      else if (dons == "DonsPlasma"){
+        await axios.put("/api/don/addPlasma", {userId: uid.user._id, dateDon : date});
+      }
+      else if (dons == "DonsPlaquette"){
+        await axios.put("/api/don/addPlaquette", {userId: uid.user._id, dateDon : date});
+      }
   }
       
 
