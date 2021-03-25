@@ -67,15 +67,15 @@ app.delete("*", authMiddleware.checkUser);
 
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
-app.use("/api/sleep", authMiddleware.checkUser, sleepRoutes); //Route du sommeil
+app.use("/api/sleep", sleepRoutes); //Route du sommeil
 app.use("/api/vaccines", vaccinesRoutes); //Route des vaccins
-app.use("/api/weight", authMiddleware.checkUser, weightRoutes); //Route du poids
+app.use("/api/weight", weightRoutes); //Route du poids
 app.use("/api/success", successRoutes); //Route de succès
 app.use("/api/allergy", allergyRoutes); //Route des allergies
-app.use("/api/don", authMiddleware.checkUser, donRoutes); //Route de don
-app.use("/api/objectives", authMiddleware.checkUser, objectivesRoutes); //Route des objectifs
+app.use("/api/don", donRoutes); //Route de don
+app.use("/api/objectives", objectivesRoutes); //Route des objectifs
 app.use("/api/astuce", astuceRoutes); //Route des astuces
-app.use("/api/periods", authMiddleware.checkUser, periodsRoutes); //Route des régles
+app.use("/api/periods", periodsRoutes); //Route des régles
 
 /*---Server listener---*/
 app.listen(process.env.PORT, () => {

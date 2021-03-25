@@ -1,5 +1,4 @@
 import weightModel from "../models/weight.model.js";
-import weightNestedSchema from "../models/weight.model.js";
 import mongoose from "mongoose";
 
 /**

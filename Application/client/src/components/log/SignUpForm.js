@@ -40,11 +40,17 @@ function SignUpForm(props) {
 				birthError.innerHTML = "";
 				sexError.innerHTML = "";
 
-				const resvaccines = await axios.post("/api/vaccines", {userId: response.data.user._id}, { withCredentials: true });
-				const resallergy = await axios.post("/api/allergy", {userId: response.data.user._id}, { withCredentials: true });
-				//TODO : le reste des requêtes
+				let userId = response.data.user._id;
+				const resVaccines = await axios.post("/api/vaccines", {userId}, { withCredentials: true });
+				const resAllergy = await axios.post("/api/allergy", {userId}, { withCredentials: true });
+				const resWeight = await axios.post("/api/weight", {userId}, { withCredentials: true });
+				const resSleep = await axios.post("/api/sleep", {userId}, { withCredentials: true });
+				const resDon = await axios.post("/api/don", {userId}, { withCredentials: true });
+				const resPeriods = await axios.post("/api/periods", {userId}, { withCredentials: true });
+				const resObjectives = await axios.post("/api/objectives", {userId}, { withCredentials: true });
 
-				if (!resvaccines.data || !resallergy.data) {
+				if (!resVaccines.data || !resAllergy.data || !resWeight.data ||
+					!resSleep.data || !resDon.data || !resPeriods.data || !resObjectives.data) {
 					props.handleAlert("error", "Une erreur est survenue lors de la création du profil");
 				}
 				else {
