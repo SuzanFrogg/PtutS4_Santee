@@ -89,7 +89,7 @@ function Objectives() {
 				<div className="modify-objectives-form">
 					{/* Formulaire modifier/delete*/}
 					{showObjectivesForm && !showModifyObjectivesForm && <button onClick={(event) => {setModifyObjectivesForm(true);setObjectivesForm(false); }}>Modifier</button>}
-					{showObjectivesForm && !showModifyObjectivesForm &&<button onClick={(event) => {setDeleteObjectivesForm(true);setObjectivesForm(false); }}>Supprimer</button>}
+					{showObjectivesForm && !showModifyObjectivesForm && <button onClick={(event) => {setDeleteObjectivesForm(true);setObjectivesForm(false); }}>Supprimer</button>}
 					{showObjectivesForm && !showModifyObjectivesForm && <button onClick={(event) => setObjectivesForm(false)}>Annuler</button>}
 
 					{showModifyObjectivesForm && <ModifyObjectives handle={handleModifyObjectives} obj={objectifInstance}/>}

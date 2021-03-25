@@ -73,8 +73,8 @@ function CalendarItem() {
 		listOfDays = Array(firstDayInMonth-1).fill(null).concat(listOfDays);
 		
 		return listOfDays.map((day, key) => {
-			day = dateWithoutTime(new Date(day));
 			if (day) {
+				day = dateWithoutTime(new Date(day));
 				let isSelected = day.getTime() === selectedDate.getTime();
 				let isToday = day.getTime() === today.getTime();
 
@@ -95,9 +95,8 @@ function CalendarItem() {
 							})}
 							{calendarData.objectives.map((data, key) => {
 								let dateEnd = dateWithoutTime(new Date(data.dateEnd));
-								if (day.getTime() === dateEnd.getTime()) {
+								if (day.getTime() === dateEnd.getTime())
 									return <div className="calendar-day-info-objectives" key={key}></div>;
-								}
 								else
 									return null;
 							})}
@@ -106,7 +105,7 @@ function CalendarItem() {
 				);
 			}
 			else {
-				return <time key={key} className="calendar-day"></time>
+				return <time key={key} className="calendar-day calendar-null"></time>
 			}
 		});
 	};
