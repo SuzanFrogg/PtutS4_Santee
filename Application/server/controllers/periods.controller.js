@@ -75,8 +75,8 @@ let updatePeriods = async (req, res) => {
 		//Vérifie les id
 		if(!mongoose.isValidObjectId(req.params.periodsId))
 			return res.status(400).json("wrong id : " + req.params.periodsId);
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).json("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).json("wrong id : " + req.user._id);
 
 		const docs = await periodsModel.findOneAndUpdate(
 			{ userId: req.user._id, "periods._id": req.params.periodsId },
@@ -108,8 +108,8 @@ let updatePeriods = async (req, res) => {
 let addPeriods = async (req, res) => {
 	try {
         //Vérifie que l'id est le bon
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).send("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).send("wrong id : " + req.user._id);
 
 		const docs = await periodsModel.findOneAndUpdate(
 			{ userId: req.user._id },

@@ -7,7 +7,7 @@ function Menstruation(props)
 {
     const [showAddForm, setShowAddForm] = useState(false);
 
-	let userPeriods = useState([]);
+	const [userPeriods, setUserPeriods] = useState([]);
 	const [dateStartP, setDateStart] = useState(0);
 	const [dateEndP, setDateEnd] = useState(0);
 
@@ -20,7 +20,7 @@ function Menstruation(props)
 		{
 			const dataDons = await axios.get('/api/periods/', {withCredentials: true});
 			if (isMounted) {
-				userPeriods = dataDons.data.periods;
+				setUserPeriods(dataDons.data.periods);
 				for (let i=0; i<(userPeriods.length); i++) {
 					setDateStart(userPeriods[i].dateStart);
 					setDateEnd(userPeriods[i].dateEnd);
@@ -30,7 +30,7 @@ function Menstruation(props)
 
 		fetchDon();
 		return () => { isMounted = false };
-	});
+	}, [userPeriods]);
 
 	const dateDiff = (dateStart, dateEnd) => {
 		let date1 = new Date(Date.parse(dateStart));

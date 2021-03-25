@@ -1,28 +1,33 @@
 import React from "react";
 import {useState} from "react";
 import axios from "axios";
-import { useUser } from "../../../utils/store.js";
 
 
-function BloodDonation_add()
+function BloodDonation_add(props)
 {
-
-  const uid = useUser();
   const [date, setDate] = useState("");
   const [dons, setDon] = useState("");
 
   const handleSubmit = async (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      if (dons == "DonsSang"){
-        await axios.put("/api/don/addSang", {userId: uid.user._id, dateDon : date});
+    try {
+      if (date === "" || dons === "")
+        throw Error("missing data");
+
+      if (dons === "DonsSang"){
+        await axios.put("/api/don/addSang", {dateDon : date});
       }
-      else if (dons == "DonsPlasma"){
-        await axios.put("/api/don/addPlasma", {userId: uid.user._id, dateDon : date});
+      else if (dons === "DonsPlasma"){
+        await axios.put("/api/don/addPlasma", {dateDon : date});
       }
-      else if (dons == "DonsPlaquette"){
-        await axios.put("/api/don/addPlaquette", {userId: uid.user._id, dateDon : date});
+      else if (dons === "DonsPlaquette"){
+        await axios.put("/api/don/addPlaquette", {dateDon : date});
       }
+    }
+    catch (err) {
+      props.handleAlert("error", "L'ajout des données n'a pas pu être exécuté");
+    }
   }
       
 

@@ -80,11 +80,11 @@ let updateObjectives = async (req, res) => {
 		//Vérifie les id
 		if(!mongoose.isValidObjectId(req.params.objectivesId))
 			return res.status(400).json("wrong id : " + req.params.objectivesId);
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).json("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).json("wrong id : " + req.user._id);
 
 		const docs = await objectivesModel.findOneAndUpdate(
-			{ userId: req.body.userId, "objectives._id": req.params.objectivesId },
+			{ userId: req.user._id, "objectives._id": req.params.objectivesId },
 			{
 				$set: {
 					"objectives.$.obj": req.body.obj,
@@ -112,11 +112,11 @@ let updateObjectives = async (req, res) => {
 let addObjectives = async (req, res) => {
 	try {
 		//Vérifie l'id
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).send("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).send("wrong id : " + req.user._id);
 
 		const docs = await objectivesModel.findOneAndUpdate(
-			{ userId: req.body.userId },
+			{ userId: req.user._id },
 			{
 				$push: 
 				{

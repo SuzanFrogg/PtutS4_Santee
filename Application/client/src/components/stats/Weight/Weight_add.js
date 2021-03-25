@@ -1,20 +1,26 @@
 import React from "react";
 import {useState} from "react";
 import axios from "axios";
-import { useUser } from "../../../utils/store.js";
 
-function Weight_add()
+function Weight_add(props)
 {
-
-    const uid = useUser();
     const [date, setDate] = useState("");
     const [poids, setPoids] = useState("");
     const [taille, setTaille] = useState("");
 
     const handleSubmit = async (event) => {
-      event.preventDefault();
+        event.preventDefault();
 
-      await axios.put("/api/weight/", {userId: uid.user._id, entryDate : date, mass : poids, height: taille});
+        try {
+            if (date === "" || poids === "" || taille === "")
+                throw Error("missing data");
+
+            await axios.put("/api/weight/", {entryDate: date, mass: poids, height: taille});
+            props.handleAlert("success", "Les données ont bien été ajoutées");
+        }
+        catch (err) {
+            props.handleAlert("error", "L'ajout des données n'a pas pu être exécuté");
+        }
     }
       
 

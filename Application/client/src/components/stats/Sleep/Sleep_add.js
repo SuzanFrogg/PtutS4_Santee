@@ -1,18 +1,25 @@
 import React from "react";
 import {useState} from "react";
 import axios from "axios";
-import { useUser } from "../../../utils/store.js";
 
-function Sleep_add()
+function Sleep_add(props)
 {
-    const uid = useUser();
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        await axios.put("/api/sleep/", {userId: uid.user._id, dateStart : dateStart, dateEnd : dateEnd});
+        try {
+            if (dateStart === "" || dateEnd === "")
+                throw Error("missing data");
+            
+            await axios.put("/api/sleep/", {dateStart, dateEnd});
+            props.handleAlert("success", "Les données ont bien été ajoutées");
+        }
+        catch (err) {
+            props.handleAlert("error", "L'ajout des données n'a pas pu être exécuté");
+        }
     }
         
 

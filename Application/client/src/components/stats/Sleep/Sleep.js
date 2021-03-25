@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import {daysNames, monthsNames} from "../../../utils/date.js";
 
 
-function Sleep(){
+function Sleep(props) {
 
 	let today = new Date();
 	today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -207,7 +207,7 @@ function Sleep(){
 
 			<div className="data-add">
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
-				{showAddForm && <SleepAdd />}
+				{showAddForm && <SleepAdd handleAlert={props.handleAlert} />}
 			</div>
 		</>
 	);

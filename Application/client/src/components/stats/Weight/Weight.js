@@ -4,9 +4,8 @@ import WeightAdd from "./Weight_add";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-function Weight()
+function Weight(props)
 {
-	
 
 	const [userWeight, setUserWeight] = useState([{mass:0},{height:0},{entryDate: new Date()}]);
 
@@ -84,20 +83,20 @@ function Weight()
 		for (let i=1; i<(userWeight.length); i++) {
 			let sortie = false;
 			let a = 0;
-			while (sortie == false){
+			while (sortie === false){
 				let date1 = new Date(Date.parse(userWeight[i].entryDate));
 				date1 = date1.getTime() / 86400000;
 				let date2 = new Date(Date.parse(list[a].entryDate));
 				date2 = date2.getTime() / 86400000;
 				
 				if (date1<date2){
-					if (a==0){
+					if (a===0){
 						list.unshift(userWeight[i]);
 					} else {
 						list.splice(a, 0, userWeight[i]);
 					}
 					sortie = true;
-				} else if (a == list.length-1){
+				} else if (a === list.length-1){
 					list.push(userWeight[i]);
 					sortie = true;
 				} else {
@@ -296,7 +295,7 @@ function Weight()
 
 			<div className="data-add">
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
-				{showAddForm && <WeightAdd />}
+				{showAddForm && <WeightAdd handleAlert={props.handleAlert} />}
 			</div>
 		</>
 	);

@@ -48,11 +48,11 @@ let updateDonSang = async (req, res) => {
 		//Vérifie les id
 		if(!mongoose.isValidObjectId(req.params.donId))
 			return res.status(400).json("wrong id : " + req.params.donId);
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).json("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).json("wrong id : " + req.user._id);
 
 		const docs = await donModel.findOneAndUpdate(
-			{ userId: req.body.userId, "DonsSang._id": req.params.donId },
+			{ userId: req.user._id, "DonsSang._id": req.params.donId },
 			{
 				$set: {
 					"DonsSang.$.dateDon": req.body.dateDon
@@ -83,11 +83,11 @@ let updateDonSang = async (req, res) => {
 		//Vérifie les id
 		if(!mongoose.isValidObjectId(req.params.donId))
 			return res.status(400).json("wrong id : " + req.params.donId);
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).json("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).json("wrong id : " + req.user._id);
 
 		const docs = await donModel.findOneAndUpdate(
-			{ userId: req.body.userId, "DonsPlasma._id": req.params.donId },
+			{ userId: req.user._id, "DonsPlasma._id": req.params.donId },
 			{
 				$set: {
 					"DonsPlasma.$.dateDon": req.body.dateDon
@@ -118,11 +118,11 @@ let updateDonSang = async (req, res) => {
 		//Vérifie les id
 		if(!mongoose.isValidObjectId(req.params.donId))
 			return res.status(400).json("wrong id : " + req.params.donId);
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).json("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).json("wrong id : " + req.user._id);
 
 		const docs = await donModel.findOneAndUpdate(
-			{ userId: req.body.userId, "DonsPlaquette._id": req.params.donId },
+			{ userId: req.user._id, "DonsPlaquette._id": req.params.donId },
 			{
 				$set: {
 					"DonsPlaquette.$.dateDon": req.body.dateDon
@@ -151,11 +151,11 @@ let updateDonSang = async (req, res) => {
 let addDonSang = async (req, res) => {
 	try {
         //Vérifie que l'id est le bon
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).send("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).send("wrong id : " + req.user._id);
 
 		const docs = await donModel.findOneAndUpdate(
-			{ userId: req.body.userId },
+			{ userId: req.user._id },
 			{
 				$push: {
 					DonsSang: {
@@ -184,11 +184,11 @@ let addDonSang = async (req, res) => {
  let addDonPlasma = async (req, res) => {
 	try {
         //Vérifie que l'id est le bon
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).send("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).send("wrong id : " + req.user._id);
 
 		const docs = await donModel.findOneAndUpdate(
-			{ userId: req.body.userId },
+			{ userId: req.user._id },
 			{
 				$push: {
 					DonsPlasma: {
@@ -217,11 +217,11 @@ let addDonSang = async (req, res) => {
  let addDonPlaquette = async (req, res) => {
 	try {
         //Vérifie que l'id est le bon
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).send("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).send("wrong id : " + req.user._id);
 
 		const docs = await donModel.findOneAndUpdate(
-			{ userId: req.body.userId },
+			{ userId: req.user._id },
 			{
 				$push: {
 					DonsPlaquette: {
@@ -253,7 +253,7 @@ let deleteDonSang = (req, res) => {
 		return res.status(400).send("wrong id : " + req.params.id);
 
 	sleepModel.findOneAndUpdate(
-		{ userId: req.body.userId, "DonsSang._id": req.params.donId },
+		{ userId: req.user._id, "DonsSang._id": req.params.donId },
 		{
 			$pull: {
 				DonsSang: {
@@ -281,7 +281,7 @@ let deleteDonSang = (req, res) => {
 		return res.status(400).send("wrong id : " + req.params.id);
 
 	sleepModel.findOneAndUpdate(
-		{ userId: req.body.userId, "DonsPlasma._id": req.params.donId },
+		{ userId: req.user._id, "DonsPlasma._id": req.params.donId },
 		{
 			$pull: {
 				DonsPlasma: {
@@ -309,7 +309,7 @@ let deleteDonSang = (req, res) => {
 		return res.status(400).send("wrong id : " + req.params.id);
 
 	sleepModel.findOneAndUpdate(
-		{ userId: req.body.userId, "DonsPlaquette._id": req.params.donId },
+		{ userId: req.user._id, "DonsPlaquette._id": req.params.donId },
 		{
 			$pull: {
 				DonsPlaquette: {

@@ -49,11 +49,11 @@ let updateWeight = async (req,res) => {
         //Vérification des id
         if(!mongoose.isValidObjectId(req.params.weightId))
             return res.status(400).json("wrong id : " + req.params.weightId);
-        if(!mongoose.isValidObjectId(req.body.userId))
-            return res.status(400).json("wrong id : " + req.body.userId);
+        if(!mongoose.isValidObjectId(req.user._id))
+            return res.status(400).json("wrong id : " + req.user._id);
 
         const docs = await weightModel.findOneAndUpdate({
-            userId : req.body.userId, "Weight._id":req.params.weightId
+            userId : req.user._id, "Weight._id":req.params.weightId
             },
             {
                 $set: {
@@ -78,11 +78,11 @@ let updateWeight = async (req,res) => {
 
 let addWeight = async(req,res) => {
     try {
-        if(!mongoose.isValidObjectId(req.body.userId))
-            return res.status(400).send("wrong id : "+req.body.userId);
+        if(!mongoose.isValidObjectId(req.user._id))
+            return res.status(400).send("wrong id : "+req.user._id);
 
         const docs = await weightModel.findOneAndUpdate({
-            userId : req.body.userId },
+            userId : req.user._id },
             {
                 $push: {
                     Weight: {
@@ -110,7 +110,7 @@ let deleteWeight = (req,res) => {
     return res.status(400).send("wrong id : " + req.params.id);
 
     weightModel.findOneAndUpdate( {
-        userId: req.body.userId, "Weight._id": req.params.weightId },
+        userId: req.user._id, "Weight._id": req.params.weightId },
         {
             $pull: {
                 Weight: {

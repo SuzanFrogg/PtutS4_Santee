@@ -102,11 +102,11 @@ let createVaccines = async (req, res) => {
 let addVaccines = async (req, res) => {
 	try {
 		//Vérifie l'id
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).send("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).send("wrong id : " + req.user._id);
 
 		const docs = await vaccinesModel.findOneAndUpdate(
-			{ userId: req.body.userId },
+			{ userId: req.user._id },
 			{
 				$push: 
 				{
@@ -145,7 +145,7 @@ let addVaccines = async (req, res) => {
 			return res.status(400).send("wrong id : " + req.params.vaccinesId);
 
 		const docs = await vaccinesModel.findOneAndUpdate(
-			{ userId: req.body.userId, "vaccines._id": req.params.vaccinesId },
+			{ userId: req.user._id, "vaccines._id": req.params.vaccinesId },
 			{
 				$pull: {
 					vaccines: {

@@ -6,7 +6,7 @@ import BloodDonationAdd from "./BloodDonation_add";
 import {useEffect, useState} from "react";
 
 
-function BloodDonation() {
+function BloodDonation(props) {
     const [showAddForm, setShowAddForm] = useState(false);
 
 	const [listSang, setListSang] = useState([]);
@@ -78,7 +78,7 @@ function BloodDonation() {
 
 			<div className="data-add">
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
-				{showAddForm && <BloodDonationAdd />}
+				{showAddForm && <BloodDonationAdd handleAlert={props.handleAlert} />}
 			</div>
 		</>
 	);

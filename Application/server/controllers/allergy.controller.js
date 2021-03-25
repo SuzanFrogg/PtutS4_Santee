@@ -100,11 +100,11 @@ let createAllergies = async (req, res) => {
 let addAllergies = async (req, res) => {
 	try {
 		//Vérifie l'id
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).send("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).send("wrong id : " + req.user._id);
 
 		const docs = await allergyModel.findOneAndUpdate(
-			{ userId: req.body.userId },
+			{ userId: req.user._id },
 			{
 				$push: 
 				{
@@ -139,7 +139,7 @@ let addAllergies = async (req, res) => {
             return res.status(400).send("wrong id : " + req.params.allergyId);
 
         const docs = await allergyModel.findOneAndUpdate(
-            { userId: req.body.userId, "allergies._id": req.params.allergyId },
+            { userId: req.user._id, "allergies._id": req.params.allergyId },
             {
                 $pull: {
                     allergies: {

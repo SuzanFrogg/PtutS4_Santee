@@ -4,17 +4,17 @@ const weightNestedSchema = mongoose.Schema({
     entryDate: {
         type:Date,
         required: true,
-        default: Date.now,
+        default: Date.now
     },
     mass: {
         type: Number,
         required: true,
-        default:0,
+        default: 0
     },
     height: {
         type: Number,
         required: true,
-        default:0,
+        default: 0
     }
 });
 
@@ -22,7 +22,7 @@ const weightSchema = mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         unique: true,
-        required:true,
+        required:true
     },
     Weight: [weightNestedSchema],
 });

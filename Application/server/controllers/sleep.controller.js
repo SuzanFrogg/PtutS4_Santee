@@ -72,11 +72,11 @@ let createSleep = async (req, res) => {
 		//Vérifie les id
 		if(!mongoose.isValidObjectId(req.params.sleepId))
 			return res.status(400).json("wrong id : " + req.params.sleepId);
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).json("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).json("wrong id : " + req.user._id);
 
 		const docs = await sleepModel.findOneAndUpdate(
-			{ userId: req.body.userId, "Sleep._id": req.params.sleepId },
+			{ userId: req.user._id, "Sleep._id": req.params.sleepId },
 			{
 				$set: {
 					"Sleep.$.dateStart": req.body.dateStart,
@@ -104,11 +104,11 @@ let createSleep = async (req, res) => {
 let addSleep = async (req, res) => {
 	try {
 		//Vérifie l'id
-		if(!mongoose.isValidObjectId(req.body.userId))
-			return res.status(400).send("wrong id : " + req.body.userId);
+		if(!mongoose.isValidObjectId(req.user._id))
+			return res.status(400).send("wrong id : " + req.user._id);
 
 		const docs = await sleepModel.findOneAndUpdate(
-			{ userId: req.body.userId },
+			{ userId: req.user._id },
 			{
 				$push: {
 					Sleep: {
@@ -140,7 +140,7 @@ let deleteSleep = (req, res) => {
 		return res.status(400).send("wrong id : " + req.params.id);
 
 	sleepModel.findOneAndUpdate(
-		{ userId: req.body.userId, "Sleep._id": req.params.sleepId },
+		{ userId: req.user._id, "Sleep._id": req.params.sleepId },
 		{
 			$pull: {
 				Sleep: {

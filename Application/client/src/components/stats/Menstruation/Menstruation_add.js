@@ -1,24 +1,25 @@
 import React from "react";
 import {useState} from "react";
 import axios from "axios";
-import { useUser } from "../../../utils/store.js";
 
 function Menstruation_add(props)
 {
-    const uid = useUser();
     const [dateStart, setDateStart] = useState("");
     const [dateEnd, setDateEnd] = useState("");
-    const [flux, setFlux] = useState("");
+    const [flux, setFlux] = useState(0);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
+          if (dateStart === "" || dateEnd === "")
+            throw Error("missing data");
+          
           await axios.put("/api/periods/", {dateStart, dateEnd, flux});
           props.handleAlert("success", "Les données ont bien été ajoutées");
         }
         catch (err) {
-          props.handleAlert("error", "Une erreur est survenue dans l'ajout des données");
+          props.handleAlert("error", "L'ajout des données n'a pas pu être exécuté");
         }
     }
         
