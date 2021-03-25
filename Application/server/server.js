@@ -62,15 +62,17 @@ app.post("/refresh_token", async (req, res) => {
 	return res.status(200).json({ accessToken, user, expiresIn });
 });
 app.get("*", authMiddleware.checkUser);
+app.put("*", authMiddleware.checkUser);
+app.delete("*", authMiddleware.checkUser);
 
 /*---Routes API---*/
 app.use("/api/user", userRoutes); //Route de l'utilisateur
-app.use("/api/sleep", authMiddleware.checkUser,sleepRoutes); //Route du sommeil
-app.use("/api/vaccines", authMiddleware.checkUser, vaccinesRoutes); //Route des vaccins
-app.use("/api/weight", weightRoutes); //Route du poids
+app.use("/api/sleep", authMiddleware.checkUser, sleepRoutes); //Route du sommeil
+app.use("/api/vaccines", vaccinesRoutes); //Route des vaccins
+app.use("/api/weight", authMiddleware.checkUser, weightRoutes); //Route du poids
 app.use("/api/success", successRoutes); //Route de succès
-app.use("/api/allergy", authMiddleware.checkUser, allergyRoutes); //Route des allergies
-app.use("/api/don", donRoutes); //Route de don
+app.use("/api/allergy", allergyRoutes); //Route des allergies
+app.use("/api/don", authMiddleware.checkUser, donRoutes); //Route de don
 app.use("/api/objectives", authMiddleware.checkUser, objectivesRoutes); //Route des objectifs
 app.use("/api/astuce", astuceRoutes); //Route des astuces
 app.use("/api/periods", authMiddleware.checkUser, periodsRoutes); //Route des régles
