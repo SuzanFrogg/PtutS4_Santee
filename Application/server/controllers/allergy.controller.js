@@ -25,9 +25,7 @@ let getAllergies = async (req, res) => {
 let createAllergies = async (req, res) => {
     let newAllergy= new allergyModel({
         userId: req.body.userId,
-        allergies: {
-            toAvoid: req.body.toAvoid,
-        }
+        allergies: []
     });
 
     try {

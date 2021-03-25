@@ -54,11 +54,7 @@ let getPeriodsDate = async (req, res) => {
 let createPeriods = async (req, res) => {
 	let newPeriods = new periodsModel({
 		userId: req.body.userId,
-		periods: {
-			dateStart: req.body.dateStart,
-			dateEnd: req.body.dateEnd,
-            flux: req.body.flux
-		}
+		periods: []
 	});
 
 	try {

@@ -56,15 +56,9 @@ let getObjectivesDate = async (req, res) => {
  * Permet de créer une donnée d'un calendrier
  */
 let createObjectives = async (req, res) => {
-
    let newObjectif = new objectivesModel({
-        userId : req.body.userId,
-        objectives : 
-        {
-            obj : req.body.obj,
-            isDone : req.body.isDone,
-            dateEnd : req.body.dateEnd
-        }
+        userId: req.body.userId,
+        objectives: []
         
     });
 

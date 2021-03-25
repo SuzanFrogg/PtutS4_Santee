@@ -25,13 +25,7 @@ let getVaccines = async (req, res) => {
 let createVaccines = async (req, res) => {
 	let newVaccines = new vaccinesModel({
 		userId: req.body.userId,
-		vaccines: {
-			name: req.body.name,
-			possibleStartAge: req.body.possibleStartAge,
-			possibleEndAge: req.body.possibleEndAge,
-			doseNeeded: req.body.doseNeeded,
-			doseMade: req.body.doseMade
-		}
+		vaccines: []
 	});
 
 	try {

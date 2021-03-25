@@ -51,10 +51,7 @@ let getSleepDate = async (req, res) => {
 let createSleep = async (req, res) => {
 	let newSleep = new sleepModel({
 		userId: req.body.userId,
-		Sleep: {
-			dateStart: req.body.dateStart,
-			dateEnd: req.body.dateEnd
-		}
+		Sleep: []
 	});
 
 	try {
