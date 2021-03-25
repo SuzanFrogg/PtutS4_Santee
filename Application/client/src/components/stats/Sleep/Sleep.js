@@ -18,10 +18,10 @@ function Sleep(){
 	useEffect(() => {
 
 		//Récupération des informations de don
-		const fetchSleep = async () =>
+		const fetchSleep = async (dateStart, dateEnd) =>
 		{
-			const dataSleep = await axios.post('/api/sleep/findDate', {withCredentials: true});
-			console.log(dataSleep.data)
+			const dataSleep = await axios.post('/api/sleep/findDate', {dateStart, dateEnd});
+
 			setsleepData(dataSleep.data);
 		}
 
