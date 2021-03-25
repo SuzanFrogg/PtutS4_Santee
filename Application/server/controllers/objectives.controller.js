@@ -59,7 +59,6 @@ let createObjectives = async (req, res) => {
    let newObjectif = new objectivesModel({
         userId: req.body.userId,
         objectives: []
-        
     });
 
     try {
@@ -152,9 +151,6 @@ let deleteObjectives = async(req, res) => {
 	try {
 		if(!mongoose.isValidObjectId(req.params.objectivesId))
 			return res.status(400).send("wrong id : " + req.params.objectivesId);
-
-			console.log("idObj" + req.params.objectivesId);
-			console.log("idUser" +  req.user._id);
 
         const docs = await objectivesModel.findOneAndUpdate(
             { userId: req.user._id, "objectives._id": req.params.objectivesId },

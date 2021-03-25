@@ -95,7 +95,7 @@ function CalendarItem() {
 							})}
 							{calendarData.objectives.map((data, key) => {
 								let dateEnd = dateWithoutTime(new Date(data.dateEnd));
-								if (day.getTime() == dateEnd.getTime()) {
+								if (day.getTime() === dateEnd.getTime()) {
 									return <div className="calendar-day-info-objectives" key={key}></div>;
 								}
 								else
@@ -144,7 +144,7 @@ function CalendarItem() {
 				})}
 				{calendarData.objectives.map((data, key) => {
 					let dateEnd = dateWithoutTime(new Date(data.dateEnd));
-					if (selectedDate.getTime() == dateEnd.getTime()) {
+					if (selectedDate.getTime() === dateEnd.getTime()) {
 						let objectiveTitle = "Objectif" + (data.isDone ? " terminé" : " non terminé");
 						return <DescriptionItem id={data._id} title={objectiveTitle} description={data.obj} key={key} />;
 					}

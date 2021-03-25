@@ -9,9 +9,9 @@ import {useEffect, useState} from "react";
 function BloodDonation() {
     const [showAddForm, setShowAddForm] = useState(false);
 
-	let listSang = useState([]);
-	let listPlasma = useState([]);
-	let listPlaquette = useState([]);
+	const [listSang, setListSang] = useState([]);
+	const [listPlasma, setListPlasma] = useState([]);
+	const [listPlaquette, setListPlaquette] = useState([]);
 	const [nbDonSang, setNbDonSang] = useState(0);
 	const [nbDonPlasma, setNbDonPlasma] = useState(0);
 	const [nbDonPlaquette, setNbDonPlaquette] = useState(0);
@@ -25,9 +25,9 @@ function BloodDonation() {
 		{
 			const dataDons = await axios.get('/api/don/', {withCredentials: true});
 			if (isMounted) {
-				listSang = dataDons.data.DonsSang;
-				listPlasma = dataDons.data.DonsPlasma;
-				listPlaquette = dataDons.data.DonsPlaquette;
+				setListSang(dataDons.data.DonsSang);
+				setListPlasma(dataDons.data.DonsPlasma);
+				setListPlaquette(dataDons.data.DonsPlaquette);
 				setNbDonSang(listSang.length);
 				setNbDonPlasma(listPlasma.length);
 				setNbDonPlaquette(listPlaquette.length);
