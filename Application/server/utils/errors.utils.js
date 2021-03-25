@@ -4,7 +4,7 @@
  * @returns {String} Chaine de caractères correspondant à l'erreur
  */
 let signUpErrors = (err) => {
-	let errors = {pseudo: "", email: "", password: ""};
+	let errors = {pseudo: "", email: "", password: "", sex: "", birth: ""};
 
 	if (err.message.includes("email"))
 		errors.email = "Email incorrect";
@@ -12,6 +12,10 @@ let signUpErrors = (err) => {
 		errors.password = "Le mot de passe doit faire au moins 6 caractères";
 	if (err.message.includes("pseudo"))
 		errors.pseudo = "Pseudo incorrect ou déjà pris";
+	if (err.message.includes("sex"))
+		errors.sex = "Le champ sexe est manquant";
+	if (err.message.includes("birth"))
+		errors.birth = "La date de naissance est incorrect";
 	
 	if (err.code === 11000 && Object.keys(err.keyValue)[0].includes("pseudo"))
 		errors.pseudo = "Ce pseudo est déjà pris";
