@@ -26,7 +26,7 @@ function ModifyObjectives(props) {
 
             await axios.put("/api/objectives/" + props.obj._id, { userId: user._id, isDone: isDone, obj: obj, dateEnd : dateEnd}); 
 
-            window.location.reload(true); //recharger la page
+            window.location.reload(); //recharger la page
         }
 
        props.handle(false);
@@ -36,47 +36,39 @@ function ModifyObjectives(props) {
 
 	return (
 
-        <div className="modifyObjectives">
+        <div className="data-edit">
             <h3>Modifier</h3>
 
             <form action="" className="form-objectives">
-                
+                <label htmlFor="obj">Objectif : </label> 
+				<input 
+					type="text" 
+					id="obj"
+					value={obj}
+					onChange={(event) => setObj(event.target.value)}
+				/>
 
-            <label htmlFor="obj">Objectif : </label> 
-					<input 
-						type="text" 
-						id="obj"
-						value={obj}
-						onChange={(event) => setObj(event.target.value)}
-					/>
+				<label htmlFor="dateEnd">Date limite pour atteindre l'objectif : </label> 
+				<input 
+					type="date" 
+					id="dateEnd"
+					value={dateEnd}
+					onChange={(event) => setDateEnd(event.target.value)}
+				/>
 
-                    <label htmlFor="isDone">Terminé</label> 
-					<input 
-						type="checkbox" 
-						id="isDone"
-						checked={isDone} 
-						onChange={(event) => setIsDone(event.target.checked)}
-					/>
-
-					<label htmlFor="dateEnd">Date limite pour atteindre l'objectif : </label> 
-					<input 
-						type="date" 
-						id="dateEnd"
-						value={dateEnd}
-						onChange={(event) => setDateEnd(event.target.value)}
-					/>
-                
-	
+                <div className="data-checkbox">
+                    <label htmlFor="isDone">Terminé : </label> 
+                    <input 
+                        type="checkbox" 
+                        id="isDone"
+                        checked={isDone} 
+                        onChange={(event) => setIsDone(event.target.checked)}
+                    />
+                </div>
 
                 <button  type ="button" onClick={() => handleSubmit(1) }  >Valider</button>
                 <button type ="button" onClick={() => handleSubmit(2) }>Annuler</button>
-
-
             </form>
-            
-
-            
-
         </div>
 
 	);

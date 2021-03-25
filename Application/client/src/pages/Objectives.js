@@ -5,13 +5,14 @@ import { daysNames, monthsNames } from "../utils/date.js";
 import ModifyObjectives from "../components/objectives/modifyObjectives";
 import DeleteObjectives from "../components/objectives/deleteObjectives";
 
-function Objectives() {
+function Objectives(props) {
 	//user
 	const {user} = useUser();
 
 	//objectifs
 	const [listObjectives, setListObjectives] = useState([]);
 
+    const [refreshKey, setRefreshKey] = useState(0);
 	let depObjectives = JSON.stringify(listObjectives);
 	useEffect(() => 
 	{
@@ -28,7 +29,7 @@ function Objectives() {
 
 		fetchObj();
 		return () => { isMounted = false };
-	}, [depObjectives]);
+	}, [depObjectives, refreshKey]);
 
 
 
@@ -51,10 +52,22 @@ function Objectives() {
 
 
     //fonction d'ajout
-    const handleSubmitAdd = async (nbButton) => 
+    const handleSubmitAdd = async (event) => 
 	{
-		await axios.put("/api/objectives/", { userId: user._id, obj: obj, dateEnd : dateEnd}); //par default en non terminé 
-		window.location.reload(); //recharger la page
+		event.preventDefault();
+		try {
+			if (obj === "" || dateEnd === "")
+				throw Error("missing data");
+			
+			await axios.put("/api/objectives/", {obj, dateEnd}); //par default en non terminé 
+			props.handleAlert("success", "Les données ont bien été ajoutées");
+
+			//Permet de reéxécuter le useEffect donc de recharger les données
+			setRefreshKey(oldKey => oldKey +1);
+		}
+		catch (err) {
+			props.handleAlert("error", "L'ajout des données n'a pas pu être exécuté");
+		}
     }
 
 	//recuperer un objectif
@@ -64,6 +77,8 @@ function Objectives() {
 
 			<div className="data-box obj-section-left">
 				<h2>Vos Objectifs</h2>
+				{/*S'il y a pas de données on affiche un message*/}
+				{(listObjectives || listObjectives === []) && <span>Vous n'avez pas encore d'objectifs</span>}
 				<ul>
 					{listObjectives && listObjectives.map((objectif, key) => {
 						//terminé?
@@ -82,7 +97,7 @@ function Objectives() {
 								<li>Terminé : {termine}</li>
 								<li>Date de fin prévue : {daysNames[date.getDay()] + " " + date.getDate() + " " + monthsNames[date.getMonth()] + " " + date.getFullYear()}</li>
 							</ul>
-							</li>
+						</li>
 					})}
 				</ul>
 
@@ -95,16 +110,12 @@ function Objectives() {
 					{showModifyObjectivesForm && <ModifyObjectives handle={handleModifyObjectives} obj={objectifInstance}/>}
 					{showDeleteObjectivesForm && <DeleteObjectives handle={handleDeleteObjectives} obj={objectifInstance}/>}
 
-					
 				</div>
-
 			</div> 
 
-			<div className="data-box obj-section-right">
+			<div className="data-add obj-section-right">
 				<h2>Ajouter un objectif</h2>
-				<form action="" className="form-objectives">
-					
-
+				<form onSubmit={handleSubmitAdd} className="form-objectives">
 					<label htmlFor="obj">Objectif : </label> 
 					<input 
 						type="text" 
@@ -121,14 +132,9 @@ function Objectives() {
 						onChange={(event) => setDateEnd(event.target.value)}
 					/>
 
-					<button  type ="button" onClick={() => handleSubmitAdd()} >Ajouter</button>
-
-
+					<input type="submit" value="Ajouter" />
 				</form>
-		
-
 			</div>
-					
 		</section>
 	);
 }

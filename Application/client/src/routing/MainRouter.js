@@ -37,7 +37,7 @@ function MainRouter() {
 						<Switch>
 							<Route exact path="/" component={Home} />
 							<Route path="/stats" render={(props) => (<Stats {...props} handleAlert={handleAlert} />)} />
-							<Route exact path="/objectives" component={Objectives} />
+							<Route exact path="/objectives" render={(props) => (<Objectives {...props} handleAlert={handleAlert} />)} />
 							<Route exact path="/profile" render={(props) => (<Profile {...props} handleAlert={handleAlert} />)} />
 							<Route exact path="/calendar" component={Calendar} />
 							<Route path="/" component={ErrorHTTP} />

@@ -15,7 +15,7 @@ function DeleteObjectives(props) {
 
 	return (
 
-        <div className="deleteObjectives">
+        <div className="data-delete">
             <h3>Supprimer</h3>
 
             <p>Voulez vous vraiment supprimer cet objectif?</p>   

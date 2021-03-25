@@ -113,6 +113,28 @@
 	margin-top: 0;
 }
 
+.data-edit form {
+	display: flex;
+	flex-direction: column;
+}
+.data-edit input {
+	margin-top: 0;
+}
+.data-checkbox {
+	display: flex;
+	align-items: center;
+}
+.data-checkbox input {
+	margin: 0;
+	margin-left: 10px;
+	width: 25px;
+	height: 25px;
+}
+
+.data-delete button:first-of-type {
+	margin-left: 0;
+}
+
 #miniPocheSang {
 	width: 50px;
 	height: 50px;
