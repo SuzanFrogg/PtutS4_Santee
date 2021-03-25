@@ -3,7 +3,7 @@ import LoginForm from "../components/log/LoginForm";
 import SignUpForm from "../components/log/SignUpForm";
 import { ReactComponent as HealthIcon } from "../media/icons/health-insurance.svg";
 
-function PublicPage() {
+function PublicPage(props) {
 	const [signUpModal, setSignUpModal] = useState(true);
 
 	const handleModals = (event) => {
@@ -22,7 +22,7 @@ function PublicPage() {
 			<div className="main-form-container">
 				{signUpModal ?
 					<>
-						<SignUpForm />
+						<SignUpForm handleAlert={props.handleAlert} />
 						<p>
 							Vous êtes déjà inscrit ? Connectez-vous <span id="form-btn-login" onClick={handleModals}>ici</span>
 						</p>

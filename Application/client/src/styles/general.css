@@ -204,3 +204,38 @@ button:hover {
 	background-color: var(--main-color);
 	color: white;
 }
+
+#alert {
+	z-index: 1000;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+#alert > * {
+	margin: 5px;
+	padding: 10px;
+	border-radius: 40px;
+	text-align: center;
+	font-weight: bold;
+	animation: 5s appearAndDisappear;
+}
+@keyframes appearAndDisappear {
+	0% { transform: translateY(-70px); }
+	10%, 75% { transform: translateY(0); }
+	100% { transform: translateY(-70px); }
+}
+.alert-success {
+	color: white;
+	background-color: lawngreen;
+}
+.alert-success::before {
+	content: "Succès : ";
+}
+.alert-error {
+	color: white;
+	background-color: #9e1818;
+}
+.alert-error::before {
+	content: "Erreur : ";
+}
