@@ -1,24 +1,16 @@
-import React, {useState } from "react";
-import { useUser } from "../../utils/store.js";
+import React from "react";
 import axios from "axios";
 
 function DeleteObjectives(props) {
 
-    const {user} = useUser();
-
-
     const handleSubmit = async (nbButton) => {
-
         if (nbButton === 1)
         {
-            await axios.delete("/api/objectives/" + props.obj._id); 
-
-            window.location.reload(true); //recharger la page
+            await axios.delete("/api/objectives/" + props.obj._id);
+            window.location.reload(); //recharger la page
         }
 
        props.handle(false);
-
-       
     }
 
 	return (

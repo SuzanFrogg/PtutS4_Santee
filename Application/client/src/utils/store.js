@@ -28,6 +28,7 @@ function UserWrapper({ children }) {
 			.then((res) => {
 				//A chaque requête effectué ont mettra le header avec notre token à l'intérieur
 				axios.defaults.headers.common["authorization"] = `Bearer ${res.data.accessToken}`;
+				axios.defaults.withCredentials = true;
 	
 				//On appelle la fonction de nouveau quand le refreshToken n'est plus valide
 				setTimeout(() => {
