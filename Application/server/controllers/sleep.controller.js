@@ -21,7 +21,7 @@ let getSleep = async (req, res) => {
 
 let getSleepDate = async (req, res) => {
 	if (req.user._id) {
-		const Sleep = await sleepModel.aggregate(
+		const sleep = await sleepModel.aggregate(
 			[
 				{$match: { //On récupère le document correspondant à l'id de l'utilisateur
 					userId: req.user._id
@@ -38,7 +38,7 @@ let getSleepDate = async (req, res) => {
 				{$replaceRoot: {newRoot: "$Sleep"}}
 			]
 		)
-		res.status(201).json(Sleep);
+		res.status(201).json(sleep);
 	}
 	else {
 		res.status(400).send("no user");

@@ -21,9 +21,10 @@ function Sleep(){
 		const fetchSleep = async () =>
 		{
 			const dataSleep = await axios.post('/api/sleep/findDate', {withCredentials: true});
+			console.log(dataSleep.data)
 			setsleepData(dataSleep.data);
 		}
-			
+
 		let monday = currentDate.getDate() - currentDate.getDay() + 1;
 		const month = currentDate.getMonth();
 		const year = currentDate.getFullYear();
@@ -47,6 +48,17 @@ function Sleep(){
 		setCurrentDate(newDate);
 	};
 
+	/**
+	 * Renvoie la date sous forme de string au format YYYY-MM-JJ
+	 */
+	 const getDateText = (date) => {
+		let dayAsText = (date.getDate()<10) ? "0"+date.getDate() : ""+date.getDate();
+		let monthAsText = ((date.getMonth()+1)<10) ? "0"+(date.getMonth()+1) : ""+(date.getMonth()+1);
+		let yearAsText = ""+date.getFullYear();
+	
+		return dayAsText + "-" + monthAsText + "-" + yearAsText;
+	}
+
 	//DONNEES
 	//Heures de sommeil
 
@@ -60,8 +72,9 @@ function Sleep(){
 	avgSleepWE /= 2;
 	avgSleepGlobal /= 7;
 
+	let d = new Date(2021,5,5);
 	//Dates
-	let dateLegend = ["Feb 22 2021", "Feb 23 2021", "Feb 24 2021", "Feb 25 2021", "Feb 26 2021", "Feb 27 2021", "Feb 28 2021"];
+	let dateLegend = [d, "Feb 23 2021", "Feb 24 2021", "Feb 25 2021", "Feb 26 2021", "Feb 27 2021", "Feb 28 2021"];
 
 	//Heures du coucher
 	let hourSleepData = ["23:00", "23:00", "1:30", "22:00", "23:00", "00:00", "23:30"];
