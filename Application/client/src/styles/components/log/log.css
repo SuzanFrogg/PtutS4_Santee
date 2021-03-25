@@ -77,12 +77,14 @@
 		color: var(--fore-color-var1);
 		transition:  all .3s ease;
 		user-select: none;
+		pointer-events: none;
 	}
 	.form-radio label {
 		cursor: pointer;
 		position: initial;
 		line-height: calc(var(--size-input)/2);
 		padding: 0;
+		pointer-events: initial;
 	}
 	.main-form-container input:not([type="submit"], [type="radio"], [type="checkbox"]):not(:placeholder-shown) + label {
 		display: block;

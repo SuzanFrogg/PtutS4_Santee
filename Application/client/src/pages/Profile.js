@@ -6,7 +6,7 @@ import EditProfile from "../components/profile/EditProfile.js";
 import { ReactComponent as Success1 } from "../media/icons/health-insurance.svg"; //Succès exemple, à supp
 
 
-function Profile() {
+function Profile(props) {
 	const { user, setUser } = useUser();
 	const [listVaccines, setListVaccines] = useState([]);
 	const [listAllergies, setListAllergies] = useState([]);
@@ -22,14 +22,20 @@ function Profile() {
 		const fetchVaccin = async () =>
 		{
 			const response = await axios.get('/api/vaccines/');
-			if (isMounted) setListVaccines(response.data.vaccines);
+			if (isMounted) {
+				if (response.data.vaccines) setListVaccines(response.data.vaccines);
+				else setListVaccines([]);
+			}
 		}
 
 		//Initialiser allergies
 		const fetchAllergy = async () =>
 		{
 			const response = await axios.get('/api/allergy/');
-			if (isMounted) setListAllergies(response.data.allergies);
+			if (isMounted) {
+				if (response.data.vaccines) setListAllergies(response.data.allergies);
+				else setListAllergies([]);
+			}
 		}
 
 		fetchVaccin();
@@ -62,6 +68,7 @@ function Profile() {
 					allergies={{list: listAllergies, set: setListAllergies}}
 					vaccines={{list: listVaccines, set: setListVaccines}}
 					modal={{editModal, setEditModal}}
+					handleAlert={props.handleAlert}
 				/>
 			:
 			<>

@@ -24,13 +24,19 @@ function EditProfile(props) {
 	}
 	const addVaccines = () => {
 		setListVaccines((state) => {
-			return [...state, {
+			let objectToAdd = {
 				doseMade: 0,
 				doseNeeded: 1,
 				name: "",
 				possibleEndAge: 20,
 				possibleStartAge: 0
-			}];
+			};
+			if (state) {
+				return [...state, objectToAdd];
+			}
+			else {
+				return [objectToAdd];
+			}
 		});
 	}
 
@@ -46,9 +52,15 @@ function EditProfile(props) {
 	}
 	const addAllergies = () => {
 		setListAllergies((state) => {
-			return [...state, {
+			let objectToAdd = {
 				toAvoid: ""
-			}];
+			};
+			if (state) {
+				return [...state, objectToAdd];
+			}
+			else {
+				return [objectToAdd];
+			}
 		});
 	}
 
@@ -56,11 +68,12 @@ function EditProfile(props) {
 		try {
 			props.vaccines.set(listVaccines);
 			props.allergies.set(listAllergies);
-			await axios.put(`/api/vaccines/all`, {vaccines: listVaccines});
-			await axios.put(`/api/allergy/all`, {allergies: listAllergies});
+			await axios.put("/api/vaccines/all", {vaccines: listVaccines});
+			await axios.put("/api/allergy/all", {allergies: listAllergies});
+			props.handleAlert("success", "Les modifications ont bien été apporté au profil");
 		}
 		catch (err) {
-			console.error(err);
+			props.handleAlert("error", "Une erreur est survenue dans la modification du profil");
 		}
 	}
 
