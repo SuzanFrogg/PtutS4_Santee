@@ -14,8 +14,10 @@ import { ReactComponent as BloodIcon } from "../media/icons/stats/menu-blood-don
 import { ReactComponent as PeriodIcon } from "../media/icons/stats/menu-menstrual-cycle.svg";
 
 import TabItem from "../components/stats/Tab";
+import { useUser } from "../utils/store";
 
 function Stats(props) {
+	let { user } = useUser();
 	//On récupère le chemin du fichier
 	const { url, path } = useRouteMatch();
 
@@ -26,7 +28,8 @@ function Stats(props) {
 					<TabItem destination={`${url}/diary`} text="Journal" icon={<DiaryIcon />} />
 					<TabItem destination={`${url}/weight`} text="Poids" icon={<WeightIcon />} />
 					<TabItem destination={`${url}/sleep`} text="Sommeil" icon={<SleepIcon />} />
-					<TabItem destination={`${url}/menstruation`} text="Règles" icon={<PeriodIcon />} />
+					{user.sex === "F" && 
+					<TabItem destination={`${url}/menstruation`} text="Règles" icon={<PeriodIcon />} />}
 					<TabItem destination={`${url}/blood-donation`} text="Dons du sang" icon={<BloodIcon />} />
 				</ul>
 				<div className="stats-content">
@@ -49,12 +52,13 @@ function Stats(props) {
 								<Sleep {...propsRender} handleAlert={props.handleAlert} />
 							)}
 						/>
+						{user.sex === "F" && 
 						<Route
 							exact path={`${path}/menstruation`}
 							render={(propsRender) => (
 								<Menstruation {...propsRender} handleAlert={props.handleAlert} />
 							)}
-						/>
+						/>}
 						<Route
 							exact path={`${path}/blood-donation`}
 							render={(propsRender) => (
