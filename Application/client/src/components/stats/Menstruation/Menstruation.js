@@ -3,7 +3,7 @@ import axios from "axios";
 import MenstruationAdd from "./Menstruation_add";
 import {useEffect, useState} from "react";
 
-function Menstruation()
+function Menstruation(props)
 {
     const [showAddForm, setShowAddForm] = useState(false);
 
@@ -72,8 +72,8 @@ function Menstruation()
 				</div>					
 			</div>
 			<div className="data-add">
-				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
-				{showAddForm && <MenstruationAdd />}
+				<button onClick={(event) => setShowAddForm(true)}>Ajouter</button>
+				{showAddForm && <MenstruationAdd handleAlert={props.handleAlert} />}
 			</div>
 		</>
 	);

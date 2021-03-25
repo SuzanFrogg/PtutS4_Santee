@@ -79,7 +79,7 @@ let updatePeriods = async (req, res) => {
 			return res.status(400).json("wrong id : " + req.body.userId);
 
 		const docs = await periodsModel.findOneAndUpdate(
-			{ userId: req.body.userId, "periods._id": req.params.periodsId },
+			{ userId: req.user._id, "periods._id": req.params.periodsId },
 			{
 				$set: {
 					"periods.$.dateStart": req.body.dateStart,
@@ -112,7 +112,7 @@ let addPeriods = async (req, res) => {
 			return res.status(400).send("wrong id : " + req.body.userId);
 
 		const docs = await periodsModel.findOneAndUpdate(
-			{ userId: req.body.userId },
+			{ userId: req.user._id },
 			{
 				$push: {
 					periods: {
@@ -146,7 +146,7 @@ let deletePeriods = (req, res) => {
 		return res.status(400).send("wrong id : " + req.params.id);
 
 	sleepModel.findOneAndUpdate(
-		{ userId: req.body.userId, "Periods._id": req.params.periodsId },
+		{ userId: req.user._id, "Periods._id": req.params.periodsId },
 		{
 			$pull: {
 				periods: {
