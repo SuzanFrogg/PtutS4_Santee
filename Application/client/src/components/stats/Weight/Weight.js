@@ -7,21 +7,18 @@ import axios from "axios";
 function Weight(props)
 {
 
-	const [userWeight, setUserWeight] = useState([{mass:0},{height:0},{entryDate: new Date()}]);
+	const [userWeight, setUserWeight] = useState([{mass:0, height:0, entryDate: new Date()}]);
 
 	useEffect(() => {
-		let isMounted = true;
 
 		const fetchDon = async () =>
 		{
 			const dataWeight = await axios.get('/api/weight/', {withCredentials: true});
-			if (isMounted) {
+			if (dataWeight.data.Weight.length != 0){
 				setUserWeight(dataWeight.data.Weight);
 			}
-			
 		}
 		fetchDon();
-		return () => { isMounted = false };
 	});
 
 	const getDateProche = () => {
