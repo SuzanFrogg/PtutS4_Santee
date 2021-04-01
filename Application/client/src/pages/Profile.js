@@ -20,6 +20,10 @@ function Profile(props) {
 	const [listSuccess, setSuccess] = useState([]);
     const [listSuccessDone] = useState([]);
 
+	const [conditionSuccess] = useState([]);
+	const [listDon, setlistDon] = useState([]);
+
+
 
 	useEffect(() => {
 		let isMounted = true;
@@ -54,9 +58,22 @@ function Profile(props) {
 			}
 		}
 
+		const fetchDon = async () =>
+		{
+			const response = await axios.get("/api/don");
+			if (isMounted) {
+				if (response.data) setlistDon(response.data);
+				else setlistDon([]);
+				
+			}
+		}
+
+
+		fetchDon();
 		fetchSuccess();
 		fetchVaccin();
 		fetchAllergy();
+
 		return () => { isMounted = false };
 	}, [depVaccines, depAllergies]);
 
@@ -78,10 +95,28 @@ function Profile(props) {
 		let ageDate = new Date(ageDifMs);
 		return Math.abs(ageDate.getUTCFullYear() - 1970);
 	}
+	
+	const setConditionsSuccess = () =>
+	{
+		if(listDon.length >= 1)
+		{
+			conditionSuccess.push(true);
+		}
+		else 
+		{
+			conditionSuccess.push(false);
+		}
+	}
+
+	const setListSuccessDone = () =>
+		{
+		}
 
 	let expTotale = 100;
+	setConditionsSuccess();
 
-	//console.log(listSuccess);
+	console.log(conditionSuccess);
+
 
 	return (
 		<section className="profile-section">
