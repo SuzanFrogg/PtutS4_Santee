@@ -50,8 +50,8 @@ function Sleep(props) {
 					let correctGetDay = date.getDay()-1;
 					correctGetDay = correctGetDay === -1 ? 6 : correctGetDay;
 					if (correctGetDay == i) {
-						let dateStartData = dateWithoutTime(date);
-						let dateEndData = dateWithoutTime(new Date(dayData.dateEnd));
+						let dateStartData = date;
+						let dateEndData = new Date(dayData.dateEnd);
 						dataTemp[i] = {_id: dayData._id, dateStart: dateStartData, dateEnd: dateEndData};
 					}
 				});
@@ -73,6 +73,7 @@ function Sleep(props) {
 	}, [currentDate]);
 	
 	const formatDate = (date) => {
+		console.log(date);
 		return date.getDate() + " "
 		+ monthsNames[date.getMonth()] + " "
 		+ date.getFullYear();
