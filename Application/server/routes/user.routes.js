@@ -14,6 +14,7 @@ router.get("/logout", authController.logout);
 router.get("/", userController.getAllUsers); //READ
 router.get("/:id", userController.userInfo); //READ
 router.put("/:id", userController.updateUser); //UPDATE
+router.put("/xp/:id", userController.addXpUser); //UPDATE
 router.delete("/:id", userController.deleteUser); //DELETE
 
 //Upload

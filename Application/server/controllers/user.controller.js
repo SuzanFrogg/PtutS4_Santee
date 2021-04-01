@@ -25,6 +25,35 @@ let userInfo = async (req, res) => {
 }
 
 /**
+ * Permet d'ajouter de l'xp à un utilisateur
+ */
+let addXpUser = async (req, res) => {
+	//Si l'id n'est pas présent dans la bdd
+	if (!mongoose.isValidObjectId(req.params.id))
+		return res.status(400).json({ error: "ID inconnu" });
+	
+	try {
+		console.log(req.body.xp);
+		await userModel.findByIdAndUpdate(
+			req.params.id,
+			{
+				$inc: {
+					xp: req.body.xp
+				}
+			},
+			{ new: true, upsert: true, setDefaultsOnInsert: true },
+			(err, docs) => {
+				if (!err) return res.status(200).json(docs);
+				else return res.status(500).json({ error: err });
+			}
+		)
+	}
+	catch (err) {
+		return res.status(500).json({ error: err });
+	}
+}
+
+/**
  * Permet de mettre à jour un utilisateur
  */
 let updateUser = async (req, res) => {
@@ -67,4 +96,4 @@ let deleteUser = async (req, res) => {
 	}
 }
 
-export default {getAllUsers, userInfo, updateUser, deleteUser};
+export default {getAllUsers, userInfo, addXpUser, updateUser, deleteUser};

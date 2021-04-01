@@ -66,9 +66,8 @@
 	display: flex;
 	flex-direction: column;
 	padding: 40px 50px;
-  	border-radius: 30px;
+	border-radius: 30px;
 	background-color: var(--middle-color);
-	justify-content: center;
 }
 .data-card p {
 	font-size: 20px;
@@ -135,7 +134,9 @@
 	margin-left: 0;
 }
 
-#miniPocheSang {
+.miniPocheSang {
 	width: 50px;
 	height: 50px;
+	margin-right: 2px;
+	margin-left: 2px;
 }

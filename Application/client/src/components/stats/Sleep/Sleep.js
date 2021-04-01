@@ -73,10 +73,22 @@ function Sleep(props) {
 	}, [currentDate]);
 	
 	const formatDate = (date) => {
-		console.log(date);
 		return date.getDate() + " "
 		+ monthsNames[date.getMonth()] + " "
 		+ date.getFullYear();
+	}
+
+	const formatHour = (date) => {
+		let minute = date.getMinutes();
+		let hour = date.getHours();
+
+		if(hour < 10)
+			hour = "0" + date.getHours();
+
+		if(minute < 10)
+			minute = "0" + date.getMinutes();
+
+		return hour + ":" + minute;
 	}
 
 	//Get semaine prec et suiv
@@ -93,7 +105,7 @@ function Sleep(props) {
 	//DONNEES
 	//Heures de sommeil
 
-	let lengthSleepWeek = [8, 9, 5, 7, 6, 8, 6];
+	let lengthSleepWeek = [sleepData[0].dateEnd.getHours() - sleepData[0].dateStart.getHours(), sleepData[1].dateEnd.getHours() - sleepData[1].dateStart.getHours(), sleepData[2].dateEnd.getHours() - sleepData[2].dateStart.getHours(), sleepData[3].dateEnd.getHours() - sleepData[3].dateStart.getHours(), sleepData[4].dateEnd.getHours() - sleepData[4].dateStart.getHours(), sleepData[5].dateEnd.getHours() - sleepData[5].dateStart.getHours(), sleepData[6].dateEnd.getHours() - sleepData[6].dateStart.getHours()];
 
 	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0;
 
@@ -107,10 +119,10 @@ function Sleep(props) {
 	let dateLegend = [formatDate(sleepData[0].dateStart), formatDate(sleepData[1].dateStart), formatDate(sleepData[2].dateStart), formatDate(sleepData[3].dateStart), formatDate(sleepData[4].dateStart), formatDate(sleepData[5].dateStart), formatDate(sleepData[6].dateStart)];
 
 	//Heures du coucher
-	let hourSleepData = ["23:00", "23:00", "1:30", "22:00", "23:00", "00:00", "23:30"];
+	let hourSleepData = [formatHour(sleepData[0].dateStart), formatHour(sleepData[1].dateStart), formatHour(sleepData[2].dateStart), formatHour(sleepData[3].dateStart), formatHour(sleepData[4].dateStart), formatHour(sleepData[5].dateStart), formatHour(sleepData[6].dateStart)];
 
 	//Heure du lever
-	let hourWakeUpData = ["7:00", "8:00", "6:30", "5:00", "5:00", "8:00", "7:30"];
+	let hourWakeUpData = [formatHour(sleepData[0].dateEnd), formatHour(sleepData[1].dateEnd), formatHour(sleepData[2].dateEnd), formatHour(sleepData[3].dateEnd), formatHour(sleepData[4].dateEnd), formatHour(sleepData[5].dateEnd), formatHour(sleepData[6].dateEnd)];
 
 	//Récupère la couleur principale
 	let primaryColor = getComputedStyle(document.body).getPropertyValue('--main-color');

@@ -86,7 +86,7 @@ function Profile(props) {
 	};
 
 	const addXp = async (xp) => {
-		await axios.put(`/api/user/${user._id}`, {xp});
+		await axios.put(`/api/user/xp/${user._id}`, {xp});
 	}
 
 	//Avoir l'age de la personne en fonction de sa date de naissance
@@ -132,7 +132,8 @@ function Profile(props) {
 	console.log(listSuccess);
 	console.log(conditionSuccess);
 
-	let expTotale = 100;
+	let xpLevel = 100;
+	let levelUser = user.xp / xpLevel;
 	setConditionsSuccess();
 	setListSuccessDone();
 
@@ -157,11 +158,11 @@ function Profile(props) {
 				<div className="profile-info">
 					<div className="level-container">
 						<div className="level">
-							<div className="progress" style={{width: (user.experience.xp * 100 / expTotale) + "%"}}></div>
+							<div className="progress" style={{width: (user.xp * 100 / xpLevel) + "%"}}></div>
 						</div>
 						<div className="level-numbers">
-							<span>{user.experience.level}</span>
-							<span>{user.experience.level+1}</span>
+							<span>{levelUser}</span>
+							<span>{levelUser+1}</span>
 						</div>
 					</div>
 
