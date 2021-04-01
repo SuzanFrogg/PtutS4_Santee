@@ -18,10 +18,13 @@ function Profile(props) {
 
 	//succès
 	const [listSuccess, setSuccess] = useState([]);
-    //const [listSuccessDone, setSuccess] = useState([]);
+    const [listSuccessDone, setSucessDone] = useState([]);
 	const [conditionSuccess] = useState([false,false,false,false,false,false,false,false,false,false,false,false]); //pas d'utilsation d'une boucle car sinon augmentation a chaque reload
 	
 	const [listDon, setlistDon] = useState([]);
+	const [listPeriod, setListPeriod] = useState([]);
+	const [listSleep, setListSleep] = useState([]);
+
 
 
 
@@ -68,8 +71,29 @@ function Profile(props) {
 			}
 		}
 
+		const fetchPeriod = async () =>
+		{
+			const response = await axios.get("/api/periods");
+			if (isMounted) {
+				if (response.data.periods) setListPeriod(response.data.periods);
+				else setlistDon([]);
+				
+			}
+		}
 
+		const fetchSleep = async () =>
+		{
+			const response = await axios.get("/api/sleep");
+			if (isMounted) {
+				if (response.data.Sleep) setListSleep(response.data.Sleep);
+				else setlistDon([]);
+				
+			}
+		}
+
+		fetchSleep();
 		fetchDon();
+		fetchPeriod();
 		fetchSuccess();
 		fetchVaccin();
 		fetchAllergy();
@@ -98,7 +122,7 @@ function Profile(props) {
 	
 	const setConditionsSuccess = () =>
 	{
-		if(listDon != null && listDon != [])
+		if(listDon != null)
 		{
 			if(listDon.DonsPlasma != null && listDon.DonsSang != null && listDon.DonsPlaquette != null)
 			{
@@ -108,9 +132,51 @@ function Profile(props) {
 					conditionSuccess[3] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 20); 
 			}
 
+			if(listSleep != null)
+			{
+				//console.log(listSleep);
+
+				for(let i =0; i < listSleep.length ; i++)
+				{
+					let datestart = new Date(listSleep[i].dateStart);
+					let dateend = new Date(listSleep[i].dateEnd);
+
+					let dureeSomeil = dateend.getHours() - datestart.getHours();
+					
+					conditionSuccess[4] = (dureeSomeil >= 15);
+					
+					
+
+				}
+			}
+
+			if(listPeriod != null)
+			{
+				for(let i =0; i < listPeriod.length ; i++)
+				{
+					if(listPeriod[i].flux == 2)//+ douleurs si implémentées
+					{
+						conditionSuccess[7] = true;
+					}
+
+					if(listPeriod[i].flux == 0) 
+					{
+						conditionSuccess[8] = true;
+					}
+
+					
+				}
+			}
+
 			if(listAllergies != null)
 			{
 				conditionSuccess[9] = (listAllergies.length >= 5);
+			}
+
+			if(listVaccines != null )
+			{
+					conditionSuccess[10] = (listVaccines.length >= 1); 
+					conditionSuccess[11] = (listVaccines.length >= 10); 
 			}
 
 			
@@ -123,14 +189,19 @@ function Profile(props) {
 
 	const setListSuccessDone = () =>
 	{
+		//setSucessDone([]);
 		for(let i = 0; i < listSuccess.length ;i++)
 		{
-			//listSuccess[i].isDone ;
+			if(!listSuccessDone.includes(listSuccess[i]._id) && conditionSuccess[i])
+			{
+				listSuccessDone.push(listSuccess[i]);
+			}
 		}
 	}
 
-	console.log(listSuccess);
-	console.log(conditionSuccess);
+	//console.log(listSuccess);
+	//console.log(conditionSuccess);
+	console.log(listSuccessDone);
 
 	let xpLevel = 100;
 	let levelUser = user.xp / xpLevel;
