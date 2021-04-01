@@ -128,6 +128,7 @@ function Weight(props)
 	let maxIMC = getIMCMax() + 2;
 	let minIMC = getIMCMin() - 2;
 
+	//Met les dates dans l'ordre
 	const dateCroissante = () => {
 		let list = [userWeight[0]];
 		for (let i=1; i<(userWeight.length); i++) {
@@ -264,36 +265,6 @@ function Weight(props)
 				borderWidth:3,
 				borderColor: 'rgb(255,0,255)',
 				fill: false
-			},
-			{
-				label: 'IMC minimum',
-				//données
-				data:[{
-					t: 'Jan 1 2021',
-					y: 18
-				}, {
-					t: 'Dec 31 2021',
-					y: 18
-				}],
-				borderWidth:3,
-				borderColor: 'rgb(0,255,255)',
-				fill: false
-
-			},{
-				label: 'IMC maximum',
-				//données
-				data:[{
-					t: 'Jan 1 2021',
-					y: 25
-				}, {
-					t: 'Dec 31 2021',
-					y: 25
-				}
-				],
-				borderWidth:3,
-				borderColor: 'rgb(255,255,0)',
-				fill: false
-
 			}
 		]
 	};
