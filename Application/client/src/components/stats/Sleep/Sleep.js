@@ -10,9 +10,20 @@ import {daysNames, monthsNames} from "../../../utils/date.js";
 function Sleep(props) {
 
 	let today = new Date();
-	today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-	const [currentDate, setCurrentDate] = useState(today);	
-	const [sleepData, setsleepData] = useState([]);
+	today = new Date(today.getFullYear(), today.getMonth(), today.getDate()-today.getDay()+1);
+	const [currentDate, setCurrentDate] = useState(today);
+
+	//On initialise notre liste de données
+	let sleepDataDefault = [];
+	for (let i = 0; i < 7; i++) {
+		sleepDataDefault[i] = { _id: null, dateStart: today, dateEnd: today };
+	}
+	const [sleepData, setsleepData] = useState(sleepDataDefault);
+	
+	const dateWithoutTime = (date) => {
+		date.setHours(0, 0, 0, 0);
+		return date;
+	};
 
 	//se lance a chaque chargement
 	useEffect(() => {
@@ -22,7 +33,31 @@ function Sleep(props) {
 		{
 			const dataSleep = await axios.post('/api/sleep/findDate', {dateStart, dateEnd});
 
-			setsleepData(dataSleep.data);
+			//On récupère les données et les mets dans un tableau de la semaine
+			//Case vide si pas de donnée et taille de 7 pour correspondre aux jours
+			let dataTemp = [];
+			for (let i = 0; i < 7; i++) {
+				//Par défaut
+				dataTemp[i] = {
+					_id: null,
+					dateStart: new Date(dateStart.getFullYear(), dateStart.getMonth(), dateStart.getDate()+i),
+					dateEnd: new Date(dateStart.getFullYear(), dateStart.getMonth(), dateStart.getDate()+i)
+				};
+
+				//Avec les données (on remplace la donnée par défaut s'il y a une donnée)
+				dataSleep.data.forEach((dayData) => {
+					let date = new Date(dayData.dateStart);
+					let correctGetDay = date.getDay()-1;
+					correctGetDay = correctGetDay === -1 ? 6 : correctGetDay;
+					if (correctGetDay == i) {
+						let dateStartData = dateWithoutTime(date);
+						let dateEndData = dateWithoutTime(new Date(dayData.dateEnd));
+						dataTemp[i] = {_id: dayData._id, dateStart: dateStartData, dateEnd: dateEndData};
+					}
+				});
+			}
+
+			setsleepData(dataTemp);
 		}
 
 		let monday = currentDate.getDate() - currentDate.getDay() + 1;
@@ -36,6 +71,12 @@ function Sleep(props) {
 
 		fetchSleep(dateStart, dateEnd);
 	}, [currentDate]);
+	
+	const formatDate = (date) => {
+		return date.getDate() + " "
+		+ monthsNames[date.getMonth()] + " "
+		+ date.getFullYear();
+	}
 
 	//Get semaine prec et suiv
 	const getPrevWeek = () => {
@@ -47,17 +88,6 @@ function Sleep(props) {
 		let newDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 7 + 1));
 		setCurrentDate(newDate);
 	};
-
-	/**
-	 * Renvoie la date sous forme de string au format YYYY-MM-JJ
-	 */
-	 const getDateText = (date) => {
-		let dayAsText = (date.getDate()<10) ? "0"+date.getDate() : ""+date.getDate();
-		let monthAsText = ((date.getMonth()+1)<10) ? "0"+(date.getMonth()+1) : ""+(date.getMonth()+1);
-		let yearAsText = ""+date.getFullYear();
-	
-		return dayAsText + "-" + monthAsText + "-" + yearAsText;
-	}
 
 	//DONNEES
 	//Heures de sommeil
@@ -72,9 +102,8 @@ function Sleep(props) {
 	avgSleepWE /= 2;
 	avgSleepGlobal /= 7;
 
-	let d = new Date(2021,5,5);
 	//Dates
-	let dateLegend = [d, "Feb 23 2021", "Feb 24 2021", "Feb 25 2021", "Feb 26 2021", "Feb 27 2021", "Feb 28 2021"];
+	let dateLegend = [formatDate(sleepData[0].dateStart), formatDate(sleepData[1].dateStart), formatDate(sleepData[2].dateStart), formatDate(sleepData[3].dateStart), formatDate(sleepData[4].dateStart), formatDate(sleepData[5].dateStart), formatDate(sleepData[6].dateStart)];
 
 	//Heures du coucher
 	let hourSleepData = ["23:00", "23:00", "1:30", "22:00", "23:00", "00:00", "23:30"];
@@ -128,7 +157,7 @@ function Sleep(props) {
 			},
 			backgroundColor: "#2f2f2f",
 			titleFontFamily: "karla",
-			titleFontStyle: 800,
+			titleFontStyle: 600,
 			titleFontSize: 20,
 			titleMarginBottom: 10,
 			bodyFontFamily: "karla",
@@ -168,7 +197,7 @@ function Sleep(props) {
 		<>
 			<div className="calendar-header">
 				<button onClick={getPrevWeek}><ArrowIcon /></button>
-				<h3>{daysNames[currentDate.getDay()] + " " + currentDate.getDate() + " " + monthsNames[currentDate.getMonth()] + " " + currentDate.getFullYear()}</h3>
+				<h3>{"Semaine du " + currentDate.getDate() + " " + monthsNames[currentDate.getMonth()] + " " + currentDate.getFullYear()}</h3>
 				<button onClick={getNextWeek}><ArrowIcon /></button>
 			</div>
 			<h2>Sommeil</h2>
