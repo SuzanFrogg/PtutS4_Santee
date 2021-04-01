@@ -46,7 +46,8 @@ function Menstruation(props)
 		for (let i=0; i<(periods.length); i++) {
 			temp += dateDiff(dateStart,dateEnd);
 		}
-		moy = (temp / (periods.length));
+		if (moy)
+			moy = (temp / (periods.length));
 		return moy;
 	}
 

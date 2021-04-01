@@ -6,8 +6,6 @@ import ModifyObjectives from "../components/objectives/modifyObjectives";
 import DeleteObjectives from "../components/objectives/deleteObjectives";
 
 function Objectives(props) {
-	//user
-	const {user} = useUser();
 
 	//objectifs
 	const [listObjectives, setListObjectives] = useState([]);

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {ReactComponent as PocheSang} from '../../../media/icons/stats/Grand_blood_bag.svg';
+//import {ReactComponent as PocheSang} from '../../../media/icons/stats/Grand_blood_bag.svg';
 import {ReactComponent as MiniPocheSang} from '../../../media/icons/stats/Mini_blood_bag.svg';
 import BloodDonationAdd from "./BloodDonation_add";
 import {useEffect, useState} from "react";
@@ -49,7 +49,7 @@ function BloodDonation(props) {
 		for (let i=0; i<nbDons; i++) {
 			imgDon.push(<MiniPocheSang id="miniPocheSang"/>);
 		}	
-		return imgDon;
+		return imgDon && "0";
 	}
 
     return (
@@ -73,8 +73,6 @@ function BloodDonation(props) {
 					<span>{getNbPersoSauver(nbDonSang, nbDonPlasma, nbDonPlaquette)}</span>
 				</div>
 			</div>
-
-			<PocheSang/>
 
 			<div className="data-add">
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
