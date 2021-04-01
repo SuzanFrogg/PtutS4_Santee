@@ -3,6 +3,7 @@ import { Line } from "react-chartjs-2";
 import WeightAdd from "./Weight_add";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {daysNames, monthsNames} from "../../../utils/date.js";
 
 function Weight(props)
 {
@@ -14,12 +15,12 @@ function Weight(props)
 		const fetchDon = async () =>
 		{
 			const dataWeight = await axios.get('/api/weight/', {withCredentials: true});
-			if (dataWeight.data.Weight.length != 0){
+			if (dataWeight.data.Weight.length !== 0){
 				setUserWeight(dataWeight.data.Weight);
 			}
 		}
 		fetchDon();
-	});
+	}, []);
 
 	const getDateProche = () => {
 		let listDate = [];
@@ -136,17 +137,34 @@ function Weight(props)
 				data: getData1(dateCroissante()),
 				borderWidth:3,
 				borderColor: 'rgb(255,155,255)',
-				fill: false
-
+				fill: false,
+				lineTension: 0
 			}]		
 	};
 
 	//Option du Graphique de poids
 	let optionsChart1 = {
 		responsive: true,
+		maintainAspectRatio: false,
 		tooltips: {
-			mode: 'index',
+			mode: 'nearest',
 			intersect: false,
+			callbacks: {
+				title: function(tooltipItem, data) {
+					let date = new Date(tooltipItem[0].xLabel);
+					let dateFormat = daysNames[date.getDay()] + " " + date.getDate() + " "
+					+ monthsNames[date.getMonth()] + " " + date.getFullYear();
+					return dateFormat;
+				}
+			},
+			backgroundColor: "#2f2f2f",
+			titleFontFamily: "karla",
+			titleFontStyle: 600,
+			titleFontSize: 20,
+			titleMarginBottom: 10,
+			bodyFontFamily: "karla",
+			bodyFontStyle: "600",
+			bodyFontSize: 15
 		},
 		hover: {
 			mode: 'nearest',
@@ -176,6 +194,11 @@ function Weight(props)
 				fontColor: 'rgb(0,0,0)',
 				fontSize: 15
 			}
+		},
+		datasets: {
+			bar: {
+				categoryPercentage: 0.5 //Pourcentage de la largeur disponible pour chaque bar
+			}
 		}
 	};			
 	
@@ -190,7 +213,6 @@ function Weight(props)
 				borderWidth:3,
 				borderColor: 'rgb(255,0,255)',
 				fill: false
-
 			},
 			{
 				label: 'IMC minimum',
@@ -228,37 +250,54 @@ function Weight(props)
 	//Option du graphique IMC
 	let optionsChart2 = {
 		responsive: true,
-			tooltips: {
-				mode: 'index',
-				intersect: false,
-			},
-			hover: {
-				mode: 'nearest',
-				intersect: true
-			},
-			scales: {
-				xAxes: [{
-					type: 'time',
-					time: {
-						unit: 'month'
-					}
-				}],
-				yAxes: [{
-					ticks: {
-						min: 15,
-						max: 30,
-						stepSize: 1
-					}
-				}]
-			},
-			legend: {
-				position: 'bottom',
-				labels: {
-					fontColor: 'rgb(0,0,0)',
-					fontSize: 15
+		maintainAspectRatio: false,
+		tooltips: {
+			mode: 'nearest',
+			intersect: false,
+			callbacks: {
+				title: function(tooltipItem, data) {
+					let date = new Date(tooltipItem[0].xLabel);
+					let dateFormat = date.getDate() + " "
+					+ monthsNames[date.getMonth()] + " " + date.getFullYear();
+					return dateFormat;
 				}
+			},
+			backgroundColor: "#2f2f2f",
+			titleFontFamily: "karla",
+			titleFontStyle: 600,
+			titleFontSize: 20,
+			titleMarginBottom: 10,
+			bodyFontFamily: "karla",
+			bodyFontStyle: "600",
+			bodyFontSize: 15
+		},
+		hover: {
+			mode: 'nearest',
+			intersect: true
+		},
+		scales: {
+			xAxes: [{
+				gridLines: {display: false},
+				type: 'time',
+				time: {
+					unit: 'month'
+				}
+			}],
+			yAxes: [{
+				ticks: {
+					min: 15,
+					max: 30,
+					stepSize: 1
+				}
+			}]
+		},
+		legend: {
+			position: 'bottom',
+			labels: {
+				fontColor: 'rgb(0,0,0)',
+				fontSize: 15
 			}
-		
+		}
 	};	
     const [showAddForm, setShowAddForm] = useState(false);	
 
