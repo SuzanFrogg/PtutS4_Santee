@@ -12,7 +12,7 @@ const successSchema = mongoose.Schema({
 		required: true,
 		unique: true
 	},
-    exp: {
+    xp: {
 		type: Number,
 		required: true,
 		unique: false
