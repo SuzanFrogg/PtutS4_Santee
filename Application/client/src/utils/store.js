@@ -13,7 +13,7 @@ function UserWrapper({ children }) {
 		pseudo: "--",
 		sex: "--",
 		birth: new Date().toJSON(),
-		experience: {xp: 0, level: 0},
+		xp: 0,
 		success: []
 	});
 
