@@ -10,49 +10,46 @@ function Profile(props) {
 	const { user, setUser } = useUser();
 	const [listVaccines, setListVaccines] = useState([]);
 	const [listAllergies, setListAllergies] = useState([]);
+	const [listDon, setlistDon] = useState([]);
+	const [listPeriod, setListPeriod] = useState([]);
+	const [listSleep, setListSleep] = useState([]);
 	//Modale gérant l'affichage de la modification du profil
 	const [editModal, setEditModal] = useState(false);
 	
+	//Dépendances
 	let depVaccines = JSON.stringify(listVaccines);
 	let depAllergies = JSON.stringify(listAllergies);
+	let depPeriods = JSON.stringify(listDon);
+	let depDons = JSON.stringify(listPeriod);
+	let depSleep = JSON.stringify(listSleep);
 
 	//succès
 	const [listSuccess, setSuccess] = useState([]);
     const [listSuccessDone, setSucessDone] = useState([]);
-	const [conditionSuccess] = useState([false,false,false,false,false,false,false,false,false,false,false,false]); //pas d'utilsation d'une boucle car sinon augmentation a chaque reload
-	
-	const [listDon, setlistDon] = useState([]);
-	const [listPeriod, setListPeriod] = useState([]);
-	const [listSleep, setListSleep] = useState([]);
-
+	const [conditionSuccess, setCondition] = useState([false,false,false,false,false,false,false,false,false,false,false,false]); //pas d'utilsation d'une boucle car sinon augmentation a chaque reload
 
 
 
 	useEffect(() => {
 		let isMounted = true;
 
-		//Initialiser vaccins
-		const fetchVaccin = async () =>
-		{
+		//Initialiser vaccins 
+		const fetchVaccin = async () => {
 			const response = await axios.get('/api/vaccines/');
 			if (isMounted) {
 				if (response.data.vaccines) setListVaccines(response.data.vaccines);
 				else setListVaccines([]);
 			}
 		}
-
-		//Initialiser allergies
-		const fetchAllergy = async () =>
-		{
+		//Initialiser allergies 
+		const fetchAllergy = async () => {
 			const response = await axios.get('/api/allergy/');
 			if (isMounted) {
 				if (response.data.allergies) setListAllergies(response.data.allergies);
 				else setListAllergies([]);
 			}
-		}
-
-		const fetchSuccess = async () =>
-		{
+		}		
+		const fetchSuccess = async () => {
 			const response = await axios.get("/api/success");
 			if (isMounted) {
 				if (response.data) setSuccess(response.data);
@@ -60,9 +57,7 @@ function Profile(props) {
 				
 			}
 		}
-
-		const fetchDon = async () =>
-		{
+		const fetchDon = async () => {
 			const response = await axios.get("/api/don");
 			if (isMounted) {
 				if (response.data) setlistDon(response.data);
@@ -70,9 +65,7 @@ function Profile(props) {
 				
 			}
 		}
-
-		const fetchPeriod = async () =>
-		{
+		const fetchPeriod = async () => {
 			const response = await axios.get("/api/periods");
 			if (isMounted) {
 				if (response.data.periods) setListPeriod(response.data.periods);
@@ -80,14 +73,11 @@ function Profile(props) {
 				
 			}
 		}
-
-		const fetchSleep = async () =>
-		{
+		const fetchSleep = async () => {
 			const response = await axios.get("/api/sleep");
 			if (isMounted) {
 				if (response.data.Sleep) setListSleep(response.data.Sleep);
 				else setlistDon([]);
-				
 			}
 		}
 
@@ -97,24 +87,11 @@ function Profile(props) {
 		fetchSuccess();
 		fetchVaccin();
 		fetchAllergy();
-
-
-		const setListSuccessDone = () =>
-		{
-			setSucessDone([]);
-			for(let i = 0; i < listSuccess.length ;i++)
-			{
-				if(!listSuccessDone.includes(listSuccess[i]._id) )//&& conditionSuccess[i])
-				{
-					listSuccessDone.push(listSuccess[i]);
-				}
-			}
-		}
-
+		setConditionsSuccess();
 		setListSuccessDone();
 
 		return () => { isMounted = false };
-	}, [depVaccines, depAllergies]);
+	}, [depVaccines, depAllergies, depPeriods, depDons, depSleep]);
 
 
 	//Deconnexion
@@ -137,6 +114,7 @@ function Profile(props) {
 	
 	const setConditionsSuccess = () =>
 	{
+		let newListConditions = [];
 		if(listDon != null)
 		{
 			if(listDon.DonsPlasma != null && listDon.DonsSang != null && listDon.DonsPlaquette != null)
@@ -193,24 +171,26 @@ function Profile(props) {
 					conditionSuccess[10] = (listVaccines.length >= 1); 
 					conditionSuccess[11] = (listVaccines.length >= 10); 
 			}
-
-			
-
-
 		}
-
-		
 	}
 
+	const setListSuccessDone = () => {
+		//setSucessDone([]);
+		let newList = [];
+		for(let i = 0; i < listSuccess.length ;i++)
+		{
+			newList.push({...listSuccess[i], isDone: conditionSuccess[i]});
+		}
+		console.log(listSuccessDone);
+		setSucessDone(newList);
+	}
 
 	//console.log(listSuccess);
 	//console.log(conditionSuccess);
-	console.log(listSuccessDone);
+	//console.log(listSuccessDone);
 
 	let xpLevel = 100;
-	let levelUser = user.xp / xpLevel;
-	setConditionsSuccess();
-	//setListSuccessDone();
+	let levelUser = Math.floor(user.xp / xpLevel);
 
 
 
