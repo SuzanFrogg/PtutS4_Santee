@@ -98,6 +98,21 @@ function Profile(props) {
 		fetchVaccin();
 		fetchAllergy();
 
+
+		const setListSuccessDone = () =>
+		{
+			setSucessDone([]);
+			for(let i = 0; i < listSuccess.length ;i++)
+			{
+				if(!listSuccessDone.includes(listSuccess[i]._id) )//&& conditionSuccess[i])
+				{
+					listSuccessDone.push(listSuccess[i]);
+				}
+			}
+		}
+
+		setListSuccessDone();
+
 		return () => { isMounted = false };
 	}, [depVaccines, depAllergies]);
 
@@ -187,17 +202,6 @@ function Profile(props) {
 		
 	}
 
-	const setListSuccessDone = () =>
-	{
-		//setSucessDone([]);
-		for(let i = 0; i < listSuccess.length ;i++)
-		{
-			if(!listSuccessDone.includes(listSuccess[i]._id) && conditionSuccess[i])
-			{
-				listSuccessDone.push(listSuccess[i]);
-			}
-		}
-	}
 
 	//console.log(listSuccess);
 	//console.log(conditionSuccess);
@@ -206,7 +210,7 @@ function Profile(props) {
 	let xpLevel = 100;
 	let levelUser = user.xp / xpLevel;
 	setConditionsSuccess();
-	setListSuccessDone();
+	//setListSuccessDone();
 
 
 
