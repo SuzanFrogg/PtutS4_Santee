@@ -252,9 +252,9 @@ function Profile(props) {
 					<div className="profile-details-box profile-success">
 						<h3>Succès</h3>
 						<ul>
-							{/*<Success text="Succès 1" icon={<Success1 />} lock={false} />
-							<Success text="Succès 2" icon={<Success1 />} lock={false} />
-							<Success text="Succès 3" lock={true} />*/}
+							{listSuccessDone.map((success) => {
+								return <Success text={success.name} icon={<Success1 />} lock={!success.isDone} />;
+							})}
 						</ul>
 					</div>
 				</div>
