@@ -39,7 +39,6 @@ function EditProfile(props) {
 				return [objectToAdd];
 			}
 		});
-		console.log(listVaccines);
 	}
 
 	const handleEditAllergies = (allergyId, value, keyName) => {
@@ -69,6 +68,14 @@ function EditProfile(props) {
 
 	const save = async () => {
 		try {
+			const deleteId = (array) => {
+				array.forEach(elt => {
+					if(typeof elt._id == "number")
+						delete elt._id;
+				});
+			}
+			deleteId(listVaccines);
+			deleteId(listAllergies);
 			props.vaccines.set(listVaccines);
 			props.allergies.set(listAllergies);
 			await axios.put("/api/vaccines/all", {vaccines: listVaccines});
