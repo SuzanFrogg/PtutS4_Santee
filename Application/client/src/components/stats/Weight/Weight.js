@@ -43,38 +43,90 @@ function Weight(props)
 			}
 		}
 		return res;
-	}
+	};
 
 	const getPoids = (i) => {
 		let res = userWeight[i].mass;
 		return res;
-	}
+	};
 
 	const getTaille = (i) => {
 		let res = userWeight[i].height;
 		return res;
-	}
+	};
 
 
 	const getTaille1 = (taille) => {
 		let taille1= 0;
 		taille1 = Math.floor(taille/100);
 		return taille1;
-	}
+	};
 
 	const getTaille2 = (taille) => {
 		let taille2= 0;
 		taille2 = taille % 100;
 		return taille2;
-	}
+	};
 
 	const getIMC = (poids, taille) => {
 		let IMC = 0;
 		IMC = poids/ ((taille/100)^2);
 		IMC = Math.round(IMC * 100)/100;
 		return IMC;
-	}
+	};
 
+	//Max et Min poids == Bornes graphiques
+	const getPoidsMax = () => {
+		let max = 0;
+		for(let i = 0; i < userWeight.length; i++)
+		{
+			if(userWeight[i].mass > max)
+				max = userWeight[i].mass;
+		}
+
+		return max;
+	};
+
+	const getPoidsMin = () => {
+		let min = 9999;
+		for(let i = 0; i < userWeight.length; i++)
+		{
+			if(userWeight[i].mass < min)
+				min = userWeight[i].mass;
+		}
+
+		return min;
+	};
+
+	let maxPoids = getPoidsMax() + 10;
+	let minPoids = getPoidsMin() - 10;
+
+	//Max et Min IMC == Bornes graphiques
+	const getIMCMax = () => {
+		let max = 0;
+		for(let i = 0; i < userWeight.length; i++)
+		{
+			let imc = getIMC(userWeight[i].mass, userWeight[i].height);
+			if(imc > max)
+				max = imc;
+		}
+		return max;
+	};
+
+	const getIMCMin = () => {
+		let min = 50;
+		for(let i = 0; i < userWeight.length; i++)
+		{
+			let imc = getIMC(userWeight[i].mass, userWeight[i].height);
+			if(imc < min)
+				min = imc;
+		}
+
+		return min;
+	};
+
+	let maxIMC = getIMCMax() + 2;
+	let minIMC = getIMCMin() - 2;
 
 	const dateCroissante = () => {
 		let list = [userWeight[0]];
@@ -103,9 +155,7 @@ function Weight(props)
 			}
 		}
 		return list;
-		
-
-	}
+	};
 
 	const getData1 = (liste) => {
 		let data = [];
@@ -115,7 +165,7 @@ function Weight(props)
 			data.push({t: date, y: liste[i].mass});
 		}
 		return data;
-	}
+	};
 
 	const getData2 = (liste) => {
 		let data = [];
@@ -125,7 +175,7 @@ function Weight(props)
 			data.push({t: date, y: getIMC(liste[i].mass, liste[i].height)});
 		}
 		return data;
-	}
+	};
 	
 //Data du graphique de poids
 	let dataChart1 = {
@@ -142,6 +192,7 @@ function Weight(props)
 			}]		
 	};
 
+	
 	//Option du Graphique de poids
 	let optionsChart1 = {
 		responsive: true,
@@ -182,8 +233,8 @@ function Weight(props)
 			}],
 			yAxes: [{
 				ticks: {
-					min: 10,
-					max: 130,
+					min: minPoids,
+					max: maxPoids,
 					stepSize: 10
 				}
 			}]
@@ -285,8 +336,8 @@ function Weight(props)
 			}],
 			yAxes: [{
 				ticks: {
-					min: 15,
-					max: 30,
+					min: minIMC,
+					max: maxIMC,
 					stepSize: 1
 				}
 			}]
