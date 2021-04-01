@@ -39,7 +39,7 @@ function Profile(props) {
 		{
 			const response = await axios.get('/api/allergy/');
 			if (isMounted) {
-				if (response.data.vaccines) setListAllergies(response.data.allergies);
+				if (response.data.allergies) setListAllergies(response.data.allergies);
 				else setListAllergies([]);
 			}
 		}
@@ -68,6 +68,10 @@ function Profile(props) {
 		window.location = "/";
 	};
 
+	const addXp = async (xp) => {
+		await axios.put(`/api/user/${user._id}`, {xp});
+	}
+
 	//Avoir l'age de la personne en fonction de sa date de naissance
 	const getAge = (birthDate) => {
 		let ageDifMs = Date.now() - birthDate.getTime();
@@ -77,7 +81,7 @@ function Profile(props) {
 
 	let expTotale = 100;
 
-	console.log(listSuccess);
+	//console.log(listSuccess);
 
 	return (
 		<section className="profile-section">
