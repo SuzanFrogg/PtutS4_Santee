@@ -18,9 +18,9 @@ function Profile(props) {
 
 	//succès
 	const [listSuccess, setSuccess] = useState([]);
-    const [listSuccessDone] = useState([]);
-
-	const [conditionSuccess] = useState([]);
+    //const [listSuccessDone, setSuccess] = useState([]);
+	const [conditionSuccess] = useState([false,false,false,false,false,false,false,false,false,false,false,false]); //pas d'utilsation d'une boucle car sinon augmentation a chaque reload
+	
 	const [listDon, setlistDon] = useState([]);
 
 
@@ -98,24 +98,45 @@ function Profile(props) {
 	
 	const setConditionsSuccess = () =>
 	{
-		if(listDon.length >= 1)
+		if(listDon != null && listDon != [])
 		{
-			conditionSuccess.push(true);
+			if(listDon.DonsPlasma != null && listDon.DonsSang != null && listDon.DonsPlaquette != null)
+			{
+					conditionSuccess[0] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 1); 
+					conditionSuccess[1] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 5); 
+					conditionSuccess[2] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 10); 
+					conditionSuccess[3] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 20); 
+			}
+
+			if(listAllergies != null)
+			{
+				conditionSuccess[9] = (listAllergies.length >= 5);
+			}
+
+			
+
+
 		}
-		else 
-		{
-			conditionSuccess.push(false);
-		}
+
+		
 	}
 
 	const setListSuccessDone = () =>
+	{
+		for(let i = 0; i < listSuccess.length ;i++)
 		{
+			//listSuccess[i].isDone ;
 		}
+	}
+
+	console.log(listSuccess);
+	console.log(conditionSuccess);
 
 	let expTotale = 100;
 	setConditionsSuccess();
+	setListSuccessDone();
 
-	console.log(conditionSuccess);
+
 
 
 	return (
