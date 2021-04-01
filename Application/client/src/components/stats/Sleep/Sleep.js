@@ -72,6 +72,7 @@ function Sleep(props) {
 		fetchSleep(dateStart, dateEnd);
 	}, [currentDate]);
 	
+	//Format date et heure
 	const formatDate = (date) => {
 		return date.getDate() + " "
 		+ monthsNames[date.getMonth()] + " "
@@ -90,7 +91,7 @@ function Sleep(props) {
 
 		return hour + ":" + minute;
 	}
-
+	
 	//Get semaine prec et suiv
 	const getPrevWeek = () => {
 		let newDate = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() - 7 + 1));
@@ -104,16 +105,45 @@ function Sleep(props) {
 
 	//DONNEES
 	//Heures de sommeil
-
-	let lengthSleepWeek = [sleepData[0].dateEnd.getHours() - sleepData[0].dateStart.getHours(), sleepData[1].dateEnd.getHours() - sleepData[1].dateStart.getHours(), sleepData[2].dateEnd.getHours() - sleepData[2].dateStart.getHours(), sleepData[3].dateEnd.getHours() - sleepData[3].dateStart.getHours(), sleepData[4].dateEnd.getHours() - sleepData[4].dateStart.getHours(), sleepData[5].dateEnd.getHours() - sleepData[5].dateStart.getHours(), sleepData[6].dateEnd.getHours() - sleepData[6].dateStart.getHours()];
+	let lengthSleepWeek = [Math.round(Math.abs(sleepData[0].dateEnd - sleepData[0].dateStart)/36e5), Math.round(Math.abs(sleepData[1].dateEnd - sleepData[1].dateStart)/36e5), Math.round(Math.abs(sleepData[2].dateEnd - sleepData[2].dateStart)/36e5), Math.round(Math.abs(sleepData[3].dateEnd - sleepData[3].dateStart)/36e5), Math.round(Math.abs(sleepData[4].dateEnd - sleepData[4].dateStart)/36e5), Math.round(Math.abs(sleepData[5].dateEnd - sleepData[5].dateStart)/36e5), Math.round(Math.abs(sleepData[6].dateEnd - sleepData[6].dateStart)/36e5)];
 
 	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0;
+	let diviseurWeek = 5; 
+	let diviseurWE = 2;
+	let diviseurGlobal = 7;
 
-	lengthSleepWeek.slice(0, 4).forEach(hour => {avgSleepWeek+=hour; avgSleepGlobal+=hour});
-	lengthSleepWeek.slice(5, 6).forEach(hour => {avgSleepWE+=hour; avgSleepGlobal+=hour});
-	avgSleepWeek /= 5;
-	avgSleepWE /= 2;
-	avgSleepGlobal /= 7;
+	lengthSleepWeek.slice(0, 4).forEach(hour => {
+		if(hour == 0)
+		{
+			diviseurWeek -= 1;
+			diviseurGlobal -= 1;
+
+			if(diviseurWeek == 0)
+				diviseurWeek = 1;
+			else if(diviseurGlobal == 0)
+				diviseurGlobal = 1;
+		}
+		avgSleepWeek += hour; 
+		avgSleepGlobal += hour;	
+	});
+	lengthSleepWeek.slice(5, 6).forEach(hour => {
+		if(hour == 0)
+		{
+			diviseurWE -= 1;
+			diviseurGlobal -= 1;
+
+			if(diviseurWE == 0)
+				diviseurWE = 1;
+			else if(diviseurGlobal == 0)
+				diviseurGlobal = 1;
+		}
+		avgSleepWE+=hour; 
+		avgSleepGlobal+=hour;
+	});
+
+	avgSleepWeek /= diviseurWeek;
+	avgSleepWE /= diviseurWE;
+	avgSleepGlobal /= diviseurGlobal;
 
 	//Dates
 	let dateLegend = [formatDate(sleepData[0].dateStart), formatDate(sleepData[1].dateStart), formatDate(sleepData[2].dateStart), formatDate(sleepData[3].dateStart), formatDate(sleepData[4].dateStart), formatDate(sleepData[5].dateStart), formatDate(sleepData[6].dateStart)];
@@ -127,7 +157,7 @@ function Sleep(props) {
 	//Récupère la couleur principale
 	let primaryColor = getComputedStyle(document.body).getPropertyValue('--main-color');
 	let secondaryColor = getComputedStyle(document.body).getPropertyValue('--main-color-var1');
-
+	
 
 	//data graphique sommeil
 	let dataChartBar = {
