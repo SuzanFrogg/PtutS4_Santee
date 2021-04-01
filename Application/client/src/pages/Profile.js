@@ -15,6 +15,12 @@ function Profile(props) {
 	
 	let depVaccines = JSON.stringify(listVaccines);
 	let depAllergies = JSON.stringify(listAllergies);
+
+	//succès
+	const [listSuccess, setSuccess] = useState([]);
+    const [listSuccessDone] = useState([]);
+
+
 	useEffect(() => {
 		let isMounted = true;
 
@@ -38,6 +44,17 @@ function Profile(props) {
 			}
 		}
 
+		const fetchSuccess = async () =>
+		{
+			const response = await axios.get("/api/success");
+			if (isMounted) {
+				if (response.data) setSuccess(response.data);
+				else setSuccess([]);
+				
+			}
+		}
+
+		fetchSuccess();
 		fetchVaccin();
 		fetchAllergy();
 		return () => { isMounted = false };
@@ -59,6 +76,8 @@ function Profile(props) {
 	}
 
 	let expTotale = 100;
+
+	console.log(listSuccess);
 
 	return (
 		<section className="profile-section">
@@ -117,9 +136,9 @@ function Profile(props) {
 					<div className="profile-details-box profile-success">
 						<h3>Succès</h3>
 						<ul>
-							<Success text="Succès 1" icon={<Success1 />} lock={false} />
+							{/*<Success text="Succès 1" icon={<Success1 />} lock={false} />
 							<Success text="Succès 2" icon={<Success1 />} lock={false} />
-							<Success text="Succès 3" lock={true} />
+							<Success text="Succès 3" lock={true} />*/}
 						</ul>
 					</div>
 				</div>
