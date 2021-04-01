@@ -25,6 +25,7 @@ function EditProfile(props) {
 	const addVaccines = () => {
 		setListVaccines((state) => {
 			let objectToAdd = {
+				_id: listVaccines.length+1,
 				doseMade: 0,
 				doseNeeded: 1,
 				name: "",
@@ -38,6 +39,7 @@ function EditProfile(props) {
 				return [objectToAdd];
 			}
 		});
+		console.log(listVaccines);
 	}
 
 	const handleEditAllergies = (allergyId, value, keyName) => {
@@ -53,6 +55,7 @@ function EditProfile(props) {
 	const addAllergies = () => {
 		setListAllergies((state) => {
 			let objectToAdd = {
+				_id: listAllergies.length+1,
 				toAvoid: ""
 			};
 			if (state) {
