@@ -3,7 +3,6 @@ import axios from "axios";
 import { useUser } from "../utils/store.js";
 import Success from '../components/profile/Success';
 import EditProfile from "../components/profile/EditProfile.js";
-import { ReactComponent as Success1 } from "../media/icons/health-insurance.svg"; //Succès exemple, à supp
 
 
 function Profile(props) {
@@ -27,7 +26,6 @@ function Profile(props) {
 	const [listSuccess, setSuccess] = useState([]);
     const [listSuccessDone, setSucessDone] = useState([]);
 	const [conditionSuccess, setCondition] = useState([false,false,false,false,false,false,false,false,false,false,false,false]); //pas d'utilsation d'une boucle car sinon augmentation a chaque reload
-
 
 
 	useEffect(() => {
@@ -252,8 +250,8 @@ function Profile(props) {
 					<div className="profile-details-box profile-success">
 						<h3>Succès</h3>
 						<ul>
-							{listSuccessDone.map((success) => {
-								return <Success text={success.name} icon={<Success1 />} lock={!success.isDone} />;
+							{listSuccessDone.map((success, key) => {
+								return <Success name={success.name} id={success._id} desc={success.desc} lock={!success.isDone} key={key} />;
 							})}
 						</ul>
 					</div>
