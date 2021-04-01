@@ -47,9 +47,9 @@ function BloodDonation(props) {
 	const AjoutImgDon = (nbDons) => {
 		const imgDon = [];
 		for (let i=0; i<nbDons; i++) {
-			imgDon.push(<MiniPocheSang id="miniPocheSang"/>);
-		}	
-		return imgDon && "0";
+			imgDon.push(<MiniPocheSang id="miniPocheSang" key={i} />);
+		}
+		return (nbDons === 0) ? "0" : imgDon;
 	}
 
     return (
