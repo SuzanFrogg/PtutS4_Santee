@@ -108,38 +108,34 @@ function Sleep(props) {
 	let lengthSleepWeek = [Math.round(Math.abs(sleepData[0].dateEnd - sleepData[0].dateStart)/36e5), Math.round(Math.abs(sleepData[1].dateEnd - sleepData[1].dateStart)/36e5), Math.round(Math.abs(sleepData[2].dateEnd - sleepData[2].dateStart)/36e5), Math.round(Math.abs(sleepData[3].dateEnd - sleepData[3].dateStart)/36e5), Math.round(Math.abs(sleepData[4].dateEnd - sleepData[4].dateStart)/36e5), Math.round(Math.abs(sleepData[5].dateEnd - sleepData[5].dateStart)/36e5), Math.round(Math.abs(sleepData[6].dateEnd - sleepData[6].dateStart)/36e5)];
 
 	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0;
-	let diviseurWeek = 5; 
-	let diviseurWE = 2;
-	let diviseurGlobal = 7;
+	let diviseurWeek = 0; 
+	let diviseurWE = 0;
+	let diviseurGlobal = 0;
 
 	lengthSleepWeek.slice(0, 4).forEach(hour => {
-		if(hour == 0)
-		{
-			diviseurWeek -= 1;
-			diviseurGlobal -= 1;
-
-			if(diviseurWeek == 0)
-				diviseurWeek = 1;
-			else if(diviseurGlobal == 0)
-				diviseurGlobal = 1;
+		if (hour > 0) {
+			diviseurWeek++;
+			diviseurGlobal++;
 		}
 		avgSleepWeek += hour; 
 		avgSleepGlobal += hour;	
 	});
 	lengthSleepWeek.slice(5, 6).forEach(hour => {
-		if(hour == 0)
-		{
-			diviseurWE -= 1;
-			diviseurGlobal -= 1;
-
-			if(diviseurWE == 0)
-				diviseurWE = 1;
-			else if(diviseurGlobal == 0)
-				diviseurGlobal = 1;
+		if (hour > 0) {
+			diviseurWE++;
+			diviseurGlobal++;
 		}
 		avgSleepWE+=hour; 
 		avgSleepGlobal+=hour;
 	});
+	console.log(diviseurWeek);
+	
+	if(diviseurWeek == 0)
+		diviseurWeek = 1;
+	if(diviseurWE == 0)
+		diviseurWE = 1;
+	if(diviseurGlobal == 0)
+		diviseurGlobal = 1;
 
 	avgSleepWeek /= diviseurWeek;
 	avgSleepWE /= diviseurWE;
