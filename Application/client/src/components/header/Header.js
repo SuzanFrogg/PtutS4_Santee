@@ -7,6 +7,8 @@ import { ReactComponent as Calendar } from "../../media/icons/fi-calendar.svg";
 import { ReactComponent as Objectives } from "../../media/icons/fi-badge.svg";
 import { useUser } from "../../utils/store";
 
+//import {ReactCompnent} from "../../public/logo.ico";
+
 function Header() {
 	const { user } = useUser();
 
@@ -14,7 +16,7 @@ function Header() {
 		<header>
 			<div className="header-logo">
 				<Link to="/">
-					<img src="" alt="logo"/> 
+					<img src="logo.ico" alt="logo"/> 
 				</Link>
 			</div>
 			<ul className="header-menu">
