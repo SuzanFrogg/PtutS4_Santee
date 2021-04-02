@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ReactComponent as Lock } from "../../media/icons/lock.svg";
 import { ReactComponent as Success1 } from "../../media/icons/success/1_blood_drop.svg";
 import { ReactComponent as Success2 } from "../../media/icons/success/2_nurse.svg";
@@ -12,7 +12,6 @@ import { ReactComponent as Success9 } from "../../media/icons/success/9_chance.s
 import { ReactComponent as Success12 } from "../../media/icons/success/12_virusmon.svg";
 
 function Success(props) {
-	const [test, setTest] = useState(<Lock />);
 	//Pour pouvoir choisir la bonne icone
 	const getIcon = (id) => {
 		return {

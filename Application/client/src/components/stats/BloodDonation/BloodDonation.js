@@ -28,15 +28,15 @@ function BloodDonation(props) {
 				setListSang(dataDons.data.DonsSang);
 				setListPlasma(dataDons.data.DonsPlasma);
 				setListPlaquette(dataDons.data.DonsPlaquette);
-				setNbDonSang(listSang.length);
-				setNbDonPlasma(listPlasma.length);
-				setNbDonPlaquette(listPlaquette.length);
+				setNbDonSang(dataDons.data.DonsSang.length);
+				setNbDonPlasma(dataDons.data.DonsPlasma.length);
+				setNbDonPlaquette(dataDons.data.DonsPlaquette.length);
 			}
 		}
 
 		fetchDon();
 		return () => { isMounted = false };
-	});
+	}, [nbDonSang, nbDonPlasma, nbDonPlaquette]);
 
 	const getNbPersoSauver = (nbDonSang, nbDonPlasma, nbDonPlaquette) => {
 		let nbSauver = 0;

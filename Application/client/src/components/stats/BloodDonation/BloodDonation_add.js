@@ -6,7 +6,7 @@ import axios from "axios";
 function BloodDonation_add(props)
 {
   const [date, setDate] = useState("");
-  const [dons, setDon] = useState("");
+  const [dons, setDon] = useState("DonsSang");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,15 +24,15 @@ function BloodDonation_add(props)
       else if (dons === "DonsPlaquette"){
         await axios.put("/api/don/addPlaquette", {dateDon : date});
       }
+      props.handleAlert("success", "Les données ont bien été ajoutées");
     }
     catch (err) {
       props.handleAlert("error", "L'ajout des données n'a pas pu être exécuté");
     }
   }
-      
 
   return (
-    <form action="" onSubmit={handleSubmit} className="form-dons">
+    <form onSubmit={handleSubmit} className="form-dons">
         <label htmlFor="dateD">Date</label>
         <input 
           type="date" 
@@ -49,7 +49,6 @@ function BloodDonation_add(props)
         </select>
 
         <input type="submit" value="Valider"/>
-
     </form>
   );
 }
