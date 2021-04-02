@@ -1,10 +1,11 @@
 import React from "react";
 import {useState} from "react";
 import axios from "axios";
-
+import { useUser } from "../../../utils/store.js";
 
 function BloodDonation_add(props)
 {
+	const { user } = useUser();
   const [date, setDate] = useState("");
   const [dons, setDon] = useState("DonsSang");
 
@@ -24,6 +25,7 @@ function BloodDonation_add(props)
       else if (dons === "DonsPlaquette"){
         await axios.put("/api/don/addPlaquette", {dateDon : date});
       }
+      await axios.put(`/api/user/xp/${user._id}`, {xp: 75});
       props.handleAlert("success", "Les données ont bien été ajoutées");
     }
     catch (err) {
