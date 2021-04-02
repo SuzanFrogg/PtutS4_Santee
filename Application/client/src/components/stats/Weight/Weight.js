@@ -192,6 +192,10 @@ function Weight(props)
 		return data;
 	};
 	
+	//Récupère la couleur principale
+	let primaryColor = getComputedStyle(document.body).getPropertyValue('--main-color');
+	let secondaryColor = getComputedStyle(document.body).getPropertyValue('--main-color-var1');
+	
 //Data du graphique de poids
 	let dataChart1 = {
 			//axe des abscisses
@@ -201,7 +205,7 @@ function Weight(props)
 
 				data: getData1(dateCroissante()),
 				borderWidth:3,
-				borderColor: 'rgb(255,155,255)',
+				borderColor: primaryColor,
 				fill: false,
 				lineTension: 0
 			}]		
@@ -277,7 +281,7 @@ function Weight(props)
 				//données
 				data: getData2(dateCroissante()),
 				borderWidth:3,
-				borderColor: 'rgb(255,0,255)',
+				borderColor: primaryColor,
 				fill: false
 			}
 		]

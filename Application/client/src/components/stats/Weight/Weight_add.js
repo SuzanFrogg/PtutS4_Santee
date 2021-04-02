@@ -42,7 +42,7 @@ function Weight_add(props)
                     onChange={(event) => setPoids(event.target.value)}
                 />
                 
-            <label htmlFor="height">Taille</label> 
+            <label htmlFor="height">Taille (en cm)</label> 
                 <input 
                     type="number" 
                     id="taille"
