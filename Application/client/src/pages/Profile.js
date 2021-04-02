@@ -180,8 +180,6 @@ function Profile(props) {
 	let xpLevel = 100;
 	let levelUser = Math.floor(user.xp / xpLevel);
 
-
-
 	return (
 		<section className="profile-section">
 			{editModal ?
@@ -200,7 +198,7 @@ function Profile(props) {
 				<div className="profile-info">
 					<div className="level-container">
 						<div className="level">
-							<div className="progress" style={{width: (user.xp * 100 / xpLevel) + "%"}}></div>
+							<div className="progress" style={{width: (user.xp % xpLevel) + "%"}}></div>
 						</div>
 						<div className="level-numbers">
 							<span>{levelUser}</span>
