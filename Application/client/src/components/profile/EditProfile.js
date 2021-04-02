@@ -5,6 +5,7 @@ function EditProfile(props) {
 	const [pseudo, setPseudo] = useState(props.user.pseudo);
 	const [listVaccines, setListVaccines] = useState(props.vaccines.list);
 	const [listAllergies, setListAllergies] = useState(props.allergies.list);
+	const [file, setFile] = useState();
 
 	/**
 	 * Permet de gérer la modification des vaccins
@@ -80,9 +81,16 @@ function EditProfile(props) {
 			props.allergies.set(listAllergies);
 			await axios.put("/api/vaccines/all", {vaccines: listVaccines});
 			await axios.put("/api/allergy/all", {allergies: listAllergies});
+			const data = new FormData();
+			data.append("name", pseudo);
+			data.append("file", file);
+			data.append("id", props.user._id);
+			await axios.post("api/user/upload/", data);
+
 			props.handleAlert("success", "Les modifications ont bien été apporté au profil");
 		}
 		catch (err) {
+			console.error(err);
 			props.handleAlert("error", "Une erreur est survenue dans la modification du profil");
 		}
 	}
@@ -90,12 +98,22 @@ function EditProfile(props) {
 	return (
 		<>
 			<img className="profile-picture" src={`./uploads/profil/${props.user.picture}`} alt="profil" />
-			<input 
+			{/*<input 
 				type="text"
 				id="name"
 				value={pseudo}
 				onChange={(event) => setPseudo(event.target.value)}
+			/>*/}
+			<h2>{pseudo}</h2>
+			<input 
+				type="file"
+				id="file"
+				name="file"
+				accept=".jpg, .jpeg, .png"
+				className="inputfile"
+				onChange={(event) => setFile(event.target.files[0])}
 			/>
+			<label htmlFor="file">Changer d'image</label>
 
 			<div className="profile-info">
 				<div className="profile-details-box profile-vaccines profile-edit">
