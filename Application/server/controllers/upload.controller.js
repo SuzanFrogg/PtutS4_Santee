@@ -38,7 +38,7 @@ let uploadProfil = async (req, res) => {
 
 	try {
 		await userModel.findByIdAndUpdate(
-			req.body.userId,
+			req.body.id,
 			{ $set : {picture: fileName} },
 			{ new: true, upsert: true, setDefaultsOnInsert: true },
 			(err, docs) => {
@@ -48,6 +48,7 @@ let uploadProfil = async (req, res) => {
 		)
 	}
 	catch (err) {
+		console.log(err);
 		return res.status(500).json({ error: err });
 	}
 }
