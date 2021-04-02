@@ -8,27 +8,27 @@ function Menstruation(props)
     const [showAddForm, setShowAddForm] = useState(false);
 
 	const [userPeriods, setUserPeriods] = useState([]);
-	const [dateStartP, setDateStart] = useState(0);
-	const [dateEndP, setDateEnd] = useState(0);
+	//const [dateStartP, setDateStart] = useState(0);
+	//const [dateEndP, setDateEnd] = useState(0);
 
 	//se lance a chaque chargement
 	useEffect(() => {
 		let isMounted = true;
 
-		//Récupération des informations de don
-		const fetchDon = async () =>
+		//Récupération des informations de pperdiodes
+		const fetchPeriod = async () =>
 		{
-			const dataDons = await axios.get('/api/periods/', {withCredentials: true});
+			const dataPeriod = await axios.get('/api/periods/', {withCredentials: true});
 			if (isMounted) {
-				setUserPeriods(dataDons.data.periods);
-				for (let i=0; i<(userPeriods.length); i++) {
+				setUserPeriods(dataPeriod.data.periods);
+				/*for (let i=0; i<(userPeriods.length); i++) {
 					setDateStart(userPeriods[i].dateStart);
 					setDateEnd(userPeriods[i].dateEnd);
-				}
+				}*/
 			}
 		}
 
-		fetchDon();
+		fetchPeriod();
 		return () => { isMounted = false };
 	}, [userPeriods]);
 
@@ -40,7 +40,7 @@ function Menstruation(props)
 		return new Number(date2 - date1).toFixed(0);
 	}
 
-	const getMoyCycle = (periods, dateStart, dateEnd) => {
+	/*const getMoyCycle = (periods, dateStart, dateEnd) => {
 		let moy = 0;
 		let temp = 0;
 		for (let i=0; i<(periods.length); i++) {
@@ -49,27 +49,40 @@ function Menstruation(props)
 		if (moy)
 			moy = (temp / (periods.length));
 		return moy;
-	}
+	}*/
 
-	const getMoyRegle = (periods, dateStart, dateEnd) => {
+	const getMoyRegle = () => {
 		let moy = 0;
-		for (let i=0; i<(periods.length); i++) {
-			moy = dateDiff(dateStart,dateEnd);
+		let somme = 0
+		if(userPeriods != null && userPeriods.length != 0)
+		{
+			for(let i =0; i < userPeriods.length; i++)
+			{
+				let dateEnd = new Date(userPeriods[i].dateEnd);
+				let dateStart = new Date(userPeriods[i].dateStart);
+
+				let dif =dateDiff(dateStart,dateEnd) ;
+				somme += parseInt(dif);
+				
+			}
+
+			moy = somme / userPeriods.length;
 		}
-		return moy;
+		
+		return Math.round(moy);
 	}
 
     return (
 		<>
 			<h2>Règles</h2>
 			<div className="data-recap">
-				<div className="data-card">
+				{/*<div className="data-card">
 					<p>Durée moyenne du cycle</p>
 					<span>{getMoyCycle(userPeriods, dateStartP, dateEndP)}<small>j</small></span>
-				</div>
+				</div> */}
 				<div className="data-card">
 					<p>Durée moyenne des règles</p>
-					<span>{getMoyRegle(userPeriods, dateStartP, dateEndP)}<small>j</small></span>
+					<span>{getMoyRegle()}<small>j</small></span>
 				</div>					
 			</div>
 			<div className="data-add">

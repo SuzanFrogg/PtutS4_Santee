@@ -112,15 +112,14 @@ function Profile(props) {
 		{
 			if(listDon.DonsPlasma != null && listDon.DonsSang != null && listDon.DonsPlaquette != null)
 			{
-					conditionSuccess[0] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 1); 
-					conditionSuccess[1] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 5); 
+					conditionSuccess[9] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 1); 
+					conditionSuccess[4] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 5); 
 					conditionSuccess[2] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 10); 
-					conditionSuccess[3] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 20); 
+					conditionSuccess[1] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 20); 
 			}
 
 			if(listSleep != null)
 			{
-				//console.log(listSleep);
 
 				for(let i =0; i < listSleep.length ; i++)
 				{
@@ -129,7 +128,7 @@ function Profile(props) {
 
 					let dureeSomeil = dateend.getHours() - datestart.getHours();
 					
-					conditionSuccess[4] = (dureeSomeil >= 15);
+					conditionSuccess[3] = (dureeSomeil >= 15);
 					
 					
 
@@ -142,12 +141,12 @@ function Profile(props) {
 				{
 					if(listPeriod[i].flux == 2)//+ douleurs si implémentées
 					{
-						conditionSuccess[7] = true;
+						conditionSuccess[10] = true;
 					}
 
 					if(listPeriod[i].flux == 0) 
 					{
-						conditionSuccess[8] = true;
+						conditionSuccess[7] = true;
 					}
 
 					
@@ -156,13 +155,14 @@ function Profile(props) {
 
 			if(listAllergies != null)
 			{
-				conditionSuccess[9] = (listAllergies.length >= 5);
+				conditionSuccess[0] = (listAllergies.length >= 5);
 			}
 
-			if(listVaccines != null )
+			if(listVaccines != null && listVaccines.length != 0)
 			{
-					conditionSuccess[10] = (listVaccines.length >= 1); 
-					conditionSuccess[11] = (listVaccines.length >= 10); 
+	
+					conditionSuccess[11] = (listVaccines.length >= 1); 
+					conditionSuccess[5] = (listVaccines.length >= 10); 
 			}
 		}
 	}
@@ -179,6 +179,7 @@ function Profile(props) {
 
 	let xpLevel = 100;
 	let levelUser = Math.floor(user.xp / xpLevel);
+
 
 
 	return (

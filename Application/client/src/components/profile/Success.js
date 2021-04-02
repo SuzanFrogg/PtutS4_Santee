@@ -9,6 +9,8 @@ import { ReactComponent as Success6 } from "../../media/icons/success/6_regular.
 import { ReactComponent as Success7 } from "../../media/icons/success/7_insomnia.svg";
 import { ReactComponent as Success8 } from "../../media/icons/success/8_pain.svg";
 import { ReactComponent as Success9 } from "../../media/icons/success/9_chance.svg";
+import { ReactComponent as Success10 } from "../../media/icons/success/10_allergy.svg";
+import { ReactComponent as Success11 } from "../../media/icons/success/11_1vaccin.svg";
 import { ReactComponent as Success12 } from "../../media/icons/success/12_virusmon.svg";
 
 function Success(props) {
@@ -24,8 +26,8 @@ function Success(props) {
 			"606572dfc4f10e24687ed043": Success7,
 			"606572dfc4f10e24687ed044": Success8,
 			"606572dfc4f10e24687ed045": Success9,
-			/*"606572dfc4f10e24687ed046": Success10,
-			"606572dfc4f10e24687ed047": Success11,*/
+			"606572dfc4f10e24687ed046": Success10,
+			"606572dfc4f10e24687ed047": Success11,
 			"606572dfc4f10e24687ed048": Success12
 		}[id];
 	}
