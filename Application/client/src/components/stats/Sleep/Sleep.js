@@ -93,12 +93,18 @@ function Sleep(props) {
 	}
 
 	const getFormatTime = (duration) => {
-		var minutes = parseInt((duration / (1000 * 60)) % 60),
-		hours = parseInt((duration / (1000 * 60 * 60)) % 24 + 2);
-
+		
+		var minutes = 0,
+		hours = 0;
+		
+		if(duration != 0)
+		{
+			minutes = parseInt((duration / (1000 * 60)) % 60);
+			hours = parseInt((duration / (1000 * 60 * 60)) % 24 + 2);
+		}
 		hours = (hours < 10) ? "0" + hours : hours;
 		minutes = (minutes < 10) ? "0" + minutes : minutes;
-
+		
 		return hours + ":" + minutes;
 	}
 	
