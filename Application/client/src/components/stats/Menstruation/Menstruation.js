@@ -51,6 +51,29 @@ function Menstruation(props)
 		return moy;
 	}*/
 
+	const getMoyCycle = () => {
+		let moy = 0;
+		let somme = 0
+		if(userPeriods != null && userPeriods.length != 0)
+		{
+			for(let i =1; i < userPeriods.length; i++)
+			{
+				let dateStart = new Date(userPeriods[i-1].dateStart);
+				let dateEnd = new Date(userPeriods[i].dateStart);
+				
+
+				let dif =dateDiff(dateStart,dateEnd) ;
+				console.log(dif);
+				somme += parseInt(dif);
+				
+			}
+
+			moy = somme / (userPeriods.length -1);
+		}
+		
+		return Math.round(moy);
+	}
+
 	const getMoyRegle = () => {
 		let moy = 0;
 		let somme = 0
@@ -76,10 +99,10 @@ function Menstruation(props)
 		<>
 			<h2>Règles</h2>
 			<div className="data-recap">
-				{/*<div className="data-card">
+				<div className="data-card">
 					<p>Durée moyenne du cycle</p>
-					<span>{getMoyCycle(userPeriods, dateStartP, dateEndP)}<small>j</small></span>
-				</div> */}
+					<span>{getMoyCycle()}<small>j</small></span>
+				</div> 
 				<div className="data-card">
 					<p>Durée moyenne des règles</p>
 					<span>{getMoyRegle()}<small>j</small></span>
