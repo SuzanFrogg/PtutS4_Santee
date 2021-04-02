@@ -82,6 +82,14 @@
 		line-height: 50px;
 		font-size: 44px;
 	}
+	.data-add {
+		padding: 30px;
+	}
+
+	/*Header*/
+	.header-logo {
+		display: none;
+	}
 }
 @media all and (max-width: 400px) {
 	/*General*/
@@ -98,5 +106,34 @@
 	}
 	.data-card p {
 		font-size: 17px;
+	}
+	.calendar-header h3 {
+		font-size: 26px;
+	}
+
+	/*Header*/
+	header {
+		padding: 0;
+	}
+
+	/*Calendar*/
+	.calendar-display {
+		padding: 5px;
+	}
+	.calendar-day {
+		margin: 4px;
+		font-size: 24px;
+	}
+	.calendar-day-selected::before,
+	.calendar-today::before {
+		width: 54px;
+		height: 54px;
+	}
+	.calendar-day-info-periods,
+	.calendar-day-info-objectives {
+		min-width: 8px;
+		width: 8px;
+		min-height: 8px;
+		height: 8px;
 	}
 }

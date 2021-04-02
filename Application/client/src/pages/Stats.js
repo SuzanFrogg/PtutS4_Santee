@@ -1,13 +1,11 @@
 import React from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
-import Diary from "../components/stats/Diary/Diary";
 import Menstruation from "../components/stats/Menstruation/Menstruation";
 import Sleep from "../components/stats/Sleep/Sleep";
 import BloodDonation from "../components/stats/BloodDonation/BloodDonation";
 import Weight from "../components/stats/Weight/Weight";
 
-import { ReactComponent as DiaryIcon } from "../media/icons/stats/menu-book.svg";
 import { ReactComponent as SleepIcon } from "../media/icons/stats/menu-sleep.svg";
 import { ReactComponent as WeightIcon } from "../media/icons/stats/menu-weight.svg";
 import { ReactComponent as BloodIcon } from "../media/icons/stats/menu-blood-donation.svg";
@@ -25,7 +23,6 @@ function Stats(props) {
 		<section className="stats-section">
 			<div className="stats-container">
 				<ul className="stats-tabs">
-					<TabItem destination={`${url}/diary`} text="Journal" icon={<DiaryIcon />} />
 					<TabItem destination={`${url}/weight`} text="Poids" icon={<WeightIcon />} />
 					<TabItem destination={`${url}/sleep`} text="Sommeil" icon={<SleepIcon />} />
 					{user.sex === "F" && 
@@ -34,12 +31,6 @@ function Stats(props) {
 				</ul>
 				<div className="stats-content">
 					<Switch>
-						<Route
-							exact path={`${path}/diary`}
-							render={(propsRender) => (
-								<Diary {...propsRender} handleAlert={props.handleAlert} />
-							)}
-						/>
 						<Route
 							exact path={`${path}/weight`}
 							render={(propsRender) => (

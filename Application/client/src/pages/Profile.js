@@ -99,10 +99,6 @@ function Profile(props) {
 		window.location = "/";
 	};
 
-	const addXp = async (xp) => {
-		await axios.put(`/api/user/xp/${user._id}`, {xp});
-	}
-
 	//Avoir l'age de la personne en fonction de sa date de naissance
 	const getAge = (birthDate) => {
 		let ageDifMs = Date.now() - birthDate.getTime();
@@ -112,7 +108,6 @@ function Profile(props) {
 	
 	const setConditionsSuccess = () =>
 	{
-		let newListConditions = [];
 		if(listDon != null)
 		{
 			if(listDon.DonsPlasma != null && listDon.DonsSang != null && listDon.DonsPlaquette != null)
@@ -179,18 +174,11 @@ function Profile(props) {
 		{
 			newList.push({...listSuccess[i], isDone: conditionSuccess[i]});
 		}
-		console.log(listSuccessDone);
 		setSucessDone(newList);
 	}
 
-	//console.log(listSuccess);
-	//console.log(conditionSuccess);
-	//console.log(listSuccessDone);
-
 	let xpLevel = 100;
 	let levelUser = Math.floor(user.xp / xpLevel);
-
-
 
 
 	return (

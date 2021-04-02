@@ -16,7 +16,8 @@ function Header() {
 		<header>
 			<div className="header-logo">
 				<Link to="/">
-					<img src="logo.ico" alt="logo"/> 
+					<img src="/logo.ico" alt="logo"/>
+					Santech
 				</Link>
 			</div>
 			<ul className="header-menu">
