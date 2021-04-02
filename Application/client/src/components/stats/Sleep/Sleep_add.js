@@ -25,14 +25,14 @@ function Sleep_add(props)
 
     return (
 			<form action="" onSubmit={handleSubmit} className="form-sleep">
-                <label htmlFor="dateStart">Date d'endormissement</label>
+                <label htmlFor="dateStart">Date du coucher</label>
                 <input 
                     type="datetime-local" 
                     id="dateStart"
                     value={dateStart}
                     onChange={(event) => setDateStart(event.target.value)}
                 />
-                <label htmlFor="dateend">Date de réveil</label>
+                <label htmlFor="dateend">Date du réveil</label>
                 <input 
                     type="datetime-local" 
                     id="dateEnd"

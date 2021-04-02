@@ -91,6 +91,16 @@ function Sleep(props) {
 
 		return hour + ":" + minute;
 	}
+
+	const getFormatTime = (duration) => {
+		var minutes = parseInt((duration / (1000 * 60)) % 60),
+		hours = parseInt((duration / (1000 * 60 * 60)) % 24 + 2);
+
+		hours = (hours < 10) ? "0" + hours : hours;
+		minutes = (minutes < 10) ? "0" + minutes : minutes;
+
+		return hours + ":" + minutes;
+	}
 	
 	//Get semaine prec et suiv
 	const getPrevWeek = () => {
@@ -107,10 +117,41 @@ function Sleep(props) {
 	//Heures de sommeil
 	let lengthSleepWeek = [Math.round(Math.abs(sleepData[0].dateEnd - sleepData[0].dateStart)/36e5), Math.round(Math.abs(sleepData[1].dateEnd - sleepData[1].dateStart)/36e5), Math.round(Math.abs(sleepData[2].dateEnd - sleepData[2].dateStart)/36e5), Math.round(Math.abs(sleepData[3].dateEnd - sleepData[3].dateStart)/36e5), Math.round(Math.abs(sleepData[4].dateEnd - sleepData[4].dateStart)/36e5), Math.round(Math.abs(sleepData[5].dateEnd - sleepData[5].dateStart)/36e5), Math.round(Math.abs(sleepData[6].dateEnd - sleepData[6].dateStart)/36e5)];
 
-	//Moyenne heures de sommeil
-	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0;
-	let diviseurWeek = 0, diviseurWE = 0, diviseurGlobal = 0;
+	//Max et Min Sleep == Bornes graphiques
+	const getSleepMax = () => {
+		let max = 0;
+		for(let i = 0; i < lengthSleepWeek.length; i++)
+		{
+			let hour = lengthSleepWeek[i];
+			if(hour > max)
+				max = hour;
+		}
+		return max;
+	};
 
+	let maxSleep = getSleepMax();
+
+	if(maxSleep == 0)
+		maxSleep = 11; //Mi-journée 11 + 1 
+
+
+	//Moyenne heures de sommeil
+	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0, avgBedtimeN = 0, avgBedtimeD = 0;
+	let diviseurWeek = 0, diviseurWE = 0, diviseurGlobal = 0, diviseurBedTime = 0;
+
+	sleepData.slice(0,6).forEach(date => {
+		let night = 0;
+		let day = 0;
+		if (date._id != null) {
+			diviseurBedTime++;
+			night = date.dateStart.getTime();
+			day = date.dateEnd.getTime();
+		}
+		avgBedtimeN += night; 
+		avgBedtimeD += day;
+	});
+
+	
 	lengthSleepWeek.slice(0, 4).forEach(hour => {
 		if (hour > 0) {
 			diviseurWeek++;
@@ -123,6 +164,7 @@ function Sleep(props) {
 		if (hour > 0) {
 			diviseurWE++;
 			diviseurGlobal++;
+
 		}
 		avgSleepWE+=hour; 
 		avgSleepGlobal+=hour;
@@ -134,14 +176,17 @@ function Sleep(props) {
 		diviseurWE = 1;
 	if(diviseurGlobal == 0)
 		diviseurGlobal = 1;
+	if(diviseurBedTime == 0)
+		diviseurBedTime = 1;
 
 	avgSleepWeek /= diviseurWeek;
 	avgSleepWE /= diviseurWE;
 	avgSleepGlobal /= diviseurGlobal;
-
+	avgBedtimeN /= diviseurBedTime;
+	avgBedtimeD /= diviseurBedTime;
 
 	//Dates
-	let dateLegend = [formatDate(sleepData[0].dateStart), formatDate(sleepData[1].dateStart), formatDate(sleepData[2].dateStart), formatDate(sleepData[3].dateStart), formatDate(sleepData[4].dateStart), formatDate(sleepData[5].dateStart), formatDate(sleepData[6].dateStart)];
+	let dateLegend = [formatDate(sleepData[0].dateEnd), formatDate(sleepData[1].dateEnd), formatDate(sleepData[2].dateEnd), formatDate(sleepData[3].dateEnd), formatDate(sleepData[4].dateEnd), formatDate(sleepData[5].dateEnd), formatDate(sleepData[6].dateEnd)];
 
 	//Heures du coucher
 	let hourSleepData = [formatHour(sleepData[0].dateStart), formatHour(sleepData[1].dateStart), formatHour(sleepData[2].dateStart), formatHour(sleepData[3].dateStart), formatHour(sleepData[4].dateStart), formatHour(sleepData[5].dateStart), formatHour(sleepData[6].dateStart)];
@@ -218,7 +263,7 @@ function Sleep(props) {
 				gridLines: {display: false},
 				ticks: {
 					beginAtZero: true,
-					max: 12
+					max: maxSleep +1
 				}
 			}]
 		},
@@ -242,11 +287,11 @@ function Sleep(props) {
 			<div className="data-recap">
 				<div className="data-card">
 					<p>Heure moyenne du réveil</p>
-					<span>22:30</span>
+					<span>{getFormatTime(avgBedtimeD)}</span>
 				</div>
 				<div className="data-card">
 					<p>Heure moyenne du coucher</p>
-					<span>2:30</span>
+					<span>{getFormatTime(avgBedtimeN)}</span>
 				</div>
 				<div className="data-card">
 					<p>Durée moyenne en semaine</p>
