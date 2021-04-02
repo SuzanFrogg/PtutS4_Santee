@@ -25,7 +25,7 @@ function Profile(props) {
 	//succès
 	const [listSuccess, setSuccess] = useState([]);
     const [listSuccessDone, setSucessDone] = useState([]);
-	const [conditionSuccess, setCondition] = useState([false,false,false,false,false,false,false,false,false,false,false,false]); //pas d'utilsation d'une boucle car sinon augmentation a chaque reload
+	const [conditionSuccess, setCondition] = useState([false,false,false,false,false,false,false,false,false,false]); //pas d'utilsation d'une boucle car sinon augmentation a chaque reload
 
 
 	useEffect(() => {
@@ -112,7 +112,7 @@ function Profile(props) {
 		{
 			if(listDon.DonsPlasma != null && listDon.DonsSang != null && listDon.DonsPlaquette != null)
 			{
-					conditionSuccess[9] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 1); 
+					conditionSuccess[7] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 1); 
 					conditionSuccess[4] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 5); 
 					conditionSuccess[2] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 10); 
 					conditionSuccess[1] = ((listDon.DonsPlasma.length  + listDon.DonsSang.length + listDon.DonsPlaquette.length)>= 20); 
@@ -141,12 +141,12 @@ function Profile(props) {
 				{
 					if(listPeriod[i].flux == 2)//+ douleurs si implémentées
 					{
-						conditionSuccess[10] = true;
+						conditionSuccess[8] = true;
 					}
 
 					if(listPeriod[i].flux == 0) 
 					{
-						conditionSuccess[7] = true;
+						conditionSuccess[6] = true;
 					}
 
 					
@@ -161,7 +161,7 @@ function Profile(props) {
 			if(listVaccines != null && listVaccines.length != 0)
 			{
 	
-					conditionSuccess[11] = (listVaccines.length >= 1); 
+					conditionSuccess[9] = (listVaccines.length >= 1); 
 					conditionSuccess[5] = (listVaccines.length >= 10); 
 			}
 		}
