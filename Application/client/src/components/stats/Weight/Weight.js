@@ -128,6 +128,20 @@ function Weight(props)
 	let maxIMC = getIMCMax() + 2;
 	let minIMC = getIMCMin() - 2;
 
+	//Classification imc
+	const getClasseIMC = () => {
+		let IMC = getIMC(getPoids(getDateProche()),getTaille(getDateProche()));
+
+		if(IMC <= 18.5)
+			return "Insuffisance pondérale";
+		else if(IMC > 18.5 && IMC < 25)
+			return "Corpulence normale";
+		else if(IMC >= 25 && IMC < 30)
+			return "Surpoids";
+		else if(IMC >= 30)
+			return "Obésité";
+	};
+
 	//Met les dates dans l'ordre
 	const dateCroissante = () => {
 		let list = [userWeight[0]];
@@ -339,6 +353,10 @@ function Weight(props)
 					<p>IMC</p>
 					<span>{getIMC(getPoids(getDateProche()),getTaille(getDateProche()))}</span>
 				</div>	
+				<div className="data-card">
+					<p>Classe IMC</p>
+					<span>{getClasseIMC()}</span>
+				</div>	
 			</div>
 			
 			<h2>Graphiques</h2>
@@ -355,6 +373,8 @@ function Weight(props)
 				<button onClick={(event) => setShowAddForm(true)}> Ajouter </button>
 				{showAddForm && <WeightAdd handleAlert={props.handleAlert} />}
 			</div>
+
+			
 		</>
 	);
 }
