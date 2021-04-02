@@ -5,6 +5,7 @@ import SleepAdd from "./Sleep_add";
 import {ReactComponent as ArrowIcon} from '../../../media/icons/next-arrow.svg';
 import {useEffect, useState} from "react";
 import {daysNames, monthsNames} from "../../../utils/date.js";
+import datetime from datetime;
 
 
 function Sleep(props) {
@@ -46,12 +47,12 @@ function Sleep(props) {
 
 				//Avec les données (on remplace la donnée par défaut s'il y a une donnée)
 				dataSleep.data.forEach((dayData) => {
-					let date = new Date(dayData.dateStart);
+					let date = new Date(dayData.dateEnd);
 					let correctGetDay = date.getDay()-1;
 					correctGetDay = correctGetDay === -1 ? 6 : correctGetDay;
 					if (correctGetDay == i) {
-						let dateStartData = date;
-						let dateEndData = new Date(dayData.dateEnd);
+						let dateStartData = new Date(dayData.dateStart);
+						let dateEndData = date;
 						dataTemp[i] = {_id: dayData._id, dateStart: dateStartData, dateEnd: dateEndData};
 					}
 				});
@@ -107,6 +108,7 @@ function Sleep(props) {
 	//Heures de sommeil
 	let lengthSleepWeek = [Math.round(Math.abs(sleepData[0].dateEnd - sleepData[0].dateStart)/36e5), Math.round(Math.abs(sleepData[1].dateEnd - sleepData[1].dateStart)/36e5), Math.round(Math.abs(sleepData[2].dateEnd - sleepData[2].dateStart)/36e5), Math.round(Math.abs(sleepData[3].dateEnd - sleepData[3].dateStart)/36e5), Math.round(Math.abs(sleepData[4].dateEnd - sleepData[4].dateStart)/36e5), Math.round(Math.abs(sleepData[5].dateEnd - sleepData[5].dateStart)/36e5), Math.round(Math.abs(sleepData[6].dateEnd - sleepData[6].dateStart)/36e5)];
 
+	//Moyenne heures de sommeil
 	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0;
 	let diviseurWeek = 0; 
 	let diviseurWE = 0;
@@ -140,6 +142,7 @@ function Sleep(props) {
 	avgSleepWeek /= diviseurWeek;
 	avgSleepWE /= diviseurWE;
 	avgSleepGlobal /= diviseurGlobal;
+
 
 	//Dates
 	let dateLegend = [formatDate(sleepData[0].dateStart), formatDate(sleepData[1].dateStart), formatDate(sleepData[2].dateStart), formatDate(sleepData[3].dateStart), formatDate(sleepData[4].dateStart), formatDate(sleepData[5].dateStart), formatDate(sleepData[6].dateStart)];
@@ -260,11 +263,7 @@ function Sleep(props) {
 				<div className="data-card">
 					<p>Durée moyenne total de la semaine</p>
 					<span>{Math.round(avgSleepGlobal)}<small>h</small></span>
-				</div>
-				<div className="data-card">
-					<p>Fluctuation moyenne du sommeil</p>
-					<span>7<small>h</small></span>
-				</div>						
+				</div>					
 			</div>
 
 			<h2>Graphiques</h2>
