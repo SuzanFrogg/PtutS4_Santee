@@ -5,7 +5,6 @@ import SleepAdd from "./Sleep_add";
 import {ReactComponent as ArrowIcon} from '../../../media/icons/next-arrow.svg';
 import {useEffect, useState} from "react";
 import {daysNames, monthsNames} from "../../../utils/date.js";
-import datetime from datetime;
 
 
 function Sleep(props) {
@@ -110,9 +109,7 @@ function Sleep(props) {
 
 	//Moyenne heures de sommeil
 	let avgSleepWeek = 0, avgSleepWE = 0, avgSleepGlobal = 0;
-	let diviseurWeek = 0; 
-	let diviseurWE = 0;
-	let diviseurGlobal = 0;
+	let diviseurWeek = 0, diviseurWE = 0, diviseurGlobal = 0;
 
 	lengthSleepWeek.slice(0, 4).forEach(hour => {
 		if (hour > 0) {
@@ -130,7 +127,6 @@ function Sleep(props) {
 		avgSleepWE+=hour; 
 		avgSleepGlobal+=hour;
 	});
-	console.log(diviseurWeek);
 	
 	if(diviseurWeek == 0)
 		diviseurWeek = 1;
